@@ -1,0 +1,141 @@
+Options -Indexes
+
+# ============================================================
+# STOIC HEALTHCARE — Advanced .htaccess
+# SEO + Performance + Security
+# ============================================================
+
+RewriteEngine On
+
+# ----------------------------------------------------------
+# Force HTTPS
+# ----------------------------------------------------------
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ----------------------------------------------------------
+# SEO & Sitemaps
+# ----------------------------------------------------------
+RewriteRule ^sitemap-seo\.xml$ sitemap-seo.php [L]
+
+# ----------------------------------------------------------
+# Generic Fallback routing (Keep this at the bottom)
+# ----------------------------------------------------------
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/$ /$1 [L,R=301]
+
+# ----------------------------------------------------------
+# ALLOW static assets
+# ----------------------------------------------------------
+RewriteRule ^client/view_assets/(.*)$ client/view_assets/$1 [L]
+RewriteRule ^admin/assets/(.*)$ admin/assets/$1 [L]
+RewriteRule ^uploads/(.*)$ uploads/$1 [L]
+
+# ----------------------------------------------------------
+# Route /admin
+# ----------------------------------------------------------
+RewriteCond %{REQUEST_URI} ^/admin/?$
+RewriteRule ^admin/?$ admin/index.php [L]
+
+# ----------------------------------------------------------
+# Homepage
+# ----------------------------------------------------------
+RewriteRule ^$ index.php [L]
+
+# ----------------------------------------------------------
+# Clean URLs
+# /services -> index.php?page=services
+# ----------------------------------------------------------
+RewriteRule ^merchant-feed\.xml$ merchant-feed.php [L]
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^service/([a-zA-Z0-9_-]+)/?$ index.php?page=service&slug=$1 [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^blog/?$ index.php?page=blog [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^blog/([a-zA-Z0-9_-]+)/?$ index.php?page=blog_post&slug=$1 [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^author/([a-zA-Z0-9_-]+)/?$ index.php?page=author&slug=$1 [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^location/([a-zA-Z0-9_-]+)/?$ index.php?page=location&city=$1 [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^category/([a-zA-Z0-9_-]+)/?$ index.php?page=category&cat=$1 [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9_-]+)/?$ index.php?page=$1 [QSA,L]
+
+# ----------------------------------------------------------
+# Block sensitive folders
+# ----------------------------------------------------------
+RewriteRule ^config/(.*)$ - [F,L]
+RewriteRule ^includes/(.*)$ - [F,L]
+
+# ----------------------------------------------------------
+# MIME Types
+# ----------------------------------------------------------
+<IfModule mod_mime.c>
+AddType text/css .css
+AddType application/javascript .js
+AddType image/svg+xml .svg
+AddType image/webp .webp
+AddType image/avif .avif
+</IfModule>
+
+# ----------------------------------------------------------
+# Compression (GZIP)
+# ----------------------------------------------------------
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json
+</IfModule>
+
+# ----------------------------------------------------------
+# Browser Cache
+# ----------------------------------------------------------
+<IfModule mod_expires.c>
+ExpiresActive On
+
+AddType image/avif .avif
+AddType image/webp .webp
+
+ExpiresByType image/jpeg "access plus 1 year"
+ExpiresByType image/png "access plus 1 year"
+ExpiresByType image/webp "access plus 1 year"
+ExpiresByType image/avif "access plus 1 year"
+
+ExpiresByType text/css "access plus 1 month"
+ExpiresByType application/javascript "access plus 1 month"
+
+ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+
+# ----------------------------------------------------------
+# Security Headers
+# ----------------------------------------------------------
+<IfModule mod_headers.c>
+
+Header set X-Content-Type-Options "nosniff"
+Header set X-Frame-Options "SAMEORIGIN"
+Header set X-XSS-Protection "1; mode=block"
+Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+Header set Cache-Control "public, max-age=31536000"
+
+</IfModule>
+
+# ----------------------------------------------------------
+# Disable directory browsing
+# ----------------------------------------------------------
+Options -Indexes

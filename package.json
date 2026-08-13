@@ -1,0 +1,9 @@
+﻿{
+  "name": "stoic-Home Care",
+  "version": "1.0.0",
+  "description": "Stoic Home Care — 100x UX Overhaul Frontend & Admin Portal",
+  "private": true,
+  "scripts": {
+    "dev": "\"C:/laragon/bin/php/php-8.3.30-Win32-vs16-x64/php.exe\" -S localhost:8000 router.php"
+  }
+}
