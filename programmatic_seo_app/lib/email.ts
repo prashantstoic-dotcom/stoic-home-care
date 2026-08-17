@@ -1,0 +1,92 @@
+import nodemailer from "nodemailer";
+import fs from "fs";
+import path from "path";
+
+// Create reusable transporter object using the default SMTP transport
+export const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST || "smtp.gmail.com",
+  port: parseInt(process.env.SMTP_PORT || "587"),
+  secure: false, // true for 465, false for other ports
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
+
+export const ADMIN_EMAIL = "stoichomecareservices@gmail.com";
+export const FROM_EMAIL = '"Stoic Home Care" <prashantstoic@gmail.com>';
+
+/**
+ * Sends an email alert to the admin.
+ */
+export async function sendAdminAlert(
+  subject: string,
+  htmlBody: string,
+  replyTo?: string
+) {
+  try {
+    await transporter.sendMail({
+      from: FROM_EMAIL,
+      to: ADMIN_EMAIL,
+      replyTo: replyTo,
+      subject: subject,
+      html: htmlBody,
+    });
+    console.log(`Admin alert sent: ${subject}`);
+  } catch (error) {
+    // Zero Error Policy: Log the error but don't crash the application
+    console.error("Error sending admin email:", error);
+  }
+}
+
+/**
+ * Sends an auto-reply confirmation to the client with the company PDF brochure attached.
+ */
+export async function sendClientConfirmation(
+  clientEmail: string,
+  clientName: string,
+  serviceName: string
+) {
+  try {
+    // Determine path to the PDF brochure.
+    const brochurePath = path.join(process.cwd(), "public", "uploads", "stoic.pdf");
+    
+    const attachments = [];
+    // Zero Error Policy: Check if brochure exists before attaching to prevent crashes
+    if (fs.existsSync(brochurePath)) {
+      attachments.push({
+        filename: "stoic.pdf",
+        path: brochurePath,
+      });
+    } else {
+      console.warn("Brochure not found at", brochurePath);
+    }
+
+    const htmlBody = `
+      Dear ${clientName},<br><br>
+
+      Thank you for choosing <b>Stoic Home Care</b>.<br><br>
+
+      Your request for <b>${serviceName}</b> has been received.<br>
+      Our care coordinator will contact you shortly.<br><br>
+
+      Please find our company brochure attached for more details.<br><br>
+
+      Regards,<br>
+      <b>Stoic Home Care Team</b><br>
+      https://stoiccare.in
+    `;
+
+    await transporter.sendMail({
+      from: FROM_EMAIL,
+      to: clientEmail,
+      subject: "Thank you for contacting Stoic Home Care",
+      html: htmlBody,
+      attachments: attachments,
+    });
+    console.log(`Client confirmation sent to: ${clientEmail}`);
+  } catch (error) {
+    // Zero Error Policy: Log the error but don't crash the application
+    console.error("Error sending client confirmation email:", error);
+  }
+}
