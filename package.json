@@ -1,29 +1,30 @@
 {
-    "name":  "stoic-home-care",
-    "version":  "1.0.0",
-    "description":  "Stoic Home Care — Enterprise Next.js Programmatic AI SEO Engine",
-    "private":  true,
-    "scripts":  {
-                    "dev":  "npm --prefix programmatic_seo_app run dev",
-                    "build":  "npm --prefix programmatic_seo_app run build"
-                },
-    "dependencies":  {
-                         "@supabase/supabase-js":  "^2.49.1",
-                         "bcryptjs":  "^3.0.3",
-                         "jose":  "^6.2.8",
-                         "mysql2":  "^3.23.3",
-                         "next":  "^14.2.24",
-                         "nodemailer":  "^9.0.5",
-                         "react":  "^18.3.1",
-                         "react-dom":  "^18.3.1",
-                         "zod":  "^3.23.8"
-                     },
-    "devDependencies":  {
-                            "@types/bcryptjs":  "^2.4.6",
-                            "@types/node":  "^20.17.0",
-                            "@types/nodemailer":  "^8.0.1",
-                            "@types/react":  "^18.3.1",
-                            "@types/react-dom":  "^18.3.1",
-                            "typescript":  "^5.6.3"
-                        }
+    "name": "stoic-home-care",
+    "version": "1.0.0",
+    "description": "Stoic Home Care — Enterprise Next.js Programmatic AI SEO Engine",
+    "private": true,
+    "scripts": {
+        "dev": "npm --prefix programmatic_seo_app run dev",
+        "build": "npm --prefix programmatic_seo_app run build"
+    },
+    "dependencies": {
+        "@supabase/supabase-js": "^2.49.1",
+        "bcryptjs": "^3.0.3",
+        "jose": "^6.2.8",
+        "mysql2": "^3.23.3",
+        "next": "^14.2.24",
+        "nodemailer": "^9.0.5",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-hot-toast": "^2.6.0",
+        "zod": "^3.23.8"
+    },
+    "devDependencies": {
+        "@types/bcryptjs": "^2.4.6",
+        "@types/node": "^20.17.0",
+        "@types/nodemailer": "^8.0.1",
+        "@types/react": "^18.3.1",
+        "@types/react-dom": "^18.3.1",
+        "typescript": "^5.6.3"
+    }
 }
