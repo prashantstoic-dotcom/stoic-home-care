@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { jwtVerify } from 'jose';
+import { jwtVerify } from 'jose/jwt/verify';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'stoic_home_care_secure_jwt_secret_key_2026';
 const secretKey = new TextEncoder().encode(JWT_SECRET);
@@ -23,13 +23,13 @@ export async function middleware(request: NextRequest) {
   // A. Lowercase Enforcement: If the URL contains uppercase letters, redirect to lowercase.
   if (url.pathname !== url.pathname.toLowerCase()) {
     url.pathname = url.pathname.toLowerCase();
-    return NextResponse.redirect(url, 301);
+    return NextResponse.redirect(url, { status: 301 });
   }
 
   // B. Trailing Slash Fix: Remove trailing slash if present (except for root '/')
   if (url.pathname.endsWith('/') && url.pathname.length > 1) {
     url.pathname = url.pathname.slice(0, -1);
-    return NextResponse.redirect(url, 301);
+    return NextResponse.redirect(url, { status: 301 });
   }
 
   // C. Regex Pattern Mappings (Migration Example)
@@ -38,7 +38,7 @@ export async function middleware(request: NextRequest) {
   const legacyExtensionRegex = /^(.*)\.(php|html)$/i;
   if (legacyExtensionRegex.test(url.pathname)) {
     url.pathname = url.pathname.replace(legacyExtensionRegex, '$1');
-    return NextResponse.redirect(url, 301);
+    return NextResponse.redirect(url, { status: 301 });
   }
 
   // ----------------------------------------------------------------------------
