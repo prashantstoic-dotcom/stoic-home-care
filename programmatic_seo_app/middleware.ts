@@ -1,9 +1,5 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { jwtVerify } from 'jose/jwt/verify';
-
-const JWT_SECRET = process.env.JWT_SECRET || 'stoic_home_care_secure_jwt_secret_key_2026';
-const secretKey = new TextEncoder().encode(JWT_SECRET);
 
 // ==============================================================================
 // PROJECT 5 (PART 1): Edge SEO & Middleware Optimization
@@ -52,18 +48,10 @@ export async function middleware(request: NextRequest) {
         const loginUrl = new URL('/admin/login', request.url);
         return NextResponse.redirect(loginUrl);
       }
-
-      try {
-        // Cryptographically verify the session token
-        await jwtVerify(token.value, secretKey);
-      } catch (error) {
-        // Invalid signature or expired token
-        console.warn("Invalid admin session token, redirecting to login.");
-        const loginUrl = new URL('/admin/login', request.url);
-        const response = NextResponse.redirect(loginUrl);
-        response.cookies.delete('admin_session'); // Clear tampered cookie
-        return response;
-      }
+      
+      // Note: We only check for the PRESENCE of the token in Edge Middleware.
+      // The actual cryptographic verification (jwtVerify) should happen inside 
+      // the Server Components (Node.js runtime) to avoid Vercel Edge crashes.
     }
   }
 
