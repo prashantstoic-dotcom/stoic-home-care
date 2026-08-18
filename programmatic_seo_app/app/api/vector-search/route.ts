@@ -9,17 +9,16 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 
 import { SUPABASE_URL, SUPABASE_KEY } from '@/lib/supabase';
 
-// 1. Initialize Supabase Admin Client (Requires Service Role Key for Vector Operations)
-// We're using standard server env vars (or the fallback from lib/supabase if needed)
-const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-// 2. Initialize Google Gemini Client
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
-
 export async function POST(req: Request) {
   try {
+    // Initialize inside the function to prevent build-time crashes when env vars are missing
+    const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || SUPABASE_KEY;
+    
+    // Safely fallback to a dummy URL during build time to avoid createClient throwing Error
+    const supabase = createClient(supabaseUrl || 'https://dummy.supabase.co', supabaseKey || 'dummy');
+    
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || 'dummy_key');
     const body = await req.json();
     const query = body.query;
 
