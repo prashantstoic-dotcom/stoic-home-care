@@ -5,7 +5,10 @@ let transporterInstance: any = null;
 
 async function getTransporter() {
   if (!transporterInstance) {
-    const nodemailer = (await import("nodemailer")).default;
+    // Hide the require from Webpack to prevent it from bundling nodemailer
+    // and causing the '__dirname is not defined' error in Server Actions.
+    const moduleName = "nodemailer";
+    const nodemailer = require(moduleName);
     transporterInstance = nodemailer.createTransport({
       host: process.env.SMTP_HOST || "smtp.gmail.com",
       port: parseInt(process.env.SMTP_PORT || "587", 10),

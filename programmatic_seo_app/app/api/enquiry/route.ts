@@ -66,7 +66,9 @@ export async function POST(request: Request) {
     }
 
     // 4. Nodemailer Setup (replaces PHPMailer)
-    const nodemailer = (await import('nodemailer')).default;
+    // Hide from Webpack to prevent __dirname bundling issues
+    const moduleName = 'nodemailer';
+    const nodemailer = require(moduleName);
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 587,
