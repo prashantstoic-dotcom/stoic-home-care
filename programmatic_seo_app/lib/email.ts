@@ -1,17 +1,23 @@
-import nodemailer from "nodemailer";
 import fs from "fs";
 import path from "path";
 
-// Create reusable transporter object using the default SMTP transport
-export const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || "smtp.gmail.com",
-  port: parseInt(process.env.SMTP_PORT || "587"),
-  secure: false, // true for 465, false for other ports
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-});
+let transporterInstance: any = null;
+
+async function getTransporter() {
+  if (!transporterInstance) {
+    const nodemailer = (await import("nodemailer")).default;
+    transporterInstance = nodemailer.createTransport({
+      host: process.env.SMTP_HOST || "smtp.gmail.com",
+      port: parseInt(process.env.SMTP_PORT || "587", 10),
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    });
+  }
+  return transporterInstance;
+}
 
 export const ADMIN_EMAIL = "stoichomecareservices@gmail.com";
 export const FROM_EMAIL = '"Stoic Home Care" <prashantstoic@gmail.com>';
@@ -25,6 +31,7 @@ export async function sendAdminAlert(
   replyTo?: string
 ) {
   try {
+    const transporter = await getTransporter();
     await transporter.sendMail({
       from: FROM_EMAIL,
       to: ADMIN_EMAIL,
@@ -77,6 +84,7 @@ export async function sendClientConfirmation(
       https://stoiccare.in
     `;
 
+    const transporter = await getTransporter();
     await transporter.sendMail({
       from: FROM_EMAIL,
       to: clientEmail,

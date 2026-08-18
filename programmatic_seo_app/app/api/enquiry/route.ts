@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { SUPABASE_URL, SUPABASE_KEY } from '@/lib/supabase';
 import { enquirySchema } from '@/lib/validations';
-import nodemailer from 'nodemailer';
 import path from 'path';
 
 /* ============================================================
@@ -67,6 +66,7 @@ export async function POST(request: Request) {
     }
 
     // 4. Nodemailer Setup (replaces PHPMailer)
+    const nodemailer = (await import('nodemailer')).default;
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 587,
