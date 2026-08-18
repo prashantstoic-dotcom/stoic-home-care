@@ -68,9 +68,35 @@ export default async function CategoryHubPage({ params }: { params: { slug: stri
     }))
   };
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://stoiccare.in/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Services",
+        "item": "https://stoiccare.in/services"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": actualCategoryName,
+        "item": `https://stoiccare.in/category/${params.slug}`
+      }
+    ]
+  };
+
   return (
     <main id="main-content">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <header className="contact-hero-section" aria-label="Category Silo Hero">
         <div className="container position-relative" style={{ zIndex: 2, paddingBottom: '25px' }}>
           <div className="row align-items-center g-5 py-5 text-center">

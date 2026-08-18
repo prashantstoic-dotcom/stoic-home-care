@@ -121,6 +121,38 @@ export default async function ServiceLandingPage({ params }: { params: { slug: s
     customSchema.push(...reviewSchemas);
   }
 
+  // Add BreadcrumbList Schema
+  customSchema.push({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://stoiccare.in/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": category,
+        "item": `https://stoiccare.in/category/${category.toLowerCase().replace(/\s+/g, '-')}`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": location,
+        "item": `https://stoiccare.in/location/${location.toLowerCase().replace(/\s+/g, '-')}`
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": h1Title,
+        "item": `https://stoiccare.in/service/${params.slug}`
+      }
+    ]
+  });
+
   const relatedPages = await getPagesByLocation(location);
 
   return (
