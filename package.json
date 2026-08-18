@@ -8,6 +8,7 @@
         "build": "npm --prefix programmatic_seo_app run build"
     },
     "dependencies": {
+        "@google/generative-ai": "^0.24.1",
         "@supabase/supabase-js": "^2.49.1",
         "bcryptjs": "^3.0.3",
         "jose": "^6.2.8",
