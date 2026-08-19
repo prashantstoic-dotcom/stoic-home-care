@@ -71,10 +71,25 @@ export default function BookServiceModal() {
           </div>
         </div>
 
-        <div className="bsm-trust mb-4">
-          <span><i className="fa-solid fa-shield-heart text-info"></i> Verified Professionals</span>
-          <span><i className="fa-solid fa-clock text-info"></i> Callback in 1 Hour</span>
-          <span><i className="fa-solid fa-lock text-info"></i> Your data is safe</span>
+        <div className="d-flex flex-wrap justify-content-center gap-3 mb-4">
+          <div className="d-flex align-items-center gap-2 px-3 py-2 rounded shadow-sm border border-primary-subtle" style={{ background: '#f8faff' }}>
+            <div className="d-flex align-items-center justify-content-center rounded-circle" style={{ width: '24px', height: '24px', background: '#e0e7ff', color: '#3b82f6' }}>
+              <i className="fa-solid fa-shield-heart fs-6"></i>
+            </div>
+            <span className="fw-bold" style={{ fontSize: '0.8rem', color: '#1e3a8a' }}>Verified Pros</span>
+          </div>
+          <div className="d-flex align-items-center gap-2 px-3 py-2 rounded shadow-sm border border-info-subtle" style={{ background: '#f0fdfa' }}>
+            <div className="d-flex align-items-center justify-content-center rounded-circle" style={{ width: '24px', height: '24px', background: '#ccfbf1', color: '#0d9488' }}>
+              <i className="fa-solid fa-bolt fs-6"></i>
+            </div>
+            <span className="fw-bold" style={{ fontSize: '0.8rem', color: '#134e4a' }}>Fast 1-Hr Callback</span>
+          </div>
+          <div className="d-flex align-items-center gap-2 px-3 py-2 rounded shadow-sm border border-success-subtle" style={{ background: '#f0fdf4' }}>
+            <div className="d-flex align-items-center justify-content-center rounded-circle" style={{ width: '24px', height: '24px', background: '#dcfce7', color: '#22c55e' }}>
+              <i className="fa-solid fa-lock fs-6"></i>
+            </div>
+            <span className="fw-bold" style={{ fontSize: '0.8rem', color: '#14532d' }}>100% Secure</span>
+          </div>
         </div>
 
         <form onSubmit={handleSubmit} noValidate>

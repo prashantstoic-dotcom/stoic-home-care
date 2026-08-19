@@ -6,6 +6,17 @@ export default function ClientInit() {
   const pathname = usePathname();
 
   useEffect(() => {
+    // -------------------------------------------------------------
+    // Edge SEO A/B Tester Analytics (Tool 5 - Part 3)
+    // -------------------------------------------------------------
+    const match = document.cookie.match(new RegExp('(^| )ab-test-variant=([^;]+)'));
+    if (match) {
+      const variant = match[2];
+      console.log(`[SEO A/B Tester] User assigned to Variant: ${variant}`);
+      // In production, this can trigger a GA event:
+      // if (window.gtag) window.gtag('event', 'ab_test_impression', { variant_name: variant });
+    }
+
     // Run initialization in an interval to wait for CDN scripts (AOS, Swiper) to load
     const initTimer = setInterval(() => {
       let allLoaded = true;

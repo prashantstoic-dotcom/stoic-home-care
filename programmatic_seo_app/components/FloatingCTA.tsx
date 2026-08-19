@@ -64,10 +64,28 @@ export default function FloatingCTA() {
         }
         .float-cta-btn:hover {
           transform: translateY(-2px);
-          box-shadow: 0 8px 26px rgba(0,0,0,0.25);
+          /* box-shadow is handled by the animation now, but we can override if needed */
         }
-        .float-wa { background: #25D366; }
-        .float-call { background: #0CB8C9; }
+        
+        @keyframes waPulse {
+          0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+          70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+          100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        @keyframes callPulse {
+          0% { box-shadow: 0 0 0 0 rgba(12, 184, 201, 0.7); }
+          70% { box-shadow: 0 0 0 15px rgba(12, 184, 201, 0); }
+          100% { box-shadow: 0 0 0 0 rgba(12, 184, 201, 0); }
+        }
+
+        .float-wa { 
+          background: #25D366; 
+          animation: waPulse 2s infinite;
+        }
+        .float-call { 
+          background: #0CB8C9; 
+          animation: callPulse 2s infinite;
+        }
         
         @media (max-width: 767px) {
           .float-cta-wrap { bottom: 16px; left: 12px; gap: 8px; }

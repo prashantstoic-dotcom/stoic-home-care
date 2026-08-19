@@ -3,8 +3,10 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -25,6 +27,25 @@ export default function Header() {
 
   return (
     <>
+      <style dangerouslySetInnerHTML={{ __html: `
+        .nav-link.active-link {
+          color: #2563eb !important;
+          font-weight: 700 !important;
+          position: relative;
+        }
+        .nav-link.active-link::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 20px;
+          height: 3px;
+          background: #2563eb;
+          border-radius: 2px;
+        }
+      `}} />
+
       {/* Google Tag Manager (noscript) - Moved from PHP header */}
       <noscript>
         <iframe
@@ -38,31 +59,6 @@ export default function Header() {
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
-
-      {/* Page Loader (Static UI replica) */}
-      <div id="pageLoader" style={{ display: "none" }}> {/* Hidden by default in React, can be managed by state if needed */}
-        <div className="loader-logo-wrap">
-          <div className="hr1"></div>
-          <div className="hr2"></div>
-          <div className="hr3"></div>
-          <span className="loader-s">S</span>
-        </div>
-        <svg className="ecg-loader" viewBox="0 0 300 64" fill="none">
-          <path
-            className="ecg-path"
-            d="M0,32 L35,32 L50,32 L65,10 L80,54 L95,4 L110,60 L125,32 L160,32 L175,32 L190,10 L205,54 L220,4 L235,60 L250,32 L300,32"
-            stroke="#4ecdc4"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-        <div className="loader-brand">Stoic Home Care</div>
-        <div className="loader-sub">Healing Starts at Home</div>
-        <div className="loader-bar">
-          <div className="loader-bar-fill"></div>
-        </div>
-      </div>
 
       <nav className={`navbar navbar-expand-lg fixed-top ${isScrolled ? "scrolled" : ""}`} id="mainNav">
         <div className="container">
@@ -89,19 +85,19 @@ export default function Header() {
           <div className={`collapse navbar-collapse ${isMobileMenuOpen ? "show" : ""}`} id="navbarMain">
             <ul className="navbar-nav mx-auto gap-1">
               <li className="nav-item">
-                <Link href="/" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
+                <Link href="/" className={`nav-link ${pathname === '/' ? 'active-link' : ''}`} onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
               </li>
               <li className="nav-item">
-                <Link href="/services" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Services</Link>
+                <Link href="/services" className={`nav-link ${pathname?.startsWith('/services') ? 'active-link' : ''}`} onClick={() => setIsMobileMenuOpen(false)}>Services</Link>
               </li>
               <li className="nav-item">
-                <Link href="/equipment" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Equipment</Link>
+                <Link href="/equipment" className={`nav-link ${pathname?.startsWith('/equipment') ? 'active-link' : ''}`} onClick={() => setIsMobileMenuOpen(false)}>Equipment</Link>
               </li>
               <li className="nav-item">
-                <Link href="/about" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>About</Link>
+                <Link href="/about" className={`nav-link ${pathname === '/about' ? 'active-link' : ''}`} onClick={() => setIsMobileMenuOpen(false)}>About</Link>
               </li>
               <li className="nav-item">
-                <Link href="/contact" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
+                <Link href="/contact" className={`nav-link ${pathname === '/contact' ? 'active-link' : ''}`} onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
               </li>
             </ul>
             <div className="d-flex align-items-center gap-2 mt-2 mt-lg-0">

@@ -1,29 +1,88 @@
+"use server"; // Enforce this file runs ONLY in Node.js runtime, clearing Edge bundling warnings
+
 import fs from "fs";
 import path from "path";
+// Standard imports
+const ADMIN_EMAIL = "stoichomecareservices@gmail.com";
+const FROM_EMAIL = '"Stoic Home Care" <prashantstoic@gmail.com>';
 
-let transporterInstance: any = null;
+// ============================================================================
+// PART 2: MODERN EDGE HTTP API (Primary Email System via Resend)
+// ============================================================================
+async function sendEmailViaHTTP(
+  to: string,
+  subject: string,
+  html: string,
+  replyTo?: string,
+  attachments?: any[]
+) {
+  const RESEND_API_KEY = process.env.RESEND_API_KEY; 
+  if (!RESEND_API_KEY) {
+    throw new Error("RESEND_API_KEY is missing in environment variables");
+  }
 
-async function getTransporter() {
-  if (!transporterInstance) {
-    // Hide the require from Webpack to prevent it from bundling nodemailer
-    // and causing the '__dirname is not defined' error in Server Actions.
-    const moduleName = "nodemailer";
-    const nodemailer = require(moduleName);
-    transporterInstance = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || "smtp.gmail.com",
-      port: parseInt(process.env.SMTP_PORT || "587", 10),
-      secure: false, // true for 465, false for other ports
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
+  // Formatting attachments for Resend API if provided
+  let formattedAttachments = undefined;
+  if (attachments && attachments.length > 0) {
+    formattedAttachments = attachments.map(att => {
+      // Read file to base64 if it's a file path
+      const content = fs.readFileSync(att.path).toString("base64");
+      return {
+        filename: att.filename,
+        content: content,
+      };
     });
   }
-  return transporterInstance;
+
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: "onboarding@resend.dev", // Note: Replace with verified domain in production
+      to: [to],
+      reply_to: replyTo,
+      subject: subject,
+      html: html,
+      attachments: formattedAttachments,
+    }),
+  });
+
+  if (!res.ok) {
+    const errorData = await res.text();
+    throw new Error(`HTTP Email Failed: ${errorData}`);
+  }
 }
 
-export const ADMIN_EMAIL = "stoichomecareservices@gmail.com";
-export const FROM_EMAIL = '"Stoic Home Care" <prashantstoic@gmail.com>';
+// ============================================================================
+// ZERO ERROR POLICY WRAPPER
+// ============================================================================
+async function safeEmailDispatcher(
+  to: string,
+  subject: string,
+  html: string,
+  replyTo?: string,
+  attachments?: any[]
+) {
+  try {
+    if (process.env.RESEND_API_KEY) {
+      await sendEmailViaHTTP(to, subject, html, replyTo, attachments);
+      return true;
+    } else {
+      throw new Error("Skipping HTTP API (Key Missing)");
+    }
+  } catch (httpError: any) {
+    // ZERO ERROR POLICY: Catch all failures so the main app NEVER crashes.
+    console.error(`[Zero Error Policy] FATAL: Email failed for ${to}. Error:`, httpError);
+    return false; // Fail gracefully
+  }
+}
+
+// ============================================================================
+// EXPORTED FUNCTIONS
+// ============================================================================
 
 /**
  * Sends an email alert to the admin.
@@ -33,19 +92,9 @@ export async function sendAdminAlert(
   htmlBody: string,
   replyTo?: string
 ) {
-  try {
-    const transporter = await getTransporter();
-    await transporter.sendMail({
-      from: FROM_EMAIL,
-      to: ADMIN_EMAIL,
-      replyTo: replyTo,
-      subject: subject,
-      html: htmlBody,
-    });
-    console.log(`Admin alert sent: ${subject}`);
-  } catch (error) {
-    // Zero Error Policy: Log the error but don't crash the application
-    console.error("Error sending admin email:", error);
+  const success = await safeEmailDispatcher(ADMIN_EMAIL, subject, htmlBody, replyTo);
+  if (success) {
+    console.log(`Admin alert safely dispatched: ${subject}`);
   }
 }
 
@@ -57,47 +106,36 @@ export async function sendClientConfirmation(
   clientName: string,
   serviceName: string
 ) {
-  try {
-    // Determine path to the PDF brochure.
-    const brochurePath = path.join(process.cwd(), "public", "uploads", "stoic.pdf");
-    
-    const attachments = [];
-    // Zero Error Policy: Check if brochure exists before attaching to prevent crashes
-    if (fs.existsSync(brochurePath)) {
-      attachments.push({
-        filename: "stoic.pdf",
-        path: brochurePath,
-      });
-    } else {
-      console.warn("Brochure not found at", brochurePath);
-    }
-
-    const htmlBody = `
-      Dear ${clientName},<br><br>
-
-      Thank you for choosing <b>Stoic Home Care</b>.<br><br>
-
-      Your request for <b>${serviceName}</b> has been received.<br>
-      Our care coordinator will contact you shortly.<br><br>
-
-      Please find our company brochure attached for more details.<br><br>
-
-      Regards,<br>
-      <b>Stoic Home Care Team</b><br>
-      https://stoiccare.in
-    `;
-
-    const transporter = await getTransporter();
-    await transporter.sendMail({
-      from: FROM_EMAIL,
-      to: clientEmail,
-      subject: "Thank you for contacting Stoic Home Care",
-      html: htmlBody,
-      attachments: attachments,
+  // Determine path to the PDF brochure.
+  const brochurePath = path.join(process.cwd(), "public", "uploads", "stoic.pdf");
+  const attachments = [];
+  
+  if (fs.existsSync(brochurePath)) {
+    attachments.push({
+      filename: "stoic.pdf",
+      path: brochurePath,
     });
-    console.log(`Client confirmation sent to: ${clientEmail}`);
-  } catch (error) {
-    // Zero Error Policy: Log the error but don't crash the application
-    console.error("Error sending client confirmation email:", error);
+  } else {
+    console.warn("[Zero Error Policy] Brochure not found at", brochurePath);
+  }
+
+  const htmlBody = `
+    Dear ${clientName},<br><br>
+
+    Thank you for choosing <b>Stoic Home Care</b>.<br><br>
+
+    Your request for <b>${serviceName}</b> has been received.<br>
+    Our care coordinator will contact you shortly.<br><br>
+
+    Please find our company brochure attached for more details.<br><br>
+
+    Regards,<br>
+    <b>Stoic Home Care Team</b><br>
+    https://stoiccare.in
+  `;
+
+  const success = await safeEmailDispatcher(clientEmail, "Thank you for contacting Stoic Home Care", htmlBody, undefined, attachments);
+  if (success) {
+    console.log(`Client confirmation safely dispatched to: ${clientEmail}`);
   }
 }

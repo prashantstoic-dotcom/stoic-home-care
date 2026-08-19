@@ -1,6 +1,7 @@
 import { getSeoPage, getQnA, getReviewsBySlug, getPagesByLocation, getLinkDictionary } from '@/lib/supabase';
 import { ScarcityEngine } from '@/lib/scarcity';
 import { AutoLinker } from '@/lib/autolinker';
+import { generateMedicalSchema } from '@/lib/schemaGenerator';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -152,6 +153,15 @@ export default async function ServiceLandingPage({ params }: { params: { slug: s
       }
     ]
   });
+
+  // Inject Advanced Knowledge Graph / E-E-A-T Medical Schema
+  customSchema.push(
+    generateMedicalSchema(
+      h1Title,
+      `https://stoiccare.in/service/${params.slug}`,
+      seoData.meta_desc || ''
+    )
+  );
 
   const relatedPages = await getPagesByLocation(location);
 

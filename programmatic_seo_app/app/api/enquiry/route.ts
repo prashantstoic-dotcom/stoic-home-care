@@ -65,28 +65,8 @@ export async function POST(request: Request) {
       // Proceed to email even if DB fails, as a fallback mechanism
     }
 
-    // 4. Nodemailer Setup (replaces PHPMailer)
-    // Hide from Webpack to prevent __dirname bundling issues
-    const moduleName = 'nodemailer';
-    const nodemailer = require(moduleName);
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false, // TLS
-      auth: {
-        user: 'prashantstoic@gmail.com',
-        pass: 'hwmb fwyi zhmo bczl', // App Password
-      },
-    });
-
-    // 5. Admin Email
-    try {
-      await transporter.sendMail({
-        from: '"Stoic Home Care" <prashantstoic@gmail.com>',
-        to: 'stoichomecareservices@gmail.com',
-        replyTo: email ? `"${name}" <${email}>` : undefined,
-        subject: `New Enquiry Received from ${email || phone}`,
-        html: `
+    // 4. Dispatch Emails via the Zero Error Policy Wrapper in lib/email.ts
+    const adminHtml = `
         <h2 style='color:#0a7cff'>New Enquiry Received</h2>
         <table style='border-collapse:collapse;width:100%;font-family:Arial'>
             <tr><th style='background:#0a7cff;color:#fff;padding:8px'>Name</th><td style='padding:8px;border:1px solid #ddd'>${name}</td></tr>
@@ -96,51 +76,15 @@ export async function POST(request: Request) {
             <tr><th style='background:#0a7cff;color:#fff;padding:8px'>City</th><td style='padding:8px;border:1px solid #ddd'>${city}</td></tr>
             <tr><th style='background:#0a7cff;color:#fff;padding:8px'>Message</th><td style='padding:8px;border:1px solid #ddd'>${message}</td></tr>
         </table>
-        `,
-      });
-    } catch (adminMailError) {
-      console.error("Admin Mail Error:", adminMailError);
-    }
+    `;
 
-    // 6. Client Auto-Reply Email
-    if (email) {
-      try {
-        const brochurePath = path.join(process.cwd(), 'public', 'uploads', 'stoic.pdf');
-        await transporter.sendMail({
-          from: '"Stoic Home Care" <prashantstoic@gmail.com>',
-          to: `"${name}" <${email}>`,
-          subject: 'Thank you for contacting Stoic Home Care',
-          html: `
-            <p>Dear ${name},</p>
-            <p>Thank you for contacting <b>Stoic Home Care</b>.</p>
-            <p>We have received your enquiry regarding <b>${service}</b>.  
-            Our care coordinator will contact you shortly.</p>
-            <p>Please find attached our brochure for detailed services and care programs.</p>
-            <br>
-            <p>
-            Warm regards,<br>
-            <b>Stoic Home Care Team</b><br>
-            📞 +91-7668232867<br>
-            🌐 www.stoiccare.in
-            </p>
-          `,
-          attachments: [
-            {
-              filename: 'Stoic-Home Care-Brochure.pdf',
-              path: brochurePath, 
-            }
-          ]
-        });
-      } catch (clientMailError) {
-        console.error("Client Mail Error:", clientMailError);
-      }
-    }
+    // Non-blocking dispatch
+    Promise.all([
+      import('@/lib/email').then(m => m.sendAdminAlert(`New Enquiry Received from ${email || phone}`, adminHtml, email ? `"${name}" <${email}>` : undefined)),
+      email ? import('@/lib/email').then(m => m.sendClientConfirmation(email, name, service || 'our services')) : Promise.resolve()
+    ]).catch(err => console.error("API Email Dispatch Error:", err));
 
-    return NextResponse.json({
-      success: true,
-      message: 'Enquiry submitted successfully'
-    });
-
+    return NextResponse.json({ success: true, message: 'Enquiry submitted successfully' });
   } catch (error) {
     console.error('Database/Server Error:', error);
     return NextResponse.json(

@@ -9,9 +9,6 @@ import type { NextRequest } from 'next/server';
 export async function middleware(request: NextRequest) {
   try {
     const url = request.nextUrl;
-    
-    // Clone the request headers so we can modify them
-    const requestHeaders = new Headers(request.headers);
 
     // ----------------------------------------------------------------------------
     // 0. Scalable Edge Redirects (Duplicate Content & Migrations)
@@ -58,6 +55,10 @@ export async function middleware(request: NextRequest) {
 
     // ----------------------------------------------------------------------------
     // 1. Bot Routing & Edge A/B Testing Engine
+    // ----------------------------------------------------------------------------
+
+    // Clone the request headers ONLY for requests that pass all redirects and auth
+    const requestHeaders = new Headers(request.headers);
     // ----------------------------------------------------------------------------
 
     // A. Bot Detection: Identify Search Engine Crawlers
@@ -108,24 +109,7 @@ export async function middleware(request: NextRequest) {
       response.headers.set('X-Canonical-Override', `${url.origin}${url.pathname}`);
     }
 
-    // ----------------------------------------------------------------------------
-    // 3. Production-Grade Security Headers (SEO Rank Signal)
-    // ----------------------------------------------------------------------------
-    
-    // Prevents the browser from guessing the MIME type, reducing XSS risks.
-    response.headers.set('X-Content-Type-Options', 'nosniff');
-    
-    // Controls how much referrer information (sent with the Referer header) should be included with requests.
-    response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-    
-    // Protects against Clickjacking attacks by ensuring the site cannot be embedded in an iframe.
-    response.headers.set('X-Frame-Options', 'DENY');
-    
-    // Enforces secure (HTTP over SSL/TLS) connections to the server.
-    response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
-    
-    // Enables the Cross-Site Scripting (XSS) filter built into most modern web browsers.
-    response.headers.set('X-XSS-Protection', '1; mode=block');
+
 
     return response;
   } catch (error) {
@@ -138,6 +122,7 @@ export async function middleware(request: NextRequest) {
 // Ensure the middleware runs only on relevant paths, optimizing Edge performance
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    // Optimized Vercel Edge Matcher
+    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 };

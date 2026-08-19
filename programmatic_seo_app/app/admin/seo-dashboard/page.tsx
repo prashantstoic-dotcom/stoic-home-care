@@ -1,5 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 import { SUPABASE_URL, SUPABASE_KEY } from '@/lib/supabase';
+import TrafficForecastWidget from '@/components/admin/TrafficForecastWidget';
+import CrawlBudgetWidget from '@/components/admin/CrawlBudgetWidget';
+import OrphanScannerWidget from '@/components/admin/OrphanScannerWidget';
 
 // Initialize Supabase Client
 // We use the server environment variables
@@ -59,8 +62,12 @@ export default async function SEODashboard() {
         </div>
       </div>
 
-      <div className="tables-grid">
+      <CrawlBudgetWidget />
+      <TrafficForecastWidget />
+
+      <div className="tables-grid" style={{ marginTop: '32px' }}>
         <div className="table-container">
+          <OrphanScannerWidget />
           <h2>⚠️ Top Orphan Pages (Wasting Crawl Budget)</h2>
           <table className="seo-table">
             <thead>
