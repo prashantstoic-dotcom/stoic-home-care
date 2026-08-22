@@ -1,4 +1,5 @@
 import { GoogleGenAI } from '@google/genai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import { z } from 'zod';
 
 // Initialize the Gemini client
@@ -8,6 +9,9 @@ const geminiApiKey = process.env.GEMINI_API_KEY || 'dummy_key_for_dev';
 export const geminiClient = new GoogleGenAI({
   apiKey: geminiApiKey,
 });
+
+const genAI = new GoogleGenerativeAI(geminiApiKey);
+const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
 // Define the Strict Zod Schema for Content Gap Extraction.
 // This forces Gemini to respond EXACTLY in this JSON format, preventing parsing errors.
@@ -37,6 +41,7 @@ export const OutlineSchema = z.object({
     type: z.enum(["h2", "h3"]).describe("The heading level"),
     text: z.string().describe("The actual heading text"),
     keywordsToInclude: z.array(z.string()).describe("List of missing entities/LSI keywords that the writer MUST include in the paragraph under this heading")
+  }))
 });
 
 // ============================================================================
@@ -248,7 +253,7 @@ export const ParagraphSchema = z.object({
           if (!textLower.includes(kw.toLowerCase())) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
-              message: \`CRITICAL: You claimed to use the keyword "\${kw}", but it is missing from the html_content. Do not lie.\`,
+              message: `CRITICAL: You claimed to use the keyword "${kw}", but it is missing from the html_content. Do not lie.`,
             });
           }
         }
@@ -283,7 +288,7 @@ export function parseAndValidateParagraph(jsonString: string) {
     }
   } catch (error: any) {
     // Catch generic JSON parsing errors (e.g., missing comma)
-    return { success: false, data: null, errors: \`CRITICAL: Invalid JSON structure. Failed to parse string. Details: \${error.message}\` };
+    return { success: false, data: null, errors: `CRITICAL: Invalid JSON structure. Failed to parse string. Details: ${error.message}` };
   }
 }
 
@@ -343,18 +348,18 @@ export function buildPRPitchPrompt(
   senderTitle: string,
   senderBio: string
 ): string {
-  return \`
-    You are an elite, highly-paid PR Manager representing \${senderName}, who is the \${senderTitle}.
+  return `
+    You are an elite, highly-paid PR Manager representing ${senderName}, who is the ${senderTitle}.
     Your task is to write a pitch email answering a journalist's query.
 
     JOURNALIST'S QUERY:
-    "\${journalistQuery}"
+    "${journalistQuery}"
 
     SENDER'S INTERNAL EXPERT KNOWLEDGE (Use this to answer the query):
-    "\${ragContext}"
+    "${ragContext}"
 
     SENDER BIO (Context for why they are an expert):
-    "\${senderBio}"
+    "${senderBio}"
 
     === THE 5 COMMANDMENTS OF YOUR PITCH ===
     
@@ -380,7 +385,7 @@ export function buildPRPitchPrompt(
     - "delve", "tapestry", "moreover", "crucial", "seamless", "dear sir/madam", "greetings".
 
     Return your output strictly matching the provided JSON schema.
-  \`;
+  `;
 }
 
 // Part 8.3.5: Strict Zod Schema for Pitch object
@@ -460,13 +465,14 @@ export function buildHookExtractorPrompt(
   blogTitle: string, 
   blogContent: string
 ): string {
-  return `nYou are a world-class Social Media Copywriter and Ghostwriter.
+  return `
+You are a world-class Social Media Copywriter and Ghostwriter.
 I am giving you a long-form SEO blog post. Your job is to extract the absolute best "meat" from it.
 
-ARTICLE TITLE: ""
+ARTICLE TITLE: "${blogTitle}"
 ARTICLE CONTENT:
 ---
-
+${blogContent}
 ---
 
 STRICT INSTRUCTIONS:
@@ -475,7 +481,7 @@ STRICT INSTRUCTIONS:
 3. Rewrite these 3 insights as punchy, stand-alone statements (Hooks).
 4. Each hook should make the reader stop scrolling and think, "Wow, I need to know more about this."
 5. Return exactly 3 insights in the provided JSON format.
-  .trim();
+  `.trim();
 }
 
 
@@ -485,16 +491,20 @@ export function buildTwitterThreadPrompt(
   blogContent: string,
   coreHooks: string[]
 ): string {
-  return `nYou are a top-tier Tech and Health Twitter (X) Ghostwriter known for writing viral threads.
+  // #region agent log
+  fetch('http://127.0.0.1:7327/ingest/c018628c-d33c-464b-ad58-f99b37908c6e',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'c52aa0'},body:JSON.stringify({sessionId:'c52aa0',location:'lib/gemini.ts:buildTwitterThreadPrompt',message:'twitter prompt built',data:{hooks:coreHooks.length,titleLen:blogTitle?.length||0},timestamp:Date.now(),hypothesisId:'A',runId:'post-fix'})}).catch(()=>{});
+  // #endregion
+  return `
+You are a top-tier Tech and Health Twitter (X) Ghostwriter known for writing viral threads.
 Your task is to write a highly engaging 5-part Twitter Thread based on the provided blog post.
 
 CORE HOOKS (Use the best one for the opening tweet):
-- 
+- ${coreHooks.join('\n- ')}
 
-ARTICLE TITLE: ""
+ARTICLE TITLE: "${blogTitle}"
 ARTICLE CONTENT (Context):
 ---
-
+${blogContent}
 ---
 
 STRICT INSTRUCTIONS FOR THE THREAD:
@@ -504,7 +514,7 @@ STRICT INSTRUCTIONS FOR THE THREAD:
 4. TONE: Authoritative, punchy, no fluff. Do not use cringe corporate speak.
 5. LENGTH: Each tweet MUST be under 280 characters.
 6. Return the result strictly as a JSON array of 5 strings (one for each tweet).
-  .trim();
+  `.trim();
 }
 
 
@@ -535,27 +545,28 @@ export function buildLinkedInPostPrompt(
   blogContent: string,
   coreHooks: string[]
 ): string {
-  return `nYou are a Top Voice on LinkedIn. You write professional, highly engaging, and story-driven B2B posts.
+  return `
+You are a Top Voice on LinkedIn. You write professional, highly engaging, and story-driven B2B posts.
 Your task is to write a single, long-form LinkedIn post based on the provided blog post.
 
 CORE HOOKS (Use the best one for the opening sentence):
-- 
+- ${coreHooks.join('\n- ')}
 
-ARTICLE TITLE: ""
+ARTICLE TITLE: "${blogTitle}"
 ARTICLE CONTENT (Context):
 ---
-
+${blogContent}
 ---
 
 STRICT INSTRUCTIONS FOR LINKEDIN:
 1. THE HOOK: Start with a powerful, single-sentence statement that makes professionals stop scrolling. Use one of the CORE HOOKS.
 2. THE STORY/PROBLEM: Write a short, relatable problem statement or story leading into the solution. Use extremely short paragraphs (1-2 sentences max).
 3. THE VALUE: Use a bulleted list to share the top 3-4 insights from the article.
-4. THE FORMATTING: Use generous line breaks (\\\\n\\\\n) between paragraphs. No dense walls of text.
+4. THE FORMATTING: Use generous line breaks (\\n\\n) between paragraphs. No dense walls of text.
 5. THE CALL TO ACTION: End the post by asking a thought-provoking question, followed by exactly this placeholder for the full article link: [LINK]
 6. TONE: Professional, authoritative, but conversational. No cringe jargon. No hashtags.
 7. Return the result strictly in the provided JSON format.
-  .trim();
+  `.trim();
 }
 
 
@@ -601,6 +612,9 @@ STRICT INSTRUCTIONS FOR EMAIL:
 
 // Part 10.2.5 & 10.2.6: AI Execution Master Function
 export async function generateOmnichannelContent(blogTitle: string, blogContent: string) {
+  // #region agent log
+  fetch('http://127.0.0.1:7327/ingest/c018628c-d33c-464b-ad58-f99b37908c6e',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'c52aa0'},body:JSON.stringify({sessionId:'c52aa0',location:'lib/gemini.ts:generateOmnichannelContent',message:'omnichannel entry',data:{titleLen:blogTitle?.length||0,contentLen:blogContent?.length||0,hasModel:typeof model!=='undefined'},timestamp:Date.now(),hypothesisId:'C',runId:'post-fix'})}).catch(()=>{});
+  // #endregion
   console.log("[Omnichannel] Step 1: Extracting Core Hooks...");
   
   // 1. Extract Hooks
@@ -664,10 +678,11 @@ export type VisualPromptData = z.infer<typeof VisualPromptSchema>;
 
 // Part 10.3.2: Prompt Builder for Visual Prompt
 export function buildVisualPromptGenerator(blogTitle: string): string {
-  return `nYou are an expert AI Image Prompt Engineer (Midjourney/Flux style).
+  return `
+You are an expert AI Image Prompt Engineer (Midjourney/Flux style).
 Your task is to take a blog post title and convert it into a highly aesthetic, cinematic image generation prompt.
 
-BLOG TITLE: ""
+BLOG TITLE: "${blogTitle}"
 
 STRICT INSTRUCTIONS:
 1. Do NOT include text, words, or letters in the image prompt (AI struggles with spelling).
@@ -675,6 +690,6 @@ STRICT INSTRUCTIONS:
 3. Examples of style keywords: "cinematic lighting, minimalist, 3D render, vibrant, studio lighting, hyper-realistic, dark mode, neon accents".
 4. Keep it under 50 words.
 5. Return exactly the image prompt string in the provided JSON format.
-  .trim();
+  `.trim();
 }
 

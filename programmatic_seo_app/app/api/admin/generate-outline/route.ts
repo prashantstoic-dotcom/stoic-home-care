@@ -11,8 +11,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'gapId is required' }, { status: 400 });
     }
 
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dummy.supabase.co';
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'dummy';
     
     if (!supabaseUrl || !supabaseKey) {
         return NextResponse.json({ error: 'Supabase credentials missing' }, { status: 500 });

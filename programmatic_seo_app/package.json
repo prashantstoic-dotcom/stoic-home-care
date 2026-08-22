@@ -8,16 +8,23 @@
     "start": "next start"
   },
   "dependencies": {
+    "@ai-sdk/google": "^4.0.46",
+    "@babel/core": "^8.0.1",
+    "@babel/preset-typescript": "^8.0.1",
     "@google-cloud/bigquery": "^9.0.2",
     "@google/genai": "^2.17.1",
     "@google/generative-ai": "^0.24.1",
+    "@supabase/auth-helpers-nextjs": "^0.15.0",
     "@supabase/supabase-js": "^2.49.1",
     "@upstash/qstash": "^2.11.3",
     "@vercel/og": "^1.0.1",
+    "ai": "^7.0.69",
     "cheerio": "^1.2.0",
     "googleapis": "^176.0.0",
     "jose": "^6.2.8",
+    "lucide-react": "^1.33.0",
     "next": "^14.2.24",
+    "openai": "^7.5.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.6.0",
@@ -26,7 +33,8 @@
     "socket.io": "^4.8.3",
     "socket.io-client": "^4.8.3",
     "twitter-api-v2": "^1.29.1",
-    "zod": "^3.25.76"
+    "zod": "^3.25.76",
+    "zod-to-json-schema": "^3.25.2"
   },
   "devDependencies": {
     "@types/node": "^20.17.0",

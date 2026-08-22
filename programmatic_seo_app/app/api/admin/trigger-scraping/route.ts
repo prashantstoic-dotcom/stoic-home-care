@@ -1,11 +1,13 @@
 import { NextResponse } from 'next/server';
 import { verifyAdminAction } from '@/lib/auth-actions';
 import { qstashClient } from '@/lib/upstash';
+import { cookies } from 'next/headers';
 
 export async function POST(request: Request) {
   try {
     // 1. Authenticate Admin (Security First)
-    const isAdmin = await verifyAdminAction();
+    const token = cookies().get('admin_token')?.value;
+    const isAdmin = await verifyAdminAction(token || '');
     if (!isAdmin) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }

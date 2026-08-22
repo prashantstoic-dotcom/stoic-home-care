@@ -23,7 +23,7 @@ export default function PRReviewModal({ opportunityId, queryText, pitchId, subje
   useEffect(() => {
     if (isOpen) {
       setEditedSubject(subjectLine || "");
-      setEditedBody((pitchBody || "").replace(/<br\\s*\\/?>/gi, '\\n').replace(/<[^>]*>?/gm, ''));
+      setEditedBody((pitchBody || "").replace(/<br\s*\/?>/gi, '\\n').replace(/<[^>]*>?/gm, ''));
     }
   }, [isOpen, subjectLine, pitchBody]);
 

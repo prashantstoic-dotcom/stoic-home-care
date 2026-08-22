@@ -1,8 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY! // Read-only dashboard can use anon, but we use service for strict admin bypass
+  process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dummy.supabase.co',
+  process.env.SUPABASE_SERVICE_ROLE_KEY || 'dummy' // Read-only dashboard can use anon, but we use service for strict admin bypass
 );
 
 export const revalidate = 0; // Disable caching, always fetch fresh leads

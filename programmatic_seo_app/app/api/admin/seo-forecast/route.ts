@@ -18,15 +18,15 @@ export async function GET(request: Request) {
 
     // 2. Query BigQuery ML Model for 14-day horizon
     const bq = getBigQueryClient();
-    const query = \
+    const query = `
       SELECT
         page_url,
         CAST(forecast_timestamp AS STRING) as forecast_date,
         CAST(ROUND(forecast_value) AS INT64) as expected_clicks
       FROM
-        ML.FORECAST(MODEL \\\seo_analytics.traffic_forecaster_model\\\, STRUCT(14 AS horizon))
+        ML.FORECAST(MODEL \`seo_analytics.traffic_forecaster_model\`, STRUCT(14 AS horizon))
       ORDER BY page_url, forecast_timestamp ASC
-    \;
+    `;
 
     const [job] = await bq.createQueryJob({ query: query });
     const [rows] = await job.getQueryResults();

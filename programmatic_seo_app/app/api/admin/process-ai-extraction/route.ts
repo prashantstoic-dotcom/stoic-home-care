@@ -16,14 +16,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'recordId is required' }, { status: 400 });
     }
 
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dummy.supabase.co';
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'dummy';
     const supabase = createClient(supabaseUrl, supabaseKey);
 
     // 1. Fetch the raw extracted text from Supabase
     const { data: record, error: dbError } = await supabase
       .from('scraped_competitors_temp')
-      .select('extracted_text')
+      .select('extracted_text, url')
       .eq('id', recordId)
       .single();
 

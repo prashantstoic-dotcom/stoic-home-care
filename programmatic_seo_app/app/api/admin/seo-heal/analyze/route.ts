@@ -3,8 +3,8 @@ import { createClient } from '@supabase/supabase-js';
 import * as cheerio from 'cheerio';
 
 // Setup supabase
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dummy.supabase.co';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'dummy';
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 // Helper: Fetch Top 5 URLs from Google Custom Search API
@@ -18,7 +18,7 @@ async function fetchTopCompetitors(keyword: string): Promise<string[]> {
   }
 
   try {
-    const url = \`https://www.googleapis.com/customsearch/v1?key=\${apiKey}&cx=\${cx}&q=\${encodeURIComponent(keyword)}&num=5\`;
+    const url = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${cx}&q=${encodeURIComponent(keyword)}&num=5`;
     const res = await fetch(url);
     const data = await res.json();
     

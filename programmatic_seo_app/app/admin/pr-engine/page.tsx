@@ -1,11 +1,14 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import { createClient } from "@supabase/supabase-js";
 import { PROpportunity } from "@/types/pr";
 import PRReviewModal from "@/components/admin/PRReviewModal";
 
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dummy.supabase.co',
+  process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'dummy'
+);
+
 // Part 8.5.1 & 8.5.2: Server Component for PR Engine Dashboard
 export default async function PREngineDashboard() {
-  const supabase = createServerComponentClient({ cookies });
 
   // Fetch opportunities and their associated pitches, ordering by highest relevance score first
   const { data: opportunities, error } = await supabase

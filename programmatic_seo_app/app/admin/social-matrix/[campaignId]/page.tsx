@@ -1,10 +1,13 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import { createClient } from '@supabase/supabase-js';
 import Link from 'next/link';
 import { ApproveButton } from './ApproveButton';
 
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dummy.supabase.co',
+  process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'dummy'
+);
+
 export default async function CampaignBoard({ params }: { params: { campaignId: string } }) {
-  const supabase = createServerComponentClient({ cookies });
 
   // Fetch campaign details and its posts
   const { data: campaign, error } = await supabase

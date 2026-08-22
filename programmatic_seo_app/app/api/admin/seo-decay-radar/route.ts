@@ -3,8 +3,8 @@ import { getGSCAuth } from '@/lib/gsc';
 import { createClient } from '@supabase/supabase-js';
 
 // Initialize Supabase Client
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dummy.supabase.co';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'dummy';
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 export async function POST(req: Request) {
@@ -107,7 +107,7 @@ export async function POST(req: Request) {
           .update({ status: 'decaying', last_checked_at: new Date().toISOString() })
           .eq('id', page.id);
           
-        console.log(\`🚨 ALERT: Content Decay Detected on \${page.url}. Position Drop: \${positionDrop.toFixed(2)} spots.\`);
+        console.log(`🚨 ALERT: Content Decay Detected on ${page.url}. Position Drop: ${positionDrop.toFixed(2)} spots.`);
       } else {
         // Just update last checked time
         await supabase.from('seo_pages')

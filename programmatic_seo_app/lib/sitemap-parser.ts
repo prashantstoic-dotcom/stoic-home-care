@@ -7,13 +7,18 @@ export async function extractAllSitemapUrls(baseUrl: string): Promise<string[]> 
   
   try {
     // 1. Fetch the index sitemap
-    const indexRes = await fetch(\\/sitemap.xml\);
+    const indexRes = await fetch(`${baseUrl}/sitemap.xml`);
     if (!indexRes.ok) throw new Error('Failed to fetch sitemap index');
     
     const indexText = await indexRes.text();
     
     // Quick regex to find all <loc> tags in the index
-    const sitemapLinks = [...indexText.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]);
+    const indexRegex = /<loc>(.*?)<\/loc>/g;
+    const sitemapLinks: string[] = [];
+    let match;
+    while ((match = indexRegex.exec(indexText)) !== null) {
+      sitemapLinks.push(match[1]);
+    }
     
     // If it's a single sitemap (not an index) it will have direct page URLs
     // We check if the links end with .xml to determine if it's an index
@@ -28,9 +33,15 @@ export async function extractAllSitemapUrls(baseUrl: string): Promise<string[]> 
       try {
         const chunkRes = await fetch(chunkUrl);
         const chunkText = await chunkRes.text();
-        return [...chunkText.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]);
+        const chunkRegex = /<loc>(.*?)<\/loc>/g;
+        const chunkLinks: string[] = [];
+        let cMatch;
+        while ((cMatch = chunkRegex.exec(chunkText)) !== null) {
+          chunkLinks.push(cMatch[1]);
+        }
+        return chunkLinks;
       } catch (err) {
-        console.error(\Failed to parse sitemap chunk: \\);
+        console.error('Failed to parse sitemap chunk:', err);
         return [];
       }
     });
@@ -44,4 +55,3 @@ export async function extractAllSitemapUrls(baseUrl: string): Promise<string[]> 
     return [];
   }
 }
-

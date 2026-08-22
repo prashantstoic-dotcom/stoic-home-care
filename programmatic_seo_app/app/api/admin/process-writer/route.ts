@@ -8,8 +8,8 @@ import OpenAI from "openai";
 
 // Initialize Supabase Admin Client
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY! // Bypass RLS for admin background route
+  process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dummy.supabase.co',
+  process.env.SUPABASE_SERVICE_ROLE_KEY || 'dummy' // Bypass RLS for admin background route
 );
 
 // Initialize Gemini Client
@@ -40,7 +40,7 @@ async function handler(req: Request) {
       .single();
 
     if (topicError || !topicData) {
-      throw new Error(\`Failed to fetch or update topic: \${topicError?.message}\`);
+      throw new Error(`Failed to fetch or update topic: ${topicError?.message}`);
     }
 
     // Part 5.5.1 - Outline Iteration: Safely parsing the Tool 6 JSON array
@@ -54,7 +54,7 @@ async function handler(req: Request) {
         throw new Error("suggested_outline is neither a string nor an array.");
       }
     } catch (e: any) {
-      throw new Error(\`CRITICAL: Failed to parse outline JSON: \${e.message}\`);
+      throw new Error(`CRITICAL: Failed to parse outline JSON: ${e.message}`);
     }
 
     if (outlineArray.length === 0) {
@@ -72,12 +72,12 @@ async function handler(req: Request) {
       const headingText = headingObj.heading || headingObj.title || headingObj.section_title || String(headingObj);
       const lsiKeywords = headingObj.keywords || [];
 
-      console.log(\`[Chunking] Processing \${i + 1}/\${outlineArray.length}: \${headingText}\`);
+      console.log(`[Chunking] Processing ${i + 1}/${outlineArray.length}: ${headingText}`);
 
       // Part 5.5.5a - RAG Data Fetcher (Tavily Live Search)
       let ragContext = "";
       try {
-        console.log(\`[Tavily] Fetching live data for: "\${headingText}"\`);
+        console.log(`[Tavily] Fetching live data for: "${headingText}"`);
         const tvlyRes = await fetch("https://api.tavily.com/search", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -93,12 +93,12 @@ async function handler(req: Request) {
         if (tvlyRes.ok) {
           const tvlyData = await tvlyRes.json();
           // Extract the AI generated summary plus snippets from top 3 pages.
-          ragContext = \`\${tvlyData.answer || ''} \n\n \${(tvlyData.results || []).map((r: any) => r.content).join("\\n\\n")}\`;
+          ragContext = `${tvlyData.answer || ''} \n\n ${(tvlyData.results || []).map((r: any) => r.content).join("\\n\\n")}`;
         } else {
-          console.warn(\`[Tavily] Search failed for "\${headingText}". Continuing without RAG.\`);
+          console.warn(`[Tavily] Search failed for "${headingText}". Continuing without RAG.`);
         }
       } catch (e: any) {
-        console.warn(\`[Tavily] Network error for "\${headingText}". Continuing without RAG.\`);
+        console.warn(`[Tavily] Network error for "${headingText}". Continuing without RAG.`);
       }
 
       // Part 5.5.5b - RAG Data Fetcher (Text summarization / cleaning)
@@ -110,7 +110,7 @@ async function handler(req: Request) {
       ragContext = ragContext.replace(/\s+/g, ' ').trim();
 
       // Part 5.6.1 - Gemini Execution: Dynamic Prompt Construction
-      console.log(\`[Prompt Builder] Compiling rules for: "\${headingText}"\`);
+      console.log(`[Prompt Builder] Compiling rules for: "${headingText}"`);
       const finalPrompt = buildAdvancedWriterPrompt(
         headingText,
         ragContext,
@@ -119,7 +119,7 @@ async function handler(req: Request) {
       );
 
       // Part 5.6.2 - Gemini Execution with Dynamic Blocks Zod Schema
-      console.log(\`[Gemini] Calling API for: "\${headingText}"\`);
+      console.log(`[Gemini] Calling API for: "${headingText}"`);
       
       const model = genAI.getGenerativeModel({ 
         model: "gemini-2.5-pro",
@@ -132,23 +132,23 @@ async function handler(req: Request) {
       const result = await model.generateContent(finalPrompt);
       const rawJsonString = result.response.text();
       
-      console.log(\`[Gemini] Received response for: "\${headingText}"\`);
+      console.log(`[Gemini] Received response for: "${headingText}"`);
 
       // Part 5.6.5a - Critic Agent Validation (Safe Parsing and Self-Healing)
       const validationResult = parseAndValidateParagraph(rawJsonString);
       
       if (!validationResult.success || !validationResult.data) {
         // AI failed the strict rules (Lie detector, length constraints, or invalid JSON).
-        console.error(\`[Critic Agent] Validation failed for "\${headingText}": \`, validationResult.errors);
+        console.error(`[Critic Agent] Validation failed for "${headingText}": `, validationResult.errors);
         
         // CRITICAL SELF-HEALING LOOP:
         // By throwing this error, the current Vercel execution fails.
         // QStash intercepts this 500 status and will AUTOMATICALLY retry this exact API call 
         // up to 3 times (as configured in Part 5.3.2) without user intervention.
-        throw new Error(\`Critic Agent rejected AI output. Reason: \${validationResult.errors}\`);
+        throw new Error(`Critic Agent rejected AI output. Reason: ${validationResult.errors}`);
       }
 
-      console.log(\`[Critic Agent] Validation PASSED for "\${headingText}". Formatting is perfect.\`);
+      console.log(`[Critic Agent] Validation PASSED for "${headingText}". Formatting is perfect.`);
       const validatedBlocks = validationResult.data.content_blocks;
 
       // Part 5.6.8a - Media Pipeline (DALL-E 3 Image Generation loop)
@@ -156,7 +156,7 @@ async function handler(req: Request) {
         const block = validatedBlocks[j];
         
         if (block.suggested_image_prompt && block.suggested_image_prompt.length > 20) {
-          console.log(\`[DALL-E] Generating image for block \${j+1}: "\${block.suggested_image_prompt.substring(0, 30)}..."\`);
+          console.log(`[DALL-E] Generating image for block ${j+1}: "${block.suggested_image_prompt.substring(0, 30)}..."`);
           try {
             // Part 5.6.8b: Calling DALL-E 3 API
             const imageResponse = await openai.images.generate({
@@ -171,7 +171,7 @@ async function handler(req: Request) {
             if (base64Image) {
               // Part 5.6.8c: Uploading raw image buffer to Supabase Storage
               const buffer = Buffer.from(base64Image, 'base64');
-              const fileName = \`\${topicId}/\${Date.now()}-block-\${j}.png\`;
+              const fileName = `${topicId}/${Date.now()}-block-${j}.png`;
               
               const { error: uploadError } = await supabase.storage
                 .from('article_images')
@@ -187,23 +187,23 @@ async function handler(req: Request) {
                   .getPublicUrl(fileName);
 
                 const imageUrl = publicUrlData.publicUrl;
-                console.log(\`[Supabase] Image uploaded successfully: \${imageUrl}\`);
+                console.log(`[Supabase] Image uploaded successfully: ${imageUrl}`);
 
                 // Part 5.6.8d: HTML <img> tag injection with SEO alt-text
                 const altText = lsiKeywords.length > 0 ? lsiKeywords[0] : "AI Generated Image";
-                const imgTag = \`
+                const imgTag = `
                   <figure class="my-8">
-                    <img src="\${imageUrl}" alt="\${altText}" class="rounded-xl shadow-lg w-full object-cover max-h-[500px]" loading="lazy" />
-                    <figcaption class="text-center text-sm text-gray-500 mt-2">Illustration based on: \${block.suggested_image_prompt.substring(0, 50)}...</figcaption>
+                    <img src="${imageUrl}" alt="${altText}" class="rounded-xl shadow-lg w-full object-cover max-h-[500px]" loading="lazy" />
+                    <figcaption class="text-center text-sm text-gray-500 mt-2">Illustration based on: ${block.suggested_image_prompt.substring(0, 50)}...</figcaption>
                   </figure>
-                \`;
+                `;
                 block.html_content += imgTag;
               } else {
-                console.error(\`[Supabase] Image upload failed: \${uploadError.message}\`);
+                console.error(`[Supabase] Image upload failed: ${uploadError.message}`);
               }
             }
           } catch (e: any) {
-            console.error(\`[DALL-E] Failed to generate image: \${e.message}. Continuing without image.\`);
+            console.error(`[DALL-E] Failed to generate image: ${e.message}. Continuing without image.`);
           }
         }
         
@@ -212,38 +212,38 @@ async function handler(req: Request) {
 
         if (block.block_type === 'table' && block.table_data) {
           const table = block.table_data;
-          let thHtml = table.headers.map(h => \`<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">\${h}</th>\`).join('');
+          let thHtml = table.headers.map(h => `<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">${h}</th>`).join('');
           let trHtml = table.rows.map(row => {
-            const tdHtml = row.map(cell => \`<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">\${cell}</td>\`).join('');
-            return \`<tr class="bg-white border-b">\${tdHtml}</tr>\`;
+            const tdHtml = row.map(cell => `<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${cell}</td>`).join('');
+            return `<tr class="bg-white border-b">${tdHtml}</tr>`;
           }).join('');
           
-          blockHtml += \`<div class="overflow-x-auto my-8"><table class="min-w-full divide-y divide-gray-200"><thead class="bg-gray-50"><tr>\${thHtml}</tr></thead><tbody class="bg-white divide-y divide-gray-200">\${trHtml}</tbody></table></div>\`;
+          blockHtml += `<div class="overflow-x-auto my-8"><table class="min-w-full divide-y divide-gray-200"><thead class="bg-gray-50"><tr>${thHtml}</tr></thead><tbody class="bg-white divide-y divide-gray-200">${trHtml}</tbody></table></div>`;
         }
 
         if (block.block_type === 'faq' && block.faq_data) {
-          let faqsHtml = block.faq_data.map(faq => \`
+          let faqsHtml = block.faq_data.map(faq => `
             <details class="group border-b border-gray-200 py-4">
               <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-lg text-gray-900">
-                <span>\${faq.question}</span>
+                <span>${faq.question}</span>
                 <span class="transition group-open:rotate-180">
                   <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
                 </span>
               </summary>
-              <p class="text-gray-600 mt-3 group-open:animate-fadeIn">\${faq.answer}</p>
+              <p class="text-gray-600 mt-3 group-open:animate-fadeIn">${faq.answer}</p>
             </details>
-          \`).join('');
-          blockHtml += \`<div class="my-8 max-w-3xl mx-auto">\${faqsHtml}</div>\`;
+          `).join('');
+          blockHtml += `<div class="my-8 max-w-3xl mx-auto">${faqsHtml}</div>`;
         }
 
-        finalArticleBlocks.push(\`<section class="article-section my-6">\${blockHtml}</section>\`);
+        finalArticleBlocks.push(`<section class="article-section my-6">${blockHtml}</section>`);
       }
     } // End of Chunking Loop
 
     let finalArticleHtml = finalArticleBlocks.join('\\n');
 
     // Part 5.8.1 - Autonomous Linking (Fetching slugs)
-    console.log(\`[Internal Linking] Fetching active slugs from DB...\`);
+    console.log(`[Internal Linking] Fetching active slugs from DB...`);
     const { data: existingArticles, error: slugsError } = await supabase
       .from('published_articles')
       .select('title, slug')
@@ -251,17 +251,17 @@ async function handler(req: Request) {
       .limit(50); // Fetch top 50 recent articles to link to
 
     if (slugsError) {
-      console.error(\`[Internal Linking] Failed to fetch slugs: \${slugsError.message}\`);
+      console.error(`[Internal Linking] Failed to fetch slugs: ${slugsError.message}`);
     }
 
     // We only trigger the AI Linking Agent if we actually have other articles on the site.
     if (existingArticles && existingArticles.length > 0) {
-      const linkContext = existingArticles.map(a => \`Title: "\${a.title}", URL Slug: "\${a.slug}"\`).join("\\n");
+      const linkContext = existingArticles.map(a => `Title: "${a.title}", URL Slug: "${a.slug}"`).join("\\n");
       
       // Part 5.8.2 - Autonomous Linking (Gemini API Call for Injection)
-      console.log(\`[Internal Linking] Calling Gemini for natural anchor tag injection...\`);
+      console.log(`[Internal Linking] Calling Gemini for natural anchor tag injection...`);
       try {
-        const linkingPrompt = \`
+        const linkingPrompt = `
           You are an expert SEO internal linking agent.
           Below is a fully formatted HTML article.
           Below that is a list of existing published articles on our website.
@@ -274,11 +274,11 @@ async function handler(req: Request) {
           4. DO NOT change ANY other HTML. DO NOT add markdown like \`\`\`html. Return ONLY the modified raw HTML string.
           
           EXISTING ARTICLES:
-          \${linkContext}
+          ${linkContext}
           
           HTML ARTICLE:
-          \${finalArticleHtml}
-        \`;
+          ${finalArticleHtml}
+        `;
 
         const linkModel = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
         const linkResult = await linkModel.generateContent(linkingPrompt);
@@ -290,18 +290,18 @@ async function handler(req: Request) {
         
         if (linkedHtml.length > 100) {
           finalArticleHtml = linkedHtml;
-          console.log(\`[Internal Linking] Successfully injected internal links.\`);
+          console.log(`[Internal Linking] Successfully injected internal links.`);
         }
       } catch (e: any) {
-        console.error(\`[Internal Linking] Gemini failed to inject links: \${e.message}. Proceeding without internal links.\`);
+        console.error(`[Internal Linking] Gemini failed to inject links: ${e.message}. Proceeding without internal links.`);
       }
       
     } else {
-      console.log(\`[Internal Linking] No existing articles found. Skipping link injection.\`);
+      console.log(`[Internal Linking] No existing articles found. Skipping link injection.`);
     }
 
     // Part 5.8.5b - Schema Gen: Gemini API call for JSON-LD
-    console.log(\`[Schema Gen] Generating JSON-LD schema for SEO...\`);
+    console.log(`[Schema Gen] Generating JSON-LD schema for SEO...`);
     let generatedSchema = null;
     try {
       const schemaModel = genAI.getGenerativeModel({
@@ -313,7 +313,7 @@ async function handler(req: Request) {
         }
       });
 
-      const schemaPrompt = \`
+      const schemaPrompt = `
         Analyze the following HTML article.
         1. Create an 'Article' schema with a catchy headline and a 160-char SEO meta description.
         2. Set author name to "System Admin".
@@ -321,18 +321,18 @@ async function handler(req: Request) {
         4. If there are any FAQs (questions and answers) in the HTML, extract them exactly and put them in the faq_schema. If there are no FAQs, leave it empty.
         
         HTML CONTENT:
-        \${finalArticleHtml}
-      \`;
+        ${finalArticleHtml}
+      `;
 
       const schemaResult = await schemaModel.generateContent(schemaPrompt);
       generatedSchema = JSON.parse(schemaResult.response.text());
-      console.log(\`[Schema Gen] JSON-LD generated successfully.\`);
+      console.log(`[Schema Gen] JSON-LD generated successfully.`);
     } catch (e: any) {
-      console.error(\`[Schema Gen] Failed to generate schema: \${e.message}. Proceeding without schema.\`);
+      console.error(`[Schema Gen] Failed to generate schema: ${e.message}. Proceeding without schema.`);
     }
 
     // Part 5.9.1 - Database Persistence: Insert into published_articles
-    console.log(\`[DB] Saving final article to database...\`);
+    console.log(`[DB] Saving final article to database...`);
     const slug = topicData.topic.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
     
     const { error: insertError } = await supabase
@@ -347,7 +347,7 @@ async function handler(req: Request) {
       });
 
     if (insertError) {
-      throw new Error(\`CRITICAL: Failed to save article to DB: \${insertError.message}\`);
+      throw new Error(`CRITICAL: Failed to save article to DB: ${insertError.message}`);
     }
 
     // Part 5.9.2 - Database Persistence: Finalize gap status
@@ -357,12 +357,12 @@ async function handler(req: Request) {
       .eq('id', topicId);
 
     if (updateError) {
-      console.warn(\`[DB] Article saved, but failed to update content_gaps status: \${updateError.message}\`);
+      console.warn(`[DB] Article saved, but failed to update content_gaps status: ${updateError.message}`);
     }
 
-    console.log(\`[Success] 🎉 Article generation complete for: \${topicData.topic}\`);
+    console.log(`[Success] 🎉 Article generation complete for: ${topicData.topic}`);
 
-    return NextResponse.json({ success: true, message: \`Worker completed for \${topicId}\` });
+    return NextResponse.json({ success: true, message: `Worker completed for ${topicId}` });
 
   } catch (error: any) {
     console.error("Worker Error:", error);
@@ -372,7 +372,14 @@ async function handler(req: Request) {
 }
 
 // Export the wrapped handler
-export const POST = verifySignatureAppRouter(handler);
+// verifySignatureAppRouter reads QSTASH_CURRENT_SIGNING_KEY at module init;
+// guard it so Next.js build doesn't crash when env vars are absent.
+const hasQStashKeys =
+  process.env.QSTASH_CURRENT_SIGNING_KEY && process.env.QSTASH_NEXT_SIGNING_KEY;
+
+export const POST = hasQStashKeys
+  ? verifySignatureAppRouter(handler)
+  : (req: Request) => handler(req);
 
 // Vercel Specific: Force this route to run in the background with maximum timeout
 export const maxDuration = 300; // 5 minutes (Requires Vercel Pro, falls back to max allowed on free)

@@ -14,7 +14,7 @@ export async function POST(req: Request) {
   try {
     // 1. Basic Security: Check for a secret Admin API Key
     const authHeader = req.headers.get("authorization");
-    if (authHeader !== \`Bearer \${process.env.ADMIN_API_SECRET}\`) {
+    if (authHeader !== `Bearer ${process.env.ADMIN_API_SECRET}`) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -30,7 +30,7 @@ export async function POST(req: Request) {
 
     // Part 5.3.2 - Initialize QStash client and dispatch job
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-    const destinationUrl = \`\${baseUrl}/api/admin/process-writer\`;
+    const destinationUrl = `${baseUrl}/api/admin/process-writer`;
 
     const publishResponse = await qstashClient.publishJSON({
       url: destinationUrl,
@@ -40,7 +40,7 @@ export async function POST(req: Request) {
     
     return NextResponse.json({ 
       success: true, 
-      message: \`Job triggered successfully for topic: \${topicId}\`,
+      message: `Job triggered successfully for topic: ${topicId}`,
       messageId: publishResponse.messageId
     });
 

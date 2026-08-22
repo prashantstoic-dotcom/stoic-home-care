@@ -3,12 +3,12 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { createClient } from '@supabase/supabase-js';
 
 // Initialize Supabase
-const supabaseUrl = process.env.SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_KEY!;
+const supabaseUrl = process.env.SUPABASE_URL || 'https://dummy.supabase.co';
+const supabaseKey = process.env.SUPABASE_KEY || 'dummy';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Initialize Gemini
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || 'dummy');
 
 // Define RAG Ground Truth (Company Facts)
 const RAG_CONTEXT = `

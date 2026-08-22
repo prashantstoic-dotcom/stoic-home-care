@@ -9,7 +9,7 @@ export async function POST(request: Request) {
     const authHeader = request.headers.get('Authorization');
     const secret = process.env.VERCEL_LOG_DRAIN_SECRET || 'fallback-secret';
     
-    if (authHeader !== \Bearer \\) {
+    if (authHeader !== `Bearer ${secret}`) {
       return NextResponse.json({ success: false, message: 'Unauthorized Log Drain Payload' }, { status: 401 });
     }
 
@@ -18,8 +18,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: false, message: 'Invalid payload format' }, { status: 400 });
     }
 
-    const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-    const supabaseKey = process.env.SUPABASE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+    const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dummy.supabase.co';
+    const supabaseKey = process.env.SUPABASE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'dummy';
     const supabase = createClient(supabaseUrl, supabaseKey);
 
     const botLogsToInsert: any[] = [];

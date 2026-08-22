@@ -3,12 +3,12 @@ import { createClient } from '@supabase/supabase-js';
 import { Resend } from 'resend';
 
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
+  process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dummy.supabase.co',
+  process.env.SUPABASE_SERVICE_ROLE_KEY || 'dummy'
 );
 
 // Initialize Resend
-const resend = new Resend(process.env.RESEND_API_KEY!);
+const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_key');
 
 export async function POST(req: Request) {
   try {

@@ -1,10 +1,13 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import { createClient } from '@supabase/supabase-js';
 import Link from 'next/link';
 import { GenerateButton } from './GenerateButton';
 
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dummy.supabase.co',
+  process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'dummy'
+);
+
 export default async function SocialMatrixDashboard() {
-  const supabase = createServerComponentClient({ cookies });
 
   // Fetch all published articles and their associated social campaign status
   // We use a LEFT JOIN to see which articles don't have a campaign yet.
