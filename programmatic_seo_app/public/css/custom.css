@@ -639,4 +639,4 @@
   box-shadow: 0 5px 15px rgba(15,34,64,0.2);
 }
 .premium-testi-name { font-weight: 800; color: #0f2240; font-size: 1.1rem; }
-.premium-testi-role { font-size: 0.85rem; color: #78909c; }
+.premium-testi-role { font-size: 0.85rem; color: var(--muted); }

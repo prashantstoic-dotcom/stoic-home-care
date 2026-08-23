@@ -3,7 +3,7 @@
    Core design system: variables, typography, layout, utilities
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+/* Font loading moved to layout.tsx as async preload for performance */
 
 /* ── VARIABLES ── */
 :root {
@@ -16,7 +16,7 @@
   --white:         #ffffff;
   --light:         #f4f8ff;
   --text:          #354a6b;
-  --muted:         #6b82a3;
+  --muted:         #4b5e77;
   --grad:          linear-gradient(135deg, #1a3a6b 0%, #2196d3 60%, #4ecdc4 100%);
   --grad-teal:     linear-gradient(135deg, #2196d3 0%, #4ecdc4 100%);
   --grad-text:     linear-gradient(135deg, #2196d3, #4ecdc4);
@@ -45,6 +45,7 @@ p { line-height: 1.82; }
 h1,h2,h3,h4,h5,h6 { font-family: 'Outfit', sans-serif; color: var(--primary-dark); line-height: 1.15; font-weight: 700; }
 
 /* ── UTILITIES ── */
+.text-muted { color: var(--muted) !important; }
 .bg-grad      { background: var(--grad); }
 .text-teal    { color: var(--teal) !important; }
 .text-grad    { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
@@ -155,7 +156,7 @@ h1,h2,h3,h4,h5,h6 { font-family: 'Outfit', sans-serif; color: var(--primary-dark
 /* ── TICKER ── */
 .ticker-wrap { background:rgba(33,150,211,.06); border-bottom:1px solid rgba(33,150,211,.12); padding:.55rem 0; overflow:hidden; }
 .ticker-inner { display:flex; gap:3rem; animation:tickerMove 30s linear infinite; white-space:nowrap; width:max-content; }
-.ticker-item { font-size:.8rem; font-weight:600; color:var(--secondary); display:inline-flex; align-items:center; gap:.4rem; }
+.ticker-item { font-size:.8rem; font-weight:700; color:var(--primary); display:inline-flex; align-items:center; gap:.4rem; }
 @keyframes tickerMove { from{transform:translateX(0);} to{transform:translateX(-50%);} }
 
 /* ── ECG HERO DECORATION ── */
@@ -260,10 +261,11 @@ h1,h2,h3,h4,h5,h6 { font-family: 'Outfit', sans-serif; color: var(--primary-dark
 .footer-bottom { border-top:1px solid rgba(255,255,255,.07); margin-top:3rem; padding:1.5rem 0; font-size:.82rem; }
 
 /* ── SWIPER OVERRIDES ── */
+
 .swiper-button-next, .swiper-button-prev { color:#fff !important; background:rgba(255,255,255,.12); width:44px !important; height:44px !important; border-radius:50%; backdrop-filter:blur(8px); transition:var(--transition); }
 .swiper-button-next::after, .swiper-button-prev::after { font-size:1rem !important; font-weight:900; }
 .swiper-button-next:hover, .swiper-button-prev:hover { background:var(--secondary); }
-.swiper-pagination-bullet { background:rgba(255,255,255,.5) !important; opacity:1 !important; width:8px !important; height:8px !important; }
+.swiper-pagination-bullet { background:rgba(255,255,255,.5) !important; opacity:1 !important; width:12px !important; height:12px !important; margin:0 6px !important; }
 .swiper-pagination-bullet-active { background:#4ecdc4 !important; width:24px !important; border-radius:4px !important; }
 
 /* ── EMERGENCY STRIP ── */
