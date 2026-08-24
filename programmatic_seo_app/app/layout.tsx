@@ -89,7 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 })(window,document,'script','dataLayer','GTM-MZBGCCQ4');
               }
               // Load on interaction
-              ['scroll', 'mousemove', 'touchstart'].forEach(function(e) { window.addEventListener(e, loadGTM, {once: true}); });
+              ['scroll', 'mousemove', 'touchstart'].forEach(function(e) { window.addEventListener(e, loadGTM, {once: true, passive: true}); });
               // Or load after 3.5s anyway
               setTimeout(loadGTM, 3500);
             });

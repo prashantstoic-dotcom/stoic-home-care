@@ -143,7 +143,7 @@ export default async function HomePage() {
             {/* Right: Premium Image & Glassmorphism Badges */}
             <div className="col-lg-6 hero-img-side text-center text-lg-end" style={{position:'relative'}}>
               <div style={{position:'relative', display:'inline-block'}}>
-                <Image src="/images/doctor.avif" alt="Home Doctor" width={500} height={600} sizes="(max-width: 991px) 0vw, 500px" priority style={{borderRadius:'30px', width:'100%', maxWidth:'500px', height:'auto', boxShadow:'0 30px 60px rgba(0,0,0,0.5)'}} />
+                <Image src="/images/doctor.avif" alt="Home Doctor" width={500} height={600} sizes="(max-width: 991px) 100vw, 500px" priority style={{borderRadius:'30px', width:'100%', maxWidth:'500px', height:'auto', boxShadow:'0 30px 60px rgba(0,0,0,0.5)'}} />
                 
                 <div className="hero-float f1 d-none d-xl-flex" style={{position:'absolute', bottom:'30px', left:'-80px', background:'rgba(255,255,255,0.95)', padding:'0.8rem 1rem', borderRadius:'12px', alignItems:'center', gap:'0.8rem', boxShadow:'0 15px 35px rgba(0,0,0,0.15)', animation:'floatY 4s ease-in-out infinite'}}>
                   <div style={{background:'rgba(37,211,102,.15)', width:'35px', height:'35px', display:'flex', alignItems:'center', justifyContent:'center', borderRadius:'50%'}}><i className="fa-solid fa-star" style={{color:'#F5B041', fontSize:'1rem'}}></i></div>
@@ -224,7 +224,7 @@ export default async function HomePage() {
                 <div key={svc.id} className="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay={(d % 3) * 100}>
                   <div className="service-card">
                     <div className="sc-img">
-                      <Image src={svc.image ? `/uploads/services/${svc.image}` : '/images/equip.avif'} alt={svc.title} width={400} height={300} loading="lazy" />
+                      <Image src={svc.image ? `/uploads/services/${svc.image}` : '/images/equip.avif'} alt={svc.title} width={400} height={300} sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
                       <div className="sc-icon"><span className="material-icons-round">local_hospital</span></div>
                     </div>
                     <div className="sc-body">
@@ -241,7 +241,7 @@ export default async function HomePage() {
                 <div key={title} className="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay={(d % 3) * 100}>
                   <div className="service-card">
                     <div className="sc-img">
-                      <Image src={`/images/${img}`} alt={title} width={400} height={300} loading="lazy" />
+                      <Image src={`/images/${img}`} alt={title} width={400} height={300} sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
                       <div className="sc-icon"><span className="material-icons-round">{icon}</span></div>
                     </div>
                     <div className="sc-body">
@@ -314,7 +314,7 @@ export default async function HomePage() {
                 <h2 className="section-title text-white">Dedicated to Your Health & Well-being</h2>
                 <div className="divider-grad"></div>
                 <p className="text-white-50" style={{lineHeight:1.9, marginBottom:'2rem'}}>At Stoic Home Care, we go beyond medical treatment. Our holistic approach ensures emotional and physical well-being through enterprise-grade home care.</p>
-                <Image src="/images/nurse.avif" alt="Care" width={500} height={600} className="bento-hero-img" loading="lazy" />
+                <Image src="/images/nurse.avif" alt="Care" width={500} height={600} sizes="(max-width: 991px) 100vw, 33vw" className="bento-hero-img" loading="lazy" />
               </div>
             </div>
             <div className="col-lg-8">
@@ -379,7 +379,7 @@ export default async function HomePage() {
                   <div key={eq.id} className="swiper-slide">
                     <div className="equip-card">
                       <div className="ec-img">
-                        <Image src={eq.image ? `/uploads/equipment/${eq.image}` : '/images/equip.avif'} alt={eq.title} width={400} height={300} loading="lazy" />
+                        <Image src={eq.image ? `/uploads/equipment/${eq.image}` : '/images/equip.avif'} alt={eq.title} width={400} height={300} sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
                       </div>
                       <div className="ec-body">
                         <h5>{eq.title}</h5>
@@ -397,7 +397,7 @@ export default async function HomePage() {
                   <div key={title} className="swiper-slide">
                     <div className="equip-card">
                       <div className="ec-img">
-                        <Image src={`/images/${img}`} alt={title} width={400} height={300} loading="lazy" />
+                        <Image src={`/images/${img}`} alt={title} width={400} height={300} sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
                         <span className="ec-badge">{badge}</span>
                       </div>
                       <div className="ec-body">
