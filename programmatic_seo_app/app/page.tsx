@@ -117,7 +117,7 @@ export default async function HomePage() {
 
       {/* ══ MAIN HERO ══ */}
       <div className="main-hero" style={{position:'relative', overflow:'hidden', background:'#0f2240', padding: '140px 0 80px', display:'flex', alignItems:'center'}}>
-        <Image className="hero-bg" src="/images/carousel-1.avif" alt="ICU Home Care" width={1920} height={1080} sizes="(max-width: 768px) 100vw, 1920px" priority style={{position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', opacity:0.4}} />
+        <Image className="hero-bg" src="/images/carousel-1.avif" alt="ICU Home Care" width={1920} height={1080} priority style={{position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', opacity:0.4}} />
         <div className="hero-overlay" style={{position:'absolute', inset:0, background:'linear-gradient(135deg, rgba(15,34,64,0.95) 0%, rgba(33,150,211,0.8) 100%)'}}></div>
         
         <div className="container hero-content" style={{position:'relative', zIndex:2}}>
@@ -128,7 +128,7 @@ export default async function HomePage() {
               <div className="hero-badge" style={{background:'rgba(78,205,196,.15)', color:'#7ee8e2', border:'1px solid rgba(78,205,196,.3)', padding:'.5rem 1rem', borderRadius:'50px', display:'inline-block', fontSize:'0.85rem', fontWeight:600, marginBottom:'1.5rem'}}>
                 <i className="fa-solid fa-shield-heart me-1"></i> Trusted by 10,000+ Families
               </div>
-              <h1 className="hero-title" style={{fontSize:'clamp(2.5rem, 5vw, 4rem)', fontWeight:800, color:'#fff', lineHeight:1.1, marginBottom:'1.5rem', fontFamily:"var(--font-outfit), sans-serif"}}>
+              <h1 className="hero-title" style={{fontSize:'clamp(2.5rem, 5vw, 4rem)', fontWeight:800, color:'#fff', lineHeight:1.1, marginBottom:'1.5rem', fontFamily:"'Outfit', sans-serif"}}>
                 Hospital-Quality Care<br/><span style={{color:'#4ecdc4'}}>Right at Home.</span>
               </h1>
               <p className="hero-sub" style={{fontSize:'1.1rem', color:'rgba(255,255,255,0.85)', lineHeight:1.7, marginBottom:'2.5rem', maxWidth:'540px'}}>
@@ -143,7 +143,7 @@ export default async function HomePage() {
             {/* Right: Premium Image & Glassmorphism Badges */}
             <div className="col-lg-6 hero-img-side text-center text-lg-end" style={{position:'relative'}}>
               <div style={{position:'relative', display:'inline-block'}}>
-                <Image src="/images/doctor.avif" alt="Home Doctor" width={600} height={400} sizes="(max-width: 991px) 0vw, 500px" priority style={{borderRadius:'30px', width:'100%', maxWidth:'500px', height:'auto', boxShadow:'0 30px 60px rgba(0,0,0,0.5)'}} />
+                <Image src="/images/doctor.avif" alt="Home Doctor" width={600} height={400} priority style={{borderRadius:'30px', width:'100%', maxWidth:'500px', height:'auto', boxShadow:'0 30px 60px rgba(0,0,0,0.5)'}} />
                 
                 <div className="hero-float f1 d-none d-xl-flex" style={{position:'absolute', bottom:'30px', left:'-80px', background:'rgba(255,255,255,0.95)', padding:'0.8rem 1rem', borderRadius:'12px', alignItems:'center', gap:'0.8rem', boxShadow:'0 15px 35px rgba(0,0,0,0.15)', animation:'floatY 4s ease-in-out infinite'}}>
                   <div style={{background:'rgba(37,211,102,.15)', width:'35px', height:'35px', display:'flex', alignItems:'center', justifyContent:'center', borderRadius:'50%'}}><i className="fa-solid fa-star" style={{color:'#F5B041', fontSize:'1rem'}}></i></div>
