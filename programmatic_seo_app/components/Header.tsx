@@ -63,7 +63,8 @@ export default function Header() {
       <nav className={`navbar navbar-expand-lg fixed-top ${isScrolled ? "scrolled" : ""}`} id="mainNav">
         <div className="container">
           <Link href="/" className="navbar-brand">
-            <Image className="navbar-logo" src="/images/logo.png" alt="Stoic Home Care" width={180} height={56} priority style={{ height: 'auto', width: 'auto', maxHeight: '56px' }} />
+            {/* Using standard img to perfectly replicate old UI, but Next/Image is better for prod */}
+            <img className="navbar-logo" src="/images/logo.png" alt="Stoic Home Care" />
           </Link>
           
           <button

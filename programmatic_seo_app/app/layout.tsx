@@ -1,19 +1,13 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import Script from "next/script";
-import dynamic from "next/dynamic";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import RentModal from "../components/modals/RentModal";
+import BookServiceModal from "../components/modals/BookServiceModal";
+import AskQuestionModal from "../components/modals/AskQuestionModal";
+import ModalGlobals from "../components/ModalGlobals";
 import ClientInit from "../components/ClientInit";
-
-// ── Critical CSS: Inlined by Next.js for instant above-the-fold render ──
-import "./critical.css";
-
-// ── Lazy-load modals (never visible on initial render) ──
-const RentModal = dynamic(() => import("../components/modals/RentModal"), { ssr: false });
-const BookServiceModal = dynamic(() => import("../components/modals/BookServiceModal"), { ssr: false });
-const AskQuestionModal = dynamic(() => import("../components/modals/AskQuestionModal"), { ssr: false });
-const ModalGlobals = dynamic(() => import("../components/ModalGlobals"), { ssr: false });
 
 export async function generateMetadata(): Promise<Metadata> {
   const headersList = headers();
@@ -56,71 +50,26 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  // Build async CSS link tags as raw HTML to use onload attribute
-  // (React doesn't support onload on <link> elements natively)
-  const asyncCssHtml = [
-    // Google Fonts (was render-blocking @import in style.css)
-    'https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap',
-    // Local CSS
-    '/css/style.css',
-    '/css/custom.css',
-    '/css/responsive.css',
-    '/css/a11y.css',
-    // CDN CSS (was render-blocking — 4,150ms savings!)
-    'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css',
-    'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css',
-    'https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css',
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
-    'https://fonts.googleapis.com/icon?family=Material+Icons+Round',
-  ].map(href =>
-    `<link rel="stylesheet" href="${href}" media="print" onload="this.media='all'">`
-  ).join('\n') + '\n' +
-  // Noscript fallback for no-JS environments
-  '<noscript>' +
-  [
-    '/css/style.css',
-    '/css/custom.css',
-    '/css/responsive.css',
-    '/css/a11y.css',
-    'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css',
-    'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css',
-    'https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css',
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
-    'https://fonts.googleapis.com/icon?family=Material+Icons+Round',
-    'https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap',
-  ].map(href => `<link rel="stylesheet" href="${href}">`).join('') +
-  '</noscript>';
-
   return (
     <html lang="en">
       <head>
-        {/* ── Preconnects (keep — zero cost, speeds up later fetches) ── */}
+        {/* Preconnects for performance */}
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://cdn.jsdelivr.net" />
 
-        {/* ── Preload Hero Images (fixes LCP request discovery) ── */}
-        <link rel="preload" as="image" href="/images/carousel-1.avif" type="image/avif" />
-        <link rel="preload" as="image" href="/images/doctor.avif" type="image/avif" />
+        {/* Global Styles (Copied from Old PHP Assets) */}
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/custom.css" />
+        <link rel="stylesheet" href="/css/responsive.css" />
+        <link rel="stylesheet" href="/css/a11y.css" />
 
-        {/* ── All CSS loaded asynchronously (non-blocking) ── 
-            Uses media="print" onload="this.media='all'" pattern.
-            Critical CSS is inlined via import "./critical.css" above.
-            This eliminates the 4,150ms render-blocking bottleneck. */}
-        <div dangerouslySetInnerHTML={{ __html: asyncCssHtml }} />
-
-        {/* ── Fallback: ensure async CSS loads even if onload fails ── */}
-        <Script id="async-css-fallback" strategy="beforeInteractive">
-          {`
-            document.addEventListener("DOMContentLoaded", function() {
-              var links = document.querySelectorAll('link[rel="stylesheet"][media="print"]');
-              for (var i = 0; i < links.length; i++) {
-                links[i].media = "all";
-              }
-            });
-          `}
-        </Script>
+        {/* CDN Dependencies */}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" />
 
         {/* Delayed GTM Loader (Zero TBT logic from old head.php) */}
         <Script id="gtm-delayed-loader" strategy="afterInteractive">
@@ -154,7 +103,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         
         <Footer />
 
-        {/* Global Modals (lazy-loaded — not in initial bundle) */}
+        {/* Global Modals */}
         <ModalGlobals />
         <RentModal />
         <BookServiceModal />

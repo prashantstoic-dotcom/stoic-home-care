@@ -143,7 +143,7 @@ export default async function HomePage() {
             {/* Right: Premium Image & Glassmorphism Badges */}
             <div className="col-lg-6 hero-img-side text-center text-lg-end" style={{position:'relative'}}>
               <div style={{position:'relative', display:'inline-block'}}>
-                <Image src="/images/doctor.avif" alt="Home Doctor" width={600} height={400} priority style={{borderRadius:'30px', width:'100%', maxWidth:'500px', height:'auto', boxShadow:'0 30px 60px rgba(0,0,0,0.5)'}} />
+                <Image src="/images/doctor.avif" alt="Home Doctor" width={500} height={600} priority style={{borderRadius:'30px', width:'100%', maxWidth:'500px', height:'auto', boxShadow:'0 30px 60px rgba(0,0,0,0.5)'}} />
                 
                 <div className="hero-float f1 d-none d-xl-flex" style={{position:'absolute', bottom:'30px', left:'-80px', background:'rgba(255,255,255,0.95)', padding:'0.8rem 1rem', borderRadius:'12px', alignItems:'center', gap:'0.8rem', boxShadow:'0 15px 35px rgba(0,0,0,0.15)', animation:'floatY 4s ease-in-out infinite'}}>
                   <div style={{background:'rgba(37,211,102,.15)', width:'35px', height:'35px', display:'flex', alignItems:'center', justifyContent:'center', borderRadius:'50%'}}><i className="fa-solid fa-star" style={{color:'#F5B041', fontSize:'1rem'}}></i></div>
@@ -182,22 +182,22 @@ export default async function HomePage() {
           <div className="row g-4 text-center">
             <div className="col-6 col-md-3" data-aos="fade-up" data-aos-delay="0">
               <div style={{fontSize:'2.5rem', color:'#4ecdc4', marginBottom:'0.5rem'}}><i className="fa-solid fa-users"></i></div>
-              <h3 style={{fontSize:'1.8rem', fontWeight:800, color:'#0f2240', marginBottom:'0.2rem'}}>10,000+</h3>
+              <h4 style={{fontSize:'1.8rem', fontWeight:800, color:'#0f2240', marginBottom:'0.2rem'}}>10,000+</h4>
               <p style={{color:'#6b82a3', fontWeight:600, fontSize:'0.9rem', margin:0}}>Patients Served</p>
             </div>
             <div className="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
               <div style={{fontSize:'2.5rem', color:'#4ecdc4', marginBottom:'0.5rem'}}><i className="fa-solid fa-user-nurse"></i></div>
-              <h3 style={{fontSize:'1.8rem', fontWeight:800, color:'#0f2240', marginBottom:'0.2rem'}}>50+</h3>
+              <h4 style={{fontSize:'1.8rem', fontWeight:800, color:'#0f2240', marginBottom:'0.2rem'}}>50+</h4>
               <p style={{color:'#6b82a3', fontWeight:600, fontSize:'0.9rem', margin:0}}>ICU Trained Staff</p>
             </div>
             <div className="col-6 col-md-3" data-aos="fade-up" data-aos-delay="200">
               <div style={{fontSize:'2.5rem', color:'#4ecdc4', marginBottom:'0.5rem'}}><i className="fa-solid fa-bolt"></i></div>
-              <h3 style={{fontSize:'1.8rem', fontWeight:800, color:'#0f2240', marginBottom:'0.2rem'}}>2 Hours</h3>
+              <h4 style={{fontSize:'1.8rem', fontWeight:800, color:'#0f2240', marginBottom:'0.2rem'}}>2 Hours</h4>
               <p style={{color:'#6b82a3', fontWeight:600, fontSize:'0.9rem', margin:0}}>Fast Deployment</p>
             </div>
             <div className="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
               <div style={{fontSize:'2.5rem', color:'#4ecdc4', marginBottom:'0.5rem'}}><i className="fa-solid fa-award"></i></div>
-              <h3 style={{fontSize:'1.8rem', fontWeight:800, color:'#0f2240', marginBottom:'0.2rem'}}>ISO 9001</h3>
+              <h4 style={{fontSize:'1.8rem', fontWeight:800, color:'#0f2240', marginBottom:'0.2rem'}}>ISO 9001</h4>
               <p style={{color:'#6b82a3', fontWeight:600, fontSize:'0.9rem', margin:0}}>2015 Certified</p>
             </div>
           </div>
@@ -229,9 +229,9 @@ export default async function HomePage() {
                     </div>
                     <div className="sc-body">
                       <div className="sc-tag">{svc.category || ''}</div>
-                      <h3>{svc.title}</h3>
+                      <h5>{svc.title}</h5>
                       <p>{svc.description}</p>
-                      <Link href="/services" className="sc-link">Learn More About {svc.title} <i className="fa-solid fa-arrow-right fa-xs"></i></Link>
+                      <Link href="/services" className="sc-link">Learn More <i className="fa-solid fa-arrow-right fa-xs"></i></Link>
                     </div>
                   </div>
                 </div>
@@ -246,9 +246,9 @@ export default async function HomePage() {
                     </div>
                     <div className="sc-body">
                       <div className="sc-tag">{tag}</div>
-                      <h3>{title}</h3>
+                      <h5>{title}</h5>
                       <p>{desc}</p>
-                      <Link href="/services" className="sc-link">Learn More About {title} <i className="fa-solid fa-arrow-right fa-xs"></i></Link>
+                      <Link href="/services" className="sc-link">Learn More <i className="fa-solid fa-arrow-right fa-xs"></i></Link>
                     </div>
                   </div>
                 </div>
@@ -275,7 +275,7 @@ export default async function HomePage() {
                     <div className="how-num-glow"></div>
                     <div className="how-num">1</div>
                   </div>
-                  <h3>Request a Callback</h3>
+                  <h4>Request a Callback</h4>
                   <p className="text-muted mb-0">Fill out our quick form or call us directly. Our care coordinator connects with you within 60 minutes.</p>
                 </div>
               </div>
@@ -285,7 +285,7 @@ export default async function HomePage() {
                     <div className="how-num-glow"></div>
                     <div className="how-num">2</div>
                   </div>
-                  <h3>Clinical Assessment</h3>
+                  <h4>Clinical Assessment</h4>
                   <p className="text-muted mb-0">Our medical experts assess your specific needs and match you with the right ICU-trained professionals.</p>
                 </div>
               </div>
@@ -295,7 +295,7 @@ export default async function HomePage() {
                     <div className="how-num-glow"></div>
                     <div className="how-num">3</div>
                   </div>
-                  <h3>Care Starts at Home</h3>
+                  <h4>Care Starts at Home</h4>
                   <p className="text-muted mb-0">We deliver equipment, and our verified nursing staff begins providing compassionate care at your home.</p>
                 </div>
               </div>
@@ -324,7 +324,7 @@ export default async function HomePage() {
                     <div className="why-card-bento">
                       <div className="wc-icon-bento"><span className="material-icons-round">{icon}</span></div>
                       <div className="wc-content-bento">
-                        <h3>{title}</h3>
+                        <h5>{title}</h5>
                         <p>{text}</p>
                       </div>
                     </div>
@@ -382,7 +382,7 @@ export default async function HomePage() {
                         <Image src={eq.image ? `/uploads/equipment/${eq.image}` : '/images/equip.avif'} alt={eq.title} width={400} height={300} loading="lazy" />
                       </div>
                       <div className="ec-body">
-                        <h3>{eq.title}</h3>
+                        <h5>{eq.title}</h5>
                         <p>{eq.description}</p>
                         <div className="ec-footer">
                           <span className="ec-price">{eq.price || 'Call for pricing'}</span>
@@ -401,7 +401,7 @@ export default async function HomePage() {
                         <span className="ec-badge">{badge}</span>
                       </div>
                       <div className="ec-body">
-                        <h3>{title}</h3>
+                        <h5>{title}</h5>
                         <p>{desc}</p>
                         <div className="ec-footer">
                           <span className="ec-price">{price}</span>

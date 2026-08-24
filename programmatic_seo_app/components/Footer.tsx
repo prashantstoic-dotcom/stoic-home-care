@@ -65,7 +65,7 @@ export default async function Footer() {
 
             {/* Quick Links */}
             <div className="col-sm-6 col-lg-2">
-              <h2>Quick Links</h2>
+              <h6>Quick Links</h6>
               <Link href="/" className="d-flex align-items-center"><i className="fa-solid fa-chevron-right fa-xs me-2 text-teal"></i>Home</Link>
               <Link href="/services" className="d-flex align-items-center"><i className="fa-solid fa-chevron-right fa-xs me-2 text-teal"></i>Services</Link>
               <Link href="/equipment" className="d-flex align-items-center"><i className="fa-solid fa-chevron-right fa-xs me-2 text-teal"></i>Equipment</Link>
@@ -75,7 +75,7 @@ export default async function Footer() {
 
             {/* Services */}
             <div className="col-sm-6 col-lg-3">
-              <h2>Our Services</h2>
+              <h6>Our Services</h6>
               <Link href="/services" className="d-flex align-items-center"><i className="fa-solid fa-chevron-right fa-xs me-2 text-teal"></i>ICU Setup @ Home</Link>
               <Link href="/services" className="d-flex align-items-center"><i className="fa-solid fa-chevron-right fa-xs me-2 text-teal"></i>ICU Trained Nursing</Link>
               <Link href="/services" className="d-flex align-items-center"><i className="fa-solid fa-chevron-right fa-xs me-2 text-teal"></i>Old Age Care</Link>
@@ -86,7 +86,7 @@ export default async function Footer() {
 
             {/* Contact Information */}
             <div className="col-sm-6 col-lg-3" itemScope itemType="http://schema.org/MedicalBusiness">
-              <h2>Contact Us</h2>
+              <h6>Contact Us</h6>
               <address style={{ fontStyle: "normal", marginBottom: 0 }}>
                 <a href="#" className="d-flex align-items-center"><i className="fa-solid fa-location-dot me-2 text-teal"></i><span itemProp="address">FF2 Block 330, MU 2, Greater Noida, Uttar Pradesh</span></a>
                 <a href="tel:+917668232867" className="d-flex align-items-center"><i className="fa-solid fa-phone me-2 text-teal"></i><span itemProp="telephone">+91 76682 32867</span></a>
@@ -100,7 +100,7 @@ export default async function Footer() {
           {/* SEO INTERNAL LINKING BLOCK (Dynamically populated from Supabase logic) */}
           <div className="row pt-2 pb-4">
             <div className="col-12">
-              <h2 className="mb-3 text-muted">Service Areas (Top Locations)</h2>
+              <h6 className="mb-3 text-muted">Service Areas (Top Locations)</h6>
               <div className="d-flex flex-wrap gap-2" style={{ fontSize: "0.85rem" }}>
                 {seoPages.map((page, idx) => {
                   if (!page.slug) return null;
