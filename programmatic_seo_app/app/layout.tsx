@@ -10,6 +10,12 @@ import AskQuestionModal from "../components/modals/AskQuestionModal";
 import ModalGlobals from "../components/ModalGlobals";
 import ClientInit from "../components/ClientInit";
 
+import "../public/css/style.css";
+import "../public/css/custom.css";
+import "../public/css/responsive.css";
+import "../public/css/a11y.css";
+import DeferredStyles from "../components/DeferredStyles";
+
 const outfit = Outfit({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
@@ -66,18 +72,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
-        {/* Global Styles (Copied from Old PHP Assets) */}
-        <link rel="stylesheet" href="/css/style.css" />
-        <link rel="stylesheet" href="/css/custom.css" />
-        <link rel="stylesheet" href="/css/responsive.css" />
-        <link rel="stylesheet" href="/css/a11y.css" />
-
-        {/* CDN Dependencies */}
+        {/* CDN Dependencies (Only Bootstrap is synchronous for Layout Stability) */}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" />
+        
+        <DeferredStyles />
 
         {/* Delayed GTM Loader (Zero TBT logic from old head.php) */}
         <Script id="gtm-delayed-loader" strategy="afterInteractive">
