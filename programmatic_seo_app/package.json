@@ -19,6 +19,7 @@
     "@upstash/qstash": "^2.11.3",
     "@vercel/og": "^1.0.1",
     "ai": "^7.0.69",
+    "bootstrap": "^5.3.8",
     "cheerio": "^1.2.0",
     "googleapis": "^176.0.0",
     "jose": "^6.2.8",

@@ -117,7 +117,7 @@ export default async function HomePage() {
 
       {/* ══ MAIN HERO ══ */}
       <div className="main-hero" style={{position:'relative', overflow:'hidden', background:'#0f2240', padding: '140px 0 80px', display:'flex', alignItems:'center'}}>
-        <Image className="hero-bg" src="/images/carousel-1.avif" alt="ICU Home Care" width={1920} height={1080} sizes="(max-width: 768px) 100vw, 1920px" priority style={{position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', opacity:0.4}} />
+        <Image className="hero-bg" src="/images/carousel-1.avif" alt="ICU Home Care" width={1920} height={1080} sizes="(max-width: 768px) 100vw, 1920px" priority fetchPriority="high" style={{position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', opacity:0.4}} />
         <div className="hero-overlay" style={{position:'absolute', inset:0, background:'linear-gradient(135deg, rgba(15,34,64,0.95) 0%, rgba(33,150,211,0.8) 100%)'}}></div>
         
         <div className="container hero-content" style={{position:'relative', zIndex:2}}>

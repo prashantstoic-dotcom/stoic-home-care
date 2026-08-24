@@ -10,6 +10,7 @@ import AskQuestionModal from "../components/modals/AskQuestionModal";
 import ModalGlobals from "../components/ModalGlobals";
 import ClientInit from "../components/ClientInit";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "../public/css/style.css";
 import "../public/css/custom.css";
 import "../public/css/responsive.css";
@@ -68,12 +69,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={outfit.variable}>
       <head>
         {/* Preconnects for performance */}
-        <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-
-        {/* CDN Dependencies (Only Bootstrap is synchronous for Layout Stability) */}
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
         
         <DeferredStyles />
 
