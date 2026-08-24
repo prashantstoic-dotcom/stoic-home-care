@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import Script from "next/script";
+import { Outfit } from "next/font/google";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import RentModal from "../components/modals/RentModal";
@@ -8,6 +9,13 @@ import BookServiceModal from "../components/modals/BookServiceModal";
 import AskQuestionModal from "../components/modals/AskQuestionModal";
 import ModalGlobals from "../components/ModalGlobals";
 import ClientInit from "../components/ClientInit";
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
+  variable: "--font-outfit",
+});
 
 export async function generateMetadata(): Promise<Metadata> {
   const headersList = headers();
@@ -51,7 +59,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={outfit.variable}>
       <head>
         {/* Preconnects for performance */}
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" />

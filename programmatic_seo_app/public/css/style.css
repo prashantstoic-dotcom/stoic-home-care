@@ -3,7 +3,6 @@
    Core design system: variables, typography, layout, utilities
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
 /* ── VARIABLES ── */
 :root {
@@ -32,7 +31,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-outfit), sans-serif;
   color: var(--text);
   background: #fff;
   overflow-x: hidden;
@@ -42,7 +41,7 @@ body.loader-active { overflow: hidden; }
 img { max-width: 100%; height: auto; display: block; }
 a { text-decoration: none; transition: var(--transition); }
 p { line-height: 1.82; }
-h1,h2,h3,h4,h5,h6 { font-family: 'Outfit', sans-serif; color: var(--primary-dark); line-height: 1.15; font-weight: 700; }
+h1,h2,h3,h4,h5,h6 { font-family: var(--font-outfit), sans-serif; color: var(--primary-dark); line-height: 1.15; font-weight: 700; }
 
 /* ── UTILITIES ── */
 .bg-grad      { background: var(--grad); }
@@ -75,7 +74,7 @@ h1,h2,h3,h4,h5,h6 { font-family: 'Outfit', sans-serif; color: var(--primary-dark
   display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;
 }
 .loader-s {
-  font-family: 'Outfit', sans-serif; font-size: 4.2rem; font-weight: 800;
+  font-family: var(--font-outfit), sans-serif; font-size: 4.2rem; font-weight: 800;
   background: linear-gradient(135deg, #2196d3, #4ecdc4);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   animation: loaderPulse .9s ease-in-out infinite;
@@ -131,7 +130,7 @@ h1,h2,h3,h4,h5,h6 { font-family: 'Outfit', sans-serif; color: var(--primary-dark
 .btn-form-submit {
   width:100%; background:var(--grad-teal); color:#fff; border:none;
   padding:1rem 2rem; border-radius:12px; font-weight:800; font-size:1rem;
-  font-family:'Outfit',sans-serif; cursor:pointer; transition:var(--transition);
+  font-family:var(--font-outfit),sans-serif; cursor:pointer; transition:var(--transition);
   box-shadow:0 8px 25px rgba(78, 205, 196, 0.25); letter-spacing: 0.02em;
 }
 .btn-form-submit:hover { opacity:0.95; transform:translateY(-3px); box-shadow:0 12px 35px rgba(33, 150, 211, 0.35); }
