@@ -11,11 +11,13 @@ import ModalGlobals from "../components/ModalGlobals";
 import ClientInit from "../components/ClientInit";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'swiper/css/bundle';
+import 'aos/dist/aos.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import "../public/css/style.css";
 import "../public/css/custom.css";
 import "../public/css/responsive.css";
 import "../public/css/a11y.css";
-import DeferredStyles from "../components/DeferredStyles";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -71,8 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Preconnects for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
-        <DeferredStyles />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" />
 
         {/* Delayed GTM Loader (Zero TBT logic from old head.php) */}
         <Script id="gtm-delayed-loader" strategy="afterInteractive">

@@ -2,6 +2,7 @@ import { getServices, getEquipment } from '@/lib/supabase';
 import HomeEnquiryForm from '@/components/HomeEnquiryForm';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Suspense } from 'react';
 
 export const metadata = {
   title: 'ICU at Home & Expert Nursing Services in Greater Noida | Stoic Home Care',
@@ -9,7 +10,7 @@ export const metadata = {
   alternates: { canonical: '/' }
 };
 
-export default async function HomePage() {
+async function HomeDynamic() {
   let services: any[] = [];
   let equipment: any[] = [];
   try {
@@ -93,80 +94,7 @@ export default async function HomePage() {
   };
 
   return (
-    <main id="main-content">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <style dangerouslySetInnerHTML={{__html: `
-        @media (max-width: 991px) {
-          .hero-row-short { align-items: flex-start !important; padding-top: 100px !important; min-height: auto !important; height: 100vh; }
-          .hero-swiper .swiper-slide { display: flex; flex-direction: column; justify-content: flex-start; }
-        }
-        @media (max-width: 575px) {
-          .hero-row-short { padding-top: 90px !important; }
-        }
-        @keyframes floatY {
-          0% { transform: translateY(0px); }
-          50% { transform: translateY(-15px); }
-          100% { transform: translateY(0px); }
-        }
-        @media (max-width: 991px) {
-          .hero-float { display: none !important; }
-          .main-hero { padding-top: 80px; min-height: auto !important; }
-        }
-        @media (min-width: 992px) { .sticky-top-lg { position: sticky; top: 100px; } }
-      `}} />
-
-      {/* ══ MAIN HERO ══ */}
-      <div className="main-hero" style={{position:'relative', overflow:'hidden', background:'#0f2240', padding: '140px 0 80px', display:'flex', alignItems:'center'}}>
-        <Image className="hero-bg" src="/images/carousel-1.avif" alt="ICU Home Care" width={1920} height={1080} sizes="(max-width: 768px) 100vw, 1920px" priority fetchPriority="high" style={{position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', opacity:0.4}} />
-        <div className="hero-overlay" style={{position:'absolute', inset:0, background:'linear-gradient(135deg, rgba(15,34,64,0.95) 0%, rgba(33,150,211,0.8) 100%)'}}></div>
-        
-        <div className="container hero-content" style={{position:'relative', zIndex:2}}>
-          <div className="row align-items-center g-5">
-            
-            {/* Left: Typography & CTAs */}
-            <div className="col-lg-6">
-              <div className="hero-badge" style={{background:'rgba(78,205,196,.15)', color:'#7ee8e2', border:'1px solid rgba(78,205,196,.3)', padding:'.5rem 1rem', borderRadius:'50px', display:'inline-block', fontSize:'0.85rem', fontWeight:600, marginBottom:'1.5rem'}}>
-                <i className="fa-solid fa-shield-heart me-1"></i> Trusted by 10,000+ Families
-              </div>
-              <h1 className="hero-title" style={{fontSize:'clamp(2.5rem, 5vw, 4rem)', fontWeight:800, color:'#fff', lineHeight:1.1, marginBottom:'1.5rem', fontFamily:"var(--font-outfit), sans-serif"}}>
-                Hospital-Quality Care<br/><span style={{color:'#4ecdc4'}}>Right at Home.</span>
-              </h1>
-              <p className="hero-sub" style={{fontSize:'1.1rem', color:'rgba(255,255,255,0.85)', lineHeight:1.7, marginBottom:'2.5rem', maxWidth:'540px'}}>
-                Expert ICU setups, certified nursing staff, and advanced medical equipment delivered to your doorstep. We bring the hospital to you, 24/7.
-              </p>
-              <div className="hero-btns" style={{display:'flex', gap:'1rem', flexWrap:'wrap'}}>
-                <a href="tel:+917668232867" className="btn btn-lg" aria-label="Call Emergency" style={{background:'#ff4b4b', color:'#fff', borderRadius:'50px', padding:'0.8rem 2rem', fontWeight:700, boxShadow:'0 8px 25px rgba(255,75,75,0.4)'}}><i className="fa-solid fa-phone me-2"></i>Call Emergency</a>
-                <Link href="/contact" className="btn btn-lg" aria-label="Book Consultation" style={{background:'#fff', color:'#0f2240', borderRadius:'50px', padding:'0.8rem 2rem', fontWeight:700, boxShadow:'0 8px 25px rgba(0,0,0,0.1)'}}><i className="fa-solid fa-calendar-check me-2"></i>Book Consultation</Link>
-              </div>
-            </div>
-
-            {/* Right: Premium Image & Glassmorphism Badges */}
-            <div className="col-lg-6 hero-img-side text-center text-lg-end" style={{position:'relative'}}>
-              <div style={{position:'relative', display:'inline-block'}}>
-                <Image src="/images/doctor.avif" alt="Home Doctor" width={500} height={600} sizes="(max-width: 991px) 100vw, 500px" priority style={{borderRadius:'30px', width:'100%', maxWidth:'500px', height:'auto', boxShadow:'0 30px 60px rgba(0,0,0,0.5)'}} />
-                
-                <div className="hero-float f1 d-none d-xl-flex" style={{position:'absolute', bottom:'30px', left:'-80px', background:'rgba(255,255,255,0.95)', padding:'0.8rem 1rem', borderRadius:'12px', alignItems:'center', gap:'0.8rem', boxShadow:'0 15px 35px rgba(0,0,0,0.15)', animation:'floatY 4s ease-in-out infinite'}}>
-                  <div style={{background:'rgba(37,211,102,.15)', width:'35px', height:'35px', display:'flex', alignItems:'center', justifyContent:'center', borderRadius:'50%'}}><i className="fa-solid fa-star" style={{color:'#F5B041', fontSize:'1rem'}}></i></div>
-                  <div className="text-start">
-                    <div style={{fontWeight:800, fontSize:'1rem', color:'#0f2240', lineHeight:1.2}}>4.9/5 Rating</div>
-                    <div style={{fontSize:'0.75rem', color:'#6b82a3', fontWeight:600}}>Google Reviews</div>
-                  </div>
-                </div>
-
-                <div className="hero-float f2 d-none d-xl-flex" style={{position:'absolute', top:'30px', right:'-60px', background:'rgba(255,255,255,0.95)', padding:'0.8rem 1rem', borderRadius:'12px', alignItems:'center', gap:'0.8rem', boxShadow:'0 15px 35px rgba(0,0,0,0.15)', animation:'floatY 5s ease-in-out infinite reverse'}}>
-                  <div style={{background:'rgba(33,150,211,.15)', width:'35px', height:'35px', display:'flex', alignItems:'center', justifyContent:'center', borderRadius:'50%'}}><i className="fa-solid fa-user-nurse" style={{color:'#2196d3', fontSize:'1rem'}}></i></div>
-                  <div className="text-start">
-                    <div style={{fontWeight:800, fontSize:'1rem', color:'#0f2240', lineHeight:1.2}}>Verified Staff</div>
-                    <div style={{fontSize:'0.75rem', color:'#6b82a3', fontWeight:600}}>100% Checked</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
+    <>
       {/* ══ TICKER ══ */}
       <div className="ticker-wrap">
         <div className="ticker-inner">
@@ -489,6 +417,121 @@ export default async function HomePage() {
         </div>
       </section>
 
+    </main>
+  );
+}
+
+
+export default function HomePage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "name": "Stoic Home Care",
+        "url": "https://stoiccare.in",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://stoiccare.in/services?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "MedicalOrganization",
+        "name": "Stoic Home Care",
+        "url": "https://stoiccare.in",
+        "logo": "https://stoiccare.in/logo.png",
+        "description": "Hospital-grade home care in Greater Noida – ICU setup, certified nursing, old age care, mother & baby care, and medical equipment rental.",
+        "telephone": "+91-7668232867",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Greater Noida",
+          "addressLocality": "Greater Noida",
+          "addressRegion": "UP",
+          "addressCountry": "IN"
+        }
+      }
+    ]
+  };
+
+  return (
+    <main id="main-content">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <style dangerouslySetInnerHTML={{__html: `
+        @media (max-width: 991px) {
+          .hero-row-short { align-items: flex-start !important; padding-top: 100px !important; min-height: auto !important; height: 100vh; }
+          .hero-swiper .swiper-slide { display: flex; flex-direction: column; justify-content: flex-start; }
+        }
+        @media (max-width: 575px) {
+          .hero-row-short { padding-top: 90px !important; }
+        }
+        @keyframes floatY {
+          0% { transform: translateY(0px); }
+          50% { transform: translateY(-15px); }
+          100% { transform: translateY(0px); }
+        }
+        @media (max-width: 991px) {
+          .hero-float { display: none !important; }
+          .main-hero { padding-top: 80px; min-height: auto !important; }
+        }
+        @media (min-width: 992px) { .sticky-top-lg { position: sticky; top: 100px; } }
+      `}} />
+
+      {/* ══ MAIN HERO ══ */}
+      <div className="main-hero" style={{position:'relative', overflow:'hidden', background:'#0f2240', padding: '140px 0 80px', display:'flex', alignItems:'center'}}>
+        <Image className="hero-bg" src="/images/carousel-1.avif" alt="ICU Home Care" width={1920} height={1080} sizes="(max-width: 768px) 100vw, 1920px" priority fetchPriority="high" style={{position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', opacity:0.4}} />
+        <div className="hero-overlay" style={{position:'absolute', inset:0, background:'linear-gradient(135deg, rgba(15,34,64,0.95) 0%, rgba(33,150,211,0.8) 100%)'}}></div>
+        
+        <div className="container hero-content" style={{position:'relative', zIndex:2}}>
+          <div className="row align-items-center g-5">
+            
+            {/* Left: Typography & CTAs */}
+            <div className="col-lg-6">
+              <div className="hero-badge" style={{background:'rgba(78,205,196,.15)', color:'#7ee8e2', border:'1px solid rgba(78,205,196,.3)', padding:'.5rem 1rem', borderRadius:'50px', display:'inline-block', fontSize:'0.85rem', fontWeight:600, marginBottom:'1.5rem'}}>
+                <i className="fa-solid fa-shield-heart me-1"></i> Trusted by 10,000+ Families
+              </div>
+              <h1 className="hero-title" style={{fontSize:'clamp(2.5rem, 5vw, 4rem)', fontWeight:800, color:'#fff', lineHeight:1.1, marginBottom:'1.5rem', fontFamily:"var(--font-outfit), sans-serif"}}>
+                Hospital-Quality Care<br/><span style={{color:'#4ecdc4'}}>Right at Home.</span>
+              </h1>
+              <p className="hero-sub" style={{fontSize:'1.1rem', color:'rgba(255,255,255,0.85)', lineHeight:1.7, marginBottom:'2.5rem', maxWidth:'540px'}}>
+                Expert ICU setups, certified nursing staff, and advanced medical equipment delivered to your doorstep. We bring the hospital to you, 24/7.
+              </p>
+              <div className="hero-btns" style={{display:'flex', gap:'1rem', flexWrap:'wrap'}}>
+                <a href="tel:+917668232867" className="btn btn-lg" aria-label="Call Emergency" style={{background:'#ff4b4b', color:'#fff', borderRadius:'50px', padding:'0.8rem 2rem', fontWeight:700, boxShadow:'0 8px 25px rgba(255,75,75,0.4)'}}><i className="fa-solid fa-phone me-2"></i>Call Emergency</a>
+                <Link href="/contact" className="btn btn-lg" aria-label="Book Consultation" style={{background:'#fff', color:'#0f2240', borderRadius:'50px', padding:'0.8rem 2rem', fontWeight:700, boxShadow:'0 8px 25px rgba(0,0,0,0.1)'}}><i className="fa-solid fa-calendar-check me-2"></i>Book Consultation</Link>
+              </div>
+            </div>
+
+            {/* Right: Premium Image & Glassmorphism Badges */}
+            <div className="col-lg-6 hero-img-side text-center text-lg-end" style={{position:'relative'}}>
+              <div style={{position:'relative', display:'inline-block'}}>
+                <Image src="/images/doctor.avif" alt="Home Doctor" width={500} height={600} sizes="(max-width: 991px) 100vw, 500px" priority style={{borderRadius:'30px', width:'100%', maxWidth:'500px', height:'auto', boxShadow:'0 30px 60px rgba(0,0,0,0.5)'}} />
+                
+                <div className="hero-float f1 d-none d-xl-flex" style={{position:'absolute', bottom:'30px', left:'-80px', background:'rgba(255,255,255,0.95)', padding:'0.8rem 1rem', borderRadius:'12px', alignItems:'center', gap:'0.8rem', boxShadow:'0 15px 35px rgba(0,0,0,0.15)', animation:'floatY 4s ease-in-out infinite'}}>
+                  <div style={{background:'rgba(37,211,102,.15)', width:'35px', height:'35px', display:'flex', alignItems:'center', justifyContent:'center', borderRadius:'50%'}}><i className="fa-solid fa-star" style={{color:'#F5B041', fontSize:'1rem'}}></i></div>
+                  <div className="text-start">
+                    <div style={{fontWeight:800, fontSize:'1rem', color:'#0f2240', lineHeight:1.2}}>4.9/5 Rating</div>
+                    <div style={{fontSize:'0.75rem', color:'#6b82a3', fontWeight:600}}>Google Reviews</div>
+                  </div>
+                </div>
+
+                <div className="hero-float f2 d-none d-xl-flex" style={{position:'absolute', top:'30px', right:'-60px', background:'rgba(255,255,255,0.95)', padding:'0.8rem 1rem', borderRadius:'12px', alignItems:'center', gap:'0.8rem', boxShadow:'0 15px 35px rgba(0,0,0,0.15)', animation:'floatY 5s ease-in-out infinite reverse'}}>
+                  <div style={{background:'rgba(33,150,211,.15)', width:'35px', height:'35px', display:'flex', alignItems:'center', justifyContent:'center', borderRadius:'50%'}}><i className="fa-solid fa-user-nurse" style={{color:'#2196d3', fontSize:'1rem'}}></i></div>
+                  <div className="text-start">
+                    <div style={{fontWeight:800, fontSize:'1rem', color:'#0f2240', lineHeight:1.2}}>Verified Staff</div>
+                    <div style={{fontSize:'0.75rem', color:'#6b82a3', fontWeight:600}}>100% Checked</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <Suspense fallback={<div style={{minHeight: '50vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><div className="spinner-border text-primary" role="status"></div></div>}>
+        <HomeDynamic />
+      </Suspense>
     </main>
   );
 }
