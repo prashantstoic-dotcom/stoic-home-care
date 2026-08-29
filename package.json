@@ -5,7 +5,7 @@
     "private": true,
     "scripts": {
         "dev": "npm --prefix programmatic_seo_app run dev",
-        "build": "npm --prefix programmatic_seo_app run build"
+        "build": "npm --prefix programmatic_seo_app install && npm --prefix programmatic_seo_app run build"
     },
     "dependencies": {
         "@google/generative-ai": "^0.24.1",
