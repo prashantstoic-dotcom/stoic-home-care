@@ -8,19 +8,25 @@ import GenerateBlogButton from '@/components/admin/GenerateBlogButton';
 export default async function ContentGapsPage() {
   
   // Part 4.2: Fetch Data
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
   let gaps: any[] = [];
   
-  if (supabaseUrl && supabaseKey) {
+  // Only attempt to fetch if REAL env vars exist (avoids Vercel build failure)
+  if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
     const supabase = createClient(supabaseUrl, supabaseKey);
-    const { data } = await supabase
-      .from('content_gaps')
-      .select('*')
-      .order('created_at', { ascending: false })
-      .limit(20);
-      
-    if (data) gaps = data;
+    
+    try {
+      const { data } = await supabase
+        .from('content_gaps')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(20);
+        
+      if (data) gaps = data;
+    } catch (e) {
+      console.warn('Skipping gaps fetch during build', e);
+    }
   }
 
   return (
