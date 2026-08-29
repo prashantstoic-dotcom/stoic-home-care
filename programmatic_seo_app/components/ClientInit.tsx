@@ -1,82 +1,76 @@
 'use client';
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import Swiper from 'swiper';
+import { Pagination } from 'swiper/modules';
+import 'swiper/css/pagination';
 
 export default function ClientInit() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // -------------------------------------------------------------
     // Edge SEO A/B Tester Analytics (Tool 5 - Part 3)
-    // -------------------------------------------------------------
     const match = document.cookie.match(new RegExp('(^| )ab-test-variant=([^;]+)'));
     if (match) {
       const variant = match[2];
       console.log(`[SEO A/B Tester] User assigned to Variant: ${variant}`);
-      // In production, this can trigger a GA event:
-      // if (window.gtag) window.gtag('event', 'ab_test_impression', { variant_name: variant });
     }
 
-    // Run initialization in an interval to wait for CDN scripts (AOS, Swiper) to load
-    const initTimer = setInterval(() => {
-      let allLoaded = true;
-
-      // 1. Initialize AOS (Animate On Scroll)
-      if (typeof window !== 'undefined' && (window as any).AOS) {
-        (window as any).AOS.init({
-          duration: 800,
-          once: true,
-          easing: 'ease-out-cubic'
+    // AOS replacement: Lightweight IntersectionObserver
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('aos-animate');
+            observer.unobserve(entry.target);
+          }
         });
-        (window as any).AOS.refresh();
-      } else {
-        allLoaded = false;
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('[data-aos]').forEach((el) => observer.observe(el));
+
+    // Initialize Swipers directly (no polling needed)
+    const initSwipers = () => {
+      // Equipment Swiper
+      const equipEl = document.querySelector('.equip-home-swiper');
+      if (equipEl && !(equipEl as any).swiper) {
+        new Swiper('.equip-home-swiper', {
+          modules: [Pagination],
+          slidesPerView: 1,
+          spaceBetween: 20,
+          pagination: { el: '.equip-home-swiper .swiper-pagination', clickable: true },
+          breakpoints: {
+            768: { slidesPerView: 2 },
+            992: { slidesPerView: 3 },
+          },
+        });
       }
 
-      // 2. Initialize Swiper for Carousels
-      if (typeof window !== 'undefined' && (window as any).Swiper) {
-        const Swiper = (window as any).Swiper;
-        
-        // Equipment Swiper
-        if (document.querySelector('.equip-home-swiper') && !(document.querySelector('.equip-home-swiper') as any).swiper) {
-          new Swiper('.equip-home-swiper', {
-            slidesPerView: 1,
-            spaceBetween: 20,
-            pagination: { el: '.swiper-pagination', clickable: true },
-            breakpoints: {
-              768: { slidesPerView: 2 },
-              992: { slidesPerView: 3 }
-            }
-          });
-        }
-        
-        // Testimonials Swiper
-        if (document.querySelector('.testi-swiper') && !(document.querySelector('.testi-swiper') as any).swiper) {
-          new Swiper('.testi-swiper', {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            pagination: { el: '.swiper-pagination', clickable: true },
-            breakpoints: {
-              768: { slidesPerView: 2 },
-              992: { slidesPerView: 3 }
-            }
-          });
-        }
-      } else {
-        allLoaded = false;
+      // Testimonials Swiper
+      const testiEl = document.querySelector('.testi-swiper');
+      if (testiEl && !(testiEl as any).swiper) {
+        new Swiper('.testi-swiper', {
+          modules: [Pagination],
+          slidesPerView: 1,
+          spaceBetween: 30,
+          pagination: { el: '.testi-swiper .swiper-pagination', clickable: true },
+          breakpoints: {
+            768: { slidesPerView: 2 },
+            992: { slidesPerView: 3 },
+          },
+        });
       }
+    };
 
-      // If both libraries are loaded and initialized, clear the interval
-      if (allLoaded) {
-        clearInterval(initTimer);
-      }
-    }, 200);
+    // Small delay to ensure DOM is ready after hydration
+    requestAnimationFrame(() => {
+      requestAnimationFrame(initSwipers);
+    });
 
-    // Failsafe: stop checking after 5 seconds to prevent memory leaks
-    setTimeout(() => clearInterval(initTimer), 5000);
-
-    return () => clearInterval(initTimer);
-  }, [pathname]); // Re-run when pathname changes (Next.js client-side navigation)
+    return () => observer.disconnect();
+  }, [pathname]);
 
   return null;
 }

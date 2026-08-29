@@ -50,7 +50,7 @@ export default async function Footer() {
             {/* Logo & About */}
             <div className="col-lg-4">
               {/* Using standard img for exact UI match, but next/image recommended */}
-              <img src="/images/logo.png" alt="Stoic Home Care" height="50" className="mb-3" />
+              <Image src="/images/logo.png" alt="Stoic Home Care" width={180} height={50} loading="lazy" className="mb-3" />
               <p style={{ fontSize: ".87rem", lineHeight: 1.85, maxWidth: "320px" }}>
                 Bringing hospital-quality care to your home — ICU setups, skilled nursing, medical equipment and pharmaceutical manufacturing, all under one roof.
               </p>

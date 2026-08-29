@@ -64,7 +64,7 @@ export default function Header() {
         <div className="container">
           <Link href="/" className="navbar-brand">
             {/* Using standard img to perfectly replicate old UI, but Next/Image is better for prod */}
-            <img className="navbar-logo" src="/images/logo.png" alt="Stoic Home Care" />
+            <Image className="navbar-logo" src="/images/logo.png" alt="Stoic Home Care" width={180} height={50} priority />
           </Link>
           
           <button

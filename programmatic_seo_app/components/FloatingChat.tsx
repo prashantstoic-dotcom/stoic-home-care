@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
-import { io, Socket } from 'socket.io-client';
+import type { Socket } from 'socket.io-client';
 
 type Message = { id: string, role: 'user' | 'ai', text: string };
 
@@ -34,6 +34,7 @@ export default function FloatingChat() {
           const data = await res.json();
           if (data.success) {
             setSessionId(data.session_id);
+            const { io } = await import('socket.io-client');
             const newSocket = io({ path: '/socket.io' });
             setSocket(newSocket);
             

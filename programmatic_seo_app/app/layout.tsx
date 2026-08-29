@@ -11,8 +11,9 @@ import ModalGlobals from "../components/ModalGlobals";
 import ClientInit from "../components/ClientInit";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'swiper/css/bundle';
-import 'aos/dist/aos.css';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import "../public/css/animations.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import "../public/css/style.css";
 import "../public/css/custom.css";
@@ -21,7 +22,7 @@ import "../public/css/a11y.css";
 
 const outfit = Outfit({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["400", "600", "700"],
   display: "swap",
   variable: "--font-outfit",
 });
@@ -73,7 +74,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Preconnects for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" />
 
         {/* Delayed GTM Loader (Zero TBT logic from old head.php) */}
         <Script id="gtm-delayed-loader" strategy="afterInteractive">
@@ -113,10 +113,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <BookServiceModal />
         <AskQuestionModal />
 
-        {/* JS Dependencies */}
-        <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" strategy="lazyOnload" />
-        <Script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" strategy="lazyOnload" />
-        <Script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" strategy="lazyOnload" />
+        {/* JS Dependencies handled via ES modules */}
       </body>
     </html>
   );
