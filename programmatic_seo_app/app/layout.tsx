@@ -14,6 +14,7 @@ import ClientInit from "../components/ClientInit";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../public/css/uno.css";
 import "../public/css/style.css";
 import "../public/css/responsive.css";
 import "../public/css/custom.css";
