@@ -13,7 +13,6 @@ import {
   Baby,
   ShieldCheck,
   Activity,
-  Virus,
   Brain,
   PhoneCall,
   ClipboardList,
@@ -43,7 +42,7 @@ export default async function ServicesPage() {
     ['doctor_03.jpg','Doctor Visit','Doctor on Call','Board-certified physicians visiting your home for diagnosis, prescriptions and follow-ups.', ShieldCheck, ['Home consultation','Prescription & lab coordination','Emergency response']],
     ['physio.webp','Rehabilitation','Physiotherapy @ Home','Expert physiotherapists for stroke rehab, post-surgical recovery and pain management.', Activity, ['Stroke & neuro rehab','Orthopaedic recovery','Geriatric physiotherapy']],
     ['nurse.webp','Nursing','Nursing Attendant','Trained nursing attendants providing round-the-clock care and support for patients.', HeartHandshake, ['Personal hygiene care','Patient mobility','Vital signs monitoring']],
-    ['ab-1.avif','Specialised','Covid Care @ Home','Specialised care for Covid-19 patients including oxygen therapy and monitoring.', Virus, ['Oxygen saturation monitoring','Prescribed medication','Isolation protocol']],
+    ['ab-1.avif','Specialised','Covid Care @ Home','Specialised care for Covid-19 patients including oxygen therapy and monitoring.', Activity, ['Oxygen saturation monitoring','Prescribed medication','Isolation protocol']],
     ['ab-2.avif','Mental Health','Psychologist @ Home','Qualified psychologists providing therapy and counselling in the comfort of your home.', Brain, ['Individual therapy','Anxiety & depression support','Family counselling']],
   ];
 
