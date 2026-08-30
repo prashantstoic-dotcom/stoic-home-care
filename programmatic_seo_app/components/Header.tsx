@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { Headset, MessageCircle, Phone, ShieldCheck } from "lucide-react";
 
 export default function Header() {
   const pathname = usePathname();
@@ -110,13 +111,13 @@ export default function Header() {
                 className="btn-primary-grad"
                 style={{ padding: "0.4rem 1rem", fontSize: "0.85rem", marginRight: "5px", whiteSpace: "nowrap" }}
               >
-                <i className="fa-solid fa-headset me-1"></i> Request Callback
+                <Headset size={14} className="me-1" /> Request Callback
               </button>
               <a href="https://wa.me/917668232867" className="btn-wa" target="_blank" rel="noopener noreferrer">
-                <i className="fa-brands fa-whatsapp"></i> WhatsApp
+                <MessageCircle size={14} className="me-1" /> WhatsApp
               </a>
               <a href="tel:+917668232867" className="btn-call" style={{ whiteSpace: "nowrap" }}>
-                <i className="fa-solid fa-phone"></i> +91 76682 32867
+                <Phone size={14} className="me-1" /> +91 76682 32867
               </a>
               {/* Admin Login Link */}
               <Link
@@ -124,7 +125,7 @@ export default function Header() {
                 className="btn btn-outline-secondary btn-sm ms-2 btn-admin-link"
                 style={{ fontSize: ".78rem", padding: ".35rem .8rem", borderRadius: "20px" }}
               >
-                <i className="fa-solid fa-user-shield me-1"></i>Admin
+                <ShieldCheck size={14} className="me-1" />Admin
               </Link>
             </div>
           </div>

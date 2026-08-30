@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { bookServiceRequest } from '@/lib/actions';
+import { Shield, Zap, Lock, CalendarCheck, CheckCircle, Phone } from 'lucide-react';
 
 export default function BookServiceModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -74,19 +75,19 @@ export default function BookServiceModal() {
         <div className="d-flex flex-wrap justify-content-center gap-3 mb-4">
           <div className="d-flex align-items-center gap-2 px-3 py-2 rounded shadow-sm border border-primary-subtle" style={{ background: '#f8faff' }}>
             <div className="d-flex align-items-center justify-content-center rounded-circle" style={{ width: '24px', height: '24px', background: '#e0e7ff', color: '#3b82f6' }}>
-              <i className="fa-solid fa-shield-heart fs-6"></i>
+              <Shield size={14} />
             </div>
             <span className="fw-bold" style={{ fontSize: '0.8rem', color: '#1e3a8a' }}>Verified Pros</span>
           </div>
           <div className="d-flex align-items-center gap-2 px-3 py-2 rounded shadow-sm border border-info-subtle" style={{ background: '#f0fdfa' }}>
             <div className="d-flex align-items-center justify-content-center rounded-circle" style={{ width: '24px', height: '24px', background: '#ccfbf1', color: '#0d9488' }}>
-              <i className="fa-solid fa-bolt fs-6"></i>
+              <Zap size={14} />
             </div>
             <span className="fw-bold" style={{ fontSize: '0.8rem', color: '#134e4a' }}>Fast 1-Hr Callback</span>
           </div>
           <div className="d-flex align-items-center gap-2 px-3 py-2 rounded shadow-sm border border-success-subtle" style={{ background: '#f0fdf4' }}>
             <div className="d-flex align-items-center justify-content-center rounded-circle" style={{ width: '24px', height: '24px', background: '#dcfce7', color: '#22c55e' }}>
-              <i className="fa-solid fa-lock fs-6"></i>
+              <Lock size={14} />
             </div>
             <span className="fw-bold" style={{ fontSize: '0.8rem', color: '#14532d' }}>100% Secure</span>
           </div>
@@ -127,15 +128,15 @@ export default function BookServiceModal() {
 
           <button type="submit" className="btn text-white w-100 py-3 fw-bold bsm-submit" disabled={isLoading}>
             {isLoading ? (
-              <><i className="fa-solid fa-spinner fa-spin me-2"></i>Submitting…</>
+              <><span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Submitting…</>
             ) : (
-              <><i className="fa-solid fa-calendar-check me-2"></i>Confirm Booking</>
+              <><CalendarCheck className="me-2 d-inline" size={18} />Confirm Booking</>
             )}
           </button>
 
           {success && (
             <div className="d-flex align-items-center gap-3 mt-3 p-3 rounded" style={{ background: '#e8f5e9', color: '#1b5e20', border: '1px solid #a5d6a7' }}>
-              <i className="fa-solid fa-circle-check fs-3"></i>
+              <CheckCircle className="d-inline" size={24} />
               <div>
                 <strong className="d-block mb-1">Booking Confirmed!</strong>
                 <small>Our care coordinator will call you within 1 hour. A confirmation has been sent to info@stoichomecare.in.</small>
@@ -151,7 +152,7 @@ export default function BookServiceModal() {
         </form>
 
         <p className="text-center mt-4 pt-3 border-top text-muted small">
-          <i className="fa-solid fa-phone me-1"></i> Prefer to call? <a href="tel:+917668232867" className="fw-bold" style={{ color: '#1a3a6b', textDecoration: 'none' }}>+91 76682 32867</a> — Available 24/7
+          <Phone className="me-1 d-inline" size={14} /> Prefer to call? <a href="tel:+917668232867" className="fw-bold" style={{ color: '#1a3a6b', textDecoration: 'none' }}>+91 76682 32867</a> — Available 24/7
         </p>
       </div>
 

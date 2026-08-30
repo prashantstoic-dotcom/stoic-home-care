@@ -1,5 +1,5 @@
 import Link from 'next/link';
-
+import { Hospital, Mail, Grid2X2, Info, Heart, Activity, Flag, Rocket, Shield, Factory, Star } from 'lucide-react';
 export const metadata = {
   title: 'About Stoic Home Care | Top Home Care & ICU Setup in Greater Noida',
   description: 'Learn about Stoic Home Care – our mission to bring hospital-quality ICU setups, skilled nursing, and elder care to your doorstep in Greater Noida & Delhi NCR.',
@@ -27,12 +27,12 @@ export default function AboutPage() {
         <div className="container">
           <div className="row align-items-center g-5 py-5">
             <div className="col-lg-7" data-aos="fade-right">
-              <div className="hero-badge"><i className="fa-solid fa-hospital me-2"></i>Our Story</div>
+              <div className="hero-badge"><Hospital size={16} className="me-2" />Our Story</div>
               <h1 className="hero-title">Redefining Home<br/><span>Home Care in India</span></h1>
               <p className="hero-sub">Founded on the belief that exceptional Home Care shouldn't require leaving home. We bridge the gap between hospital-grade care and the comfort of your own space.</p>
               <div className="hero-btns">
-                <Link href="/contact" className="btn-primary-grad"><i className="fa-solid fa-envelope me-2"></i>Get in Touch</Link>
-                <Link href="/services" className="btn-outline-white"><i className="fa-solid fa-grid-2 me-2"></i>Our Services</Link>
+                <Link href="/contact" className="btn-primary-grad"><Mail size={18} className="me-2" />Get in Touch</Link>
+                <Link href="/services" className="btn-outline-white"><Grid2X2 size={18} className="me-2" />Our Services</Link>
               </div>
             </div>
             <div className="col-lg-5 hero-img-side" data-aos="fade-left">
@@ -47,7 +47,7 @@ export default function AboutPage() {
         <div className="container">
           <div className="row g-5 align-items-center">
             <div className="col-lg-6" data-aos="fade-right">
-              <div className="section-badge"><i className="fa-solid fa-circle-info me-1"></i> Who We Are</div>
+              <div className="section-badge"><Info size={16} className="me-1" /> Who We Are</div>
               <h2 className="section-title">Our Mission &amp; Story</h2>
               <div className="divider-grad"></div>
               <p style={{lineHeight: 1.9, marginBottom: '1.2rem'}}>Stoic Home Care was founded with a simple but powerful belief: <strong>healing happens best where the heart is.</strong> We recognised a critical gap in Indian Home Care — patients had to choose between hospital-grade care and the comfort of home.</p>
@@ -78,7 +78,7 @@ export default function AboutPage() {
       <section className="section-pad" style={{background: 'var(--light)'}}>
         <div className="container">
           <div className="text-center mb-5" data-aos="fade-up">
-            <div className="section-badge"><i className="fa-solid fa-heart me-1"></i> Our Values</div>
+            <div className="section-badge"><Heart size={16} className="me-1" /> Our Values</div>
             <h2 className="section-title">What Drives Us Every Day</h2>
             <p className="section-sub mx-auto">Our core values shape every interaction, every care plan, and every patient outcome.</p>
           </div>
@@ -134,7 +134,7 @@ export default function AboutPage() {
         <div className="container">
           <div className="row g-5 align-items-start">
             <div className="col-lg-5" data-aos="fade-right">
-              <div className="section-badge light"><i className="fa-solid fa-timeline me-1"></i> Our Journey</div>
+              <div className="section-badge light"><Activity size={16} className="me-1" /> Our Journey</div>
               <h2 className="section-title" style={{color: '#fff'}}>From Vision to Reality</h2>
               <div className="divider-grad"></div>
               <p style={{color: 'rgba(255,255,255,.75)', lineHeight: 1.9, marginBottom: '2rem'}}>Every milestone represents a life transformed, a family relieved, a patient who healed with dignity.</p>
@@ -155,31 +155,31 @@ export default function AboutPage() {
               <div className="timeline">
                 <div className="tl-item">
                   <div className="tl-dot"></div>
-                  <div className="tl-year"><i className="fa-solid fa-flag me-1"></i> 2018 — Founded</div>
+                  <div className="tl-year"><Flag size={14} className="me-1" /> 2018 — Founded</div>
                   <h5 style={{color: '#fff'}}>Stoic Home Care is Born</h5>
                   <p style={{color: 'rgba(255,255,255,.65)'}}>Founded in Mumbai with a mission to bring hospital care home. Began with nursing and attendant services, serving our first 100 patients.</p>
                 </div>
                 <div className="tl-item">
                   <div className="tl-dot"></div>
-                  <div className="tl-year"><i className="fa-solid fa-rocket me-1"></i> 2019 — Expansion</div>
+                  <div className="tl-year"><Rocket size={14} className="me-1" /> 2019 — Expansion</div>
                   <h5 style={{color: '#fff'}}>ICU at Home Launched</h5>
                   <p style={{color: 'rgba(255,255,255,.65)'}}>Pioneered ICU setup services at home in Maharashtra. First 500 patients served with critical care at home.</p>
                 </div>
                 <div className="tl-item">
                   <div className="tl-dot"></div>
-                  <div className="tl-year"><i className="fa-solid fa-shield-virus me-1"></i> 2020 — Covid Response</div>
+                  <div className="tl-year"><Shield size={14} className="me-1" /> 2020 — Covid Response</div>
                   <h5 style={{color: '#fff'}}>Covid Care at Home</h5>
                   <p style={{color: 'rgba(255,255,255,.65)'}}>Deployed rapid Covid care during the pandemic. Served 2,000+ patients safely with strict PPE protocols at home.</p>
                 </div>
                 <div className="tl-item">
                   <div className="tl-dot"></div>
-                  <div className="tl-year"><i className="fa-solid fa-industry me-1"></i> 2021 — Growth</div>
+                  <div className="tl-year"><Factory size={14} className="me-1" /> 2021 — Growth</div>
                   <h5 style={{color: '#fff'}}>Equipment Rental &amp; Manufacturing</h5>
                   <p style={{color: 'rgba(255,255,255,.65)'}}>Launched medical equipment rental division and pharma manufacturing partnerships for complete Home Care solutions.</p>
                 </div>
                 <div className="tl-item">
                   <div className="tl-dot"></div>
-                  <div className="tl-year"><i className="fa-solid fa-star me-1"></i> 2024 — Present</div>
+                  <div className="tl-year"><Star size={14} className="me-1" /> 2024 — Present</div>
                   <h5 style={{color: '#fff'}}>100+ Families Served</h5>
                   <p style={{color: 'rgba(255,255,255,.65)'}}>Serving 100+ families across India with 15+ services and 20+ expert professionals. Expanding our reach every day.</p>
                 </div>

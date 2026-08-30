@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { MessageCircle, Phone, ChevronUp } from "lucide-react";
 
 export default function FloatingCTA() {
   const [isVisible, setIsVisible] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
     // Show after interaction or 4 seconds fallback
@@ -26,6 +28,14 @@ export default function FloatingCTA() {
       window.removeEventListener("touchstart", showCta);
       clearTimeout(fallbackTimer);
     };
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 500);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToTop = () => {
@@ -64,7 +74,6 @@ export default function FloatingCTA() {
         }
         .float-cta-btn:hover {
           transform: translateY(-2px);
-          /* box-shadow is handled by the animation now, but we can override if needed */
         }
         
         @keyframes waPulse {
@@ -104,29 +113,31 @@ export default function FloatingCTA() {
           border: none;
           border-radius: 50%;
           box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-          display: ${isVisible ? "flex" : "none"};
+          display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
           z-index: 9998;
-          transition: background 0.3s ease;
+          transition: all 0.3s ease;
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(16px);
         }
-        .scroll-top-btn:hover { background: #0CB8C9; }
+        .scroll-top-btn.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .scroll-top-btn:hover { background: #0CB8C9; transform: translateY(-3px); }
       `}} />
 
-      {/* FLOATING CTA WRAPPER */}
       <div className="float-cta-wrap">
         <a className="float-cta-btn float-wa" href="https://wa.me/917668232867" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
-          <i className="fa-brands fa-whatsapp"></i><span>WhatsApp Us</span>
+          <MessageCircle size={20} /><span>WhatsApp Us</span>
         </a>
         <a className="float-cta-btn float-call" href="tel:+917668232867" aria-label="Call Stoic Home Care">
-          <i className="fa-solid fa-phone"></i><span>Call Now</span>
+          <Phone size={20} /><span>Call Now</span>
         </a>
       </div>
-
-      {/* SCROLL TOP BUTTON */}
-      <button className="scroll-top-btn" aria-label="Back to top" onClick={scrollToTop}>
-        <i className="fa-solid fa-chevron-up"></i>
+      
+      <button onClick={scrollToTop} className={`scroll-top-btn ${showScrollTop ? 'visible' : ''}`} aria-label="Scroll to top">
+        <ChevronUp size={24} />
       </button>
     </>
   );

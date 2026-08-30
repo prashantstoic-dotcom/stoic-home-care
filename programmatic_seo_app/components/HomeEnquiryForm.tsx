@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { TriangleAlert, Send, CheckCircle } from 'lucide-react';
 
 export default function HomeEnquiryForm() {
   const [success, setSuccess] = useState(false);
@@ -43,7 +44,7 @@ export default function HomeEnquiryForm() {
       
       {errorMsg && (
         <div className="alert alert-danger" style={{ borderRadius: '12px', fontWeight: 600 }}>
-          <i className="fa-solid fa-triangle-exclamation me-2"></i> {errorMsg}
+          <TriangleAlert className="me-2 d-inline" size={18} /> {errorMsg}
         </div>
       )}
 
@@ -104,13 +105,13 @@ export default function HomeEnquiryForm() {
           </div>
           <div className="col-12 mt-4 pt-2">
             <button type="submit" disabled={loading} className="btn-form-submit w-100" style={{ padding: '1.1rem', borderRadius: '12px', fontSize: '1.1rem', background: 'linear-gradient(135deg, #0CB8C9, #1D9E75)', color: '#fff', border: 'none', fontWeight: 700, boxShadow: '0 15px 30px rgba(12, 184, 201, 0.3)' }}>
-              {loading ? 'Sending...' : <><i className="fa-solid fa-paper-plane me-2"></i> Send Enquiry — We Call Back Within 1 Hour</>}
+              {loading ? 'Sending...' : <><Send className="me-2 d-inline" size={18} /> Send Enquiry — We Call Back Within 1 Hour</>}
             </button>
           </div>
           {success && (
             <div className="col-12">
               <div className="form-success mt-3" style={{ background: '#e8f5e9', color: '#2e7d32', padding: '1rem', borderRadius: '12px', fontWeight: 600 }}>
-                <i className="fa-solid fa-circle-check me-2"></i> Thank you! Our care coordinator will contact you shortly.
+                <CheckCircle className="me-2 d-inline" size={18} /> Thank you! Our care coordinator will contact you shortly.
               </div>
             </div>
           )}

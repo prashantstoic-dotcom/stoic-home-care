@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { submitQnaRequest } from '@/lib/actions';
+import { Send, CheckCircle } from 'lucide-react';
 
 export default function AskQuestionModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -85,21 +86,18 @@ export default function AskQuestionModal() {
             <textarea id="questionText" name="question" className="form-control bg-light" rows={3} placeholder="Type your question here..." required></textarea>
           </div>
 
-          <button type="submit" className="btn text-white w-100 py-3 fw-bold bsm-submit" style={{ background: 'linear-gradient(135deg, #20c997, #1a3a6b)' }} disabled={isLoading}>
+          <button type="submit" className="btn w-100" style={{ background: '#1a3a6b', color: '#fff', fontWeight: 600, padding: '0.85rem' }} disabled={isLoading}>
             {isLoading ? (
-              <><i className="fa-solid fa-spinner fa-spin me-2"></i>Submitting…</>
+              <><span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Submitting…</>
             ) : (
-              <><i className="fa-solid fa-paper-plane me-2"></i>Submit Question</>
+              <><Send className="me-2 d-inline" size={18} />Submit Question</>
             )}
           </button>
 
           {success && (
-            <div className="d-flex align-items-center gap-3 mt-3 p-3 rounded" style={{ background: '#e8f5e9', color: '#1b5e20', border: '1px solid #a5d6a7' }}>
-              <i className="fa-solid fa-circle-check fs-3"></i>
-              <div>
-                <strong className="d-block mb-1">Question Submitted!</strong>
-                <small>Our experts will review and answer it soon.</small>
-              </div>
+            <div className="alert alert-success mt-3 mb-0 text-center d-flex align-items-center justify-content-center gap-2" style={{ borderRadius: '12px' }}>
+              <CheckCircle className="d-inline" size={24} />
+              <span>Question submitted successfully. We'll reply soon!</span>
             </div>
           )}
 

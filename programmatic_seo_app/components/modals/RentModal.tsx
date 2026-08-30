@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { submitRentalRequest } from '@/lib/actions';
+import { Ambulance, Send, CheckCircle } from 'lucide-react';
 
 export default function RentModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,7 +67,7 @@ export default function RentModal() {
 
         <div className="rent-modal-header d-flex align-items-center gap-3 mb-4 pb-3 border-bottom">
           <div className="rent-modal-icon d-flex align-items-center justify-content-center text-white rounded-3" style={{ width: '50px', height: '50px', background: 'linear-gradient(135deg, #1a3a6b, #0CB8C9)' }}>
-            <i className="fa-solid fa-truck-medical fs-4"></i>
+            <Ambulance size={24} />
           </div>
           <div>
             <h3 id="rentModalTitle" className="mb-0 fw-bold" style={{ color: '#1a3a6b', fontSize: '1.25rem' }}>Rent Equipment</h3>
@@ -112,15 +113,15 @@ export default function RentModal() {
 
           <button type="submit" className="btn text-white w-100 py-2 fw-bold" style={{ background: 'linear-gradient(135deg, #1a3a6b, #0CB8C9)', borderRadius: '8px' }} disabled={isLoading}>
             {isLoading ? (
-              <><i className="fa-solid fa-spinner fa-spin me-2"></i>Submitting…</>
+              <><span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Submitting…</>
             ) : (
-              <><i className="fa-solid fa-paper-plane me-2"></i>Submit Rental Request</>
+              <><Send className="me-2 d-inline" size={18} />Submit Rental Request</>
             )}
           </button>
 
           {success && (
             <div className="d-flex align-items-center gap-3 mt-3 p-3 rounded" style={{ background: '#e8f5e9', color: '#2e7d32' }}>
-              <i className="fa-solid fa-circle-check fs-3"></i>
+              <CheckCircle className="d-inline" size={24} />
               <div>
                 <strong className="d-block mb-1">Request Received!</strong>
                 <small>Our team will call you within 1 hour to confirm your rental.</small>
