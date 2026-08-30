@@ -57,40 +57,16 @@ export async function middleware(request: NextRequest) {
     // 1. Bot Routing & Edge A/B Testing Engine
     // ----------------------------------------------------------------------------
 
-    // Clone the request headers ONLY for requests that pass all redirects and auth
-    const requestHeaders = new Headers(request.headers);
-    // ----------------------------------------------------------------------------
-
-    // A. Bot Detection: Identify Search Engine Crawlers
+    // B. Bot Detection: Identify Search Engine Crawlers
     const userAgent = request.headers.get('user-agent') || '';
     const isBot = /Googlebot|Bingbot|Slurp|DuckDuckBot|Baiduspider|YandexBot/i.test(userAgent);
+    
+    // We create a standard response without modifying downstream request headers
+    // modifying downstream request headers forces Vercel to bypass Edge Cache!
+    const response = NextResponse.next();
+
     if (isBot) {
-      // Append a custom header to the *request* so Server Components can read it
-      requestHeaders.set('X-Is-Bot', 'true');
-    }
-
-    // B. Edge A/B Testing Engine (50/50 Split)
-    let abVariant = request.cookies.get('ab-test-variant')?.value;
-    let isNewVariant = false;
-    
-    if (!abVariant) {
-      abVariant = Math.random() < 0.5 ? 'A' : 'B';
-      isNewVariant = true;
-    }
-    
-    // Pass the variant as a header to the request
-    requestHeaders.set('X-AB-Version', abVariant);
-
-    // Now create the response, passing the modified request headers downstream
-    const response = NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
-
-    // If we generated a new variant, set it in the response cookies
-    if (isNewVariant) {
-      response.cookies.set('ab-test-variant', abVariant, { path: '/', maxAge: 60 * 60 * 24 * 30 }); // 30 Days
+      response.headers.set('X-Is-Bot', 'true');
     }
 
     // ----------------------------------------------------------------------------
