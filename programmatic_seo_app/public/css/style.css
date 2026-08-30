@@ -62,40 +62,6 @@ h1,h2,h3,h4,h5,h6 { font-family: var(--font-outfit), sans-serif; color: var(--pr
 .section-sub   { color: var(--muted); font-size: 1rem; line-height: 1.85; max-width: 580px; }
 .divider-grad  { width: 50px; height: 4px; border-radius: 2px; background: var(--grad-teal); margin: 1rem 0 1.5rem; }
 
-/* ── LOADER ── */
-#pageLoader {
-  position: fixed; inset: 0; z-index: 9999; background: #0f2240;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  transition: opacity .65s ease, visibility .65s ease;
-}
-#pageLoader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-.loader-logo-wrap {
-  position: relative; width: 130px; height: 130px;
-  display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;
-}
-.loader-s {
-  font-family: var(--font-outfit), sans-serif; font-size: 4.2rem; font-weight: 800;
-  background: linear-gradient(135deg, #2196d3, #4ecdc4);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  animation: loaderPulse .9s ease-in-out infinite;
-}
-@keyframes loaderPulse {
-  0%,100% { transform: scale(1); filter: brightness(1); }
-  50%     { transform: scale(1.1); filter: brightness(1.4); }
-}
-.hr1 { position:absolute; inset:-10px; border:2px solid rgba(78,205,196,.5); border-radius:50%; animation:rp .9s ease-out infinite; }
-.hr2 { position:absolute; inset:-24px; border:2px solid rgba(33,150,211,.3); border-radius:50%; animation:rp .9s ease-out infinite .18s; }
-.hr3 { position:absolute; inset:-40px; border:1.5px solid rgba(33,150,211,.15); border-radius:50%; animation:rp .9s ease-out infinite .36s; }
-@keyframes rp { 0%{transform:scale(1);opacity:1;} 100%{transform:scale(1.6);opacity:0;} }
-.ecg-loader { width:300px; height:64px; margin-bottom:1.5rem; filter:drop-shadow(0 0 6px rgba(78,205,196,.4)); }
-.ecg-path { stroke-dasharray:700; stroke-dashoffset:700; animation:drawEcg 1.4s ease-in-out infinite; }
-@keyframes drawEcg { 0%{stroke-dashoffset:700;opacity:1;} 75%{stroke-dashoffset:0;opacity:1;} 100%{stroke-dashoffset:0;opacity:0;} }
-.loader-brand { color:rgba(255,255,255,.85); font-size:.95rem; font-weight:700; letter-spacing:.25em; text-transform:uppercase; }
-.loader-sub   { color:rgba(255,255,255,.4); font-size:.75rem; letter-spacing:.08em; margin-top:.3rem; }
-.loader-bar   { width:220px; height:3px; background:rgba(255,255,255,.1); border-radius:2px; overflow:hidden; margin-top:1.5rem; }
-.loader-bar-fill { height:100%; background:var(--grad-teal); border-radius:2px; width:0; animation:barFill 2.8s ease-out forwards; }
-@keyframes barFill { 0%{width:0;} 60%{width:70%;} 85%{width:90%;} 100%{width:100%;} }
-
 /* ── BUTTONS ── */
 .btn-primary-grad {
   background: var(--grad-teal); color: #fff; padding: .85rem 2rem;
@@ -143,10 +109,7 @@ h1,h2,h3,h4,h5,h6 { font-family: var(--font-outfit), sans-serif; color: var(--pr
 .ci-title { font-weight:700; font-size:.92rem; color:var(--primary-dark); margin-bottom:.2rem; }
 .ci-val { color:var(--muted); font-size:.86rem; line-height:1.65; }
 
-/* ── FLOATING BUTTONS ── */
-.wa-float { position:fixed; bottom:1.5rem; left:1.5rem; background:var(--wa-green); color:#fff; width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(37,211,102,.48); z-index:998; text-decoration:none; transition:var(--transition); animation:waPulse 2.5s ease-in-out infinite; }
-@keyframes waPulse { 0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.48);} 50%{box-shadow:0 4px 32px rgba(37,211,102,.75),0 0 0 12px rgba(37,211,102,.1);} }
-.wa-float:hover { transform:scale(1.1); color:#fff; animation:none; box-shadow:0 8px 28px rgba(37,211,102,.6); }
+/* ── SCROLL TOP ── */
 .scroll-top-btn { position:fixed; bottom:1.5rem; right:1.5rem; background:var(--grad-teal); color:#fff; width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(33,150,211,.38); z-index:998; cursor:pointer; border:none; opacity:0; transform:translateY(16px); transition:var(--transition); }
 .scroll-top-btn.visible { opacity:1; transform:translateY(0); }
 .scroll-top-btn:hover { transform:translateY(-3px); opacity:1; }

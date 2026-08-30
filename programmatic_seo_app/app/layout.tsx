@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import Script from "next/script";
+import dynamic from "next/dynamic";
 import { Outfit } from "next/font/google";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import RentModal from "../components/modals/RentModal";
-import BookServiceModal from "../components/modals/BookServiceModal";
-import AskQuestionModal from "../components/modals/AskQuestionModal";
+const RentModal = dynamic(() => import("../components/modals/RentModal"), { ssr: false });
+const BookServiceModal = dynamic(() => import("../components/modals/BookServiceModal"), { ssr: false });
+const AskQuestionModal = dynamic(() => import("../components/modals/AskQuestionModal"), { ssr: false });
 import ModalGlobals from "../components/ModalGlobals";
 import ClientInit from "../components/ClientInit";
 
@@ -71,29 +72,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={outfit.variable}>
       <head>
-        {/* Preconnects for performance */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-
-        {/* Delayed GTM Loader (Zero TBT logic from old head.php) */}
+        {/* Delayed GTM Loader — fires on first interaction or 3.5s fallback */}
         <Script id="gtm-delayed-loader" strategy="afterInteractive">
           {`
-            document.addEventListener("DOMContentLoaded", function() {
-              var gtmLoaded = false;
-              function loadGTM() {
-                if (gtmLoaded) return;
-                gtmLoaded = true;
-                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                })(window,document,'script','dataLayer','GTM-MZBGCCQ4');
-              }
-              // Load on interaction
-              ['scroll', 'mousemove', 'touchstart'].forEach(function(e) { window.addEventListener(e, loadGTM, {once: true, passive: true}); });
-              // Or load after 3.5s anyway
-              setTimeout(loadGTM, 3500);
+            var gtmLoaded = false;
+            function loadGTM() {
+              if (gtmLoaded) return;
+              gtmLoaded = true;
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-MZBGCCQ4');
+            }
+            ['scroll','mousemove','touchstart'].forEach(function(e){
+              window.addEventListener(e, loadGTM, {once:true, passive:true});
             });
+            setTimeout(loadGTM, 3500);
           `}
         </Script>
       </head>

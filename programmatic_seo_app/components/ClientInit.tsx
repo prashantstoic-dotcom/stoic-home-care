@@ -1,9 +1,6 @@
 'use client';
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import Swiper from 'swiper';
-import { Pagination } from 'swiper/modules';
-import 'swiper/css/pagination';
 
 export default function ClientInit() {
   const pathname = usePathname();
@@ -31,10 +28,21 @@ export default function ClientInit() {
 
     document.querySelectorAll('[data-aos]').forEach((el) => observer.observe(el));
 
-    // Initialize Swipers directly (no polling needed)
-    const initSwipers = () => {
-      // Equipment Swiper
+    // Initialize Swipers — dynamically loaded only when carousel elements exist
+    const initSwipers = async () => {
       const equipEl = document.querySelector('.equip-home-swiper');
+      const testiEl = document.querySelector('.testi-swiper');
+
+      // No carousels on this page? Skip loading 88KB Swiper bundle entirely
+      if (!equipEl && !testiEl) return;
+
+      // Dynamic import — Swiper JS only loads when actually needed
+      const [{ default: Swiper }, { Pagination }] = await Promise.all([
+        import('swiper'),
+        import('swiper/modules'),
+      ]);
+
+      // Equipment Swiper
       if (equipEl && !(equipEl as any).swiper) {
         new Swiper('.equip-home-swiper', {
           modules: [Pagination],
@@ -49,7 +57,6 @@ export default function ClientInit() {
       }
 
       // Testimonials Swiper
-      const testiEl = document.querySelector('.testi-swiper');
       if (testiEl && !(testiEl as any).swiper) {
         new Swiper('.testi-swiper', {
           modules: [Pagination],
