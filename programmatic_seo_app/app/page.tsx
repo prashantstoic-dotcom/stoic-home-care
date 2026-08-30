@@ -2,6 +2,7 @@ import { getServices, getEquipment } from '@/lib/supabase';
 import HomeEnquiryForm from '@/components/HomeEnquiryForm';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Hospital, Stethoscope, Users, Baby, ShieldPlus, Activity } from 'lucide-react';
 import { Suspense } from 'react';
 
 export const metadata = {
@@ -153,7 +154,7 @@ async function HomeDynamic() {
                   <div className="service-card">
                     <div className="sc-img">
                       <Image src={svc.image ? `/uploads/services/${svc.image}` : '/images/equip.avif'} alt={svc.title} width={400} height={300} sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
-                      <div className="sc-icon"><span className="material-icons-round">local_hospital</span></div>
+                      <div className="sc-icon"><Hospital className="me-2" style={{color:"#0CB8C9"}} /></div>
                     </div>
                     <div className="sc-body">
                       <div className="sc-tag">{svc.category || ''}</div>
@@ -170,7 +171,7 @@ async function HomeDynamic() {
                   <div className="service-card">
                     <div className="sc-img">
                       <Image src={`/images/${img}`} alt={title} width={400} height={300} sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
-                      <div className="sc-icon"><span className="material-icons-round">{icon}</span></div>
+                      <div className="sc-icon">{icon === "local_hospital" ? <Hospital /> : icon === "medical_services" ? <Stethoscope /> : icon === "elderly" ? <Users /> : icon === "child_care" ? <Baby /> : icon === "health_and_safety" ? <ShieldPlus /> : <Activity />}</div>
                     </div>
                     <div className="sc-body">
                       <div className="sc-tag">{tag}</div>
@@ -250,7 +251,7 @@ async function HomeDynamic() {
                 {whys.map(([icon, title, text, size], d) => (
                   <div key={title} className={`bento-item ${size}`} data-aos="fade-up" data-aos-delay={d*50}>
                     <div className="why-card-bento">
-                      <div className="wc-icon-bento"><span className="material-icons-round">{icon}</span></div>
+                      <div className="wc-icon-bento">{icon === "local_hospital" ? <Hospital /> : icon === "medical_services" ? <Stethoscope /> : icon === "elderly" ? <Users /> : icon === "child_care" ? <Baby /> : icon === "health_and_safety" ? <ShieldPlus /> : <Activity />}</div>
                       <div className="wc-content-bento">
                         <h5>{title}</h5>
                         <p>{text}</p>
@@ -292,7 +293,7 @@ async function HomeDynamic() {
         <div className="container">
           <div className="row align-items-end mb-5">
             <div className="col-lg-7" data-aos="fade-right">
-              <div className="section-badge"><span className="material-icons-round" style={{fontSize:'1rem', verticalAlign:'middle'}}>medical_information</span> Equipment on Rent</div>
+              <div className="section-badge"><Activity size={16} style={{verticalAlign:"middle"}} className="me-1" /> Equipment on Rent</div>
               <h2 className="section-title">Medical Equipment Delivered to You</h2>
               <p className="section-sub">Hospital-grade devices on flexible rental plans. Doorstep delivery, installation and maintenance included.</p>
             </div>
