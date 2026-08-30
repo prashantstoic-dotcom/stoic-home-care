@@ -118,22 +118,22 @@ async function HomeDynamic() {
       <section className="bg-white py-12 border-b border-black/5">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div data-aos="fade-up" data-aos-delay="0">
+            <div  >
               <Users className="w-10 h-10 mx-auto text-[#4ecdc4] mb-3" />
               <h4 className="text-3xl font-extrabold text-[#0f2240] mb-1">10,000+</h4>
               <p className="text-[#6b82a3] font-semibold text-sm m-0">Patients Served</p>
             </div>
-            <div data-aos="fade-up" data-aos-delay="100">
+            <div  >
               <Hospital className="w-10 h-10 mx-auto text-[#4ecdc4] mb-3" />
               <h4 className="text-3xl font-extrabold text-[#0f2240] mb-1">50+</h4>
               <p className="text-[#6b82a3] font-semibold text-sm m-0">ICU Trained Staff</p>
             </div>
-            <div data-aos="fade-up" data-aos-delay="200">
+            <div  >
               <Zap className="w-10 h-10 mx-auto text-[#4ecdc4] mb-3" />
               <h4 className="text-3xl font-extrabold text-[#0f2240] mb-1">2 Hours</h4>
               <p className="text-[#6b82a3] font-semibold text-sm m-0">Fast Deployment</p>
             </div>
-            <div data-aos="fade-up" data-aos-delay="300">
+            <div  >
               <Award className="w-10 h-10 mx-auto text-[#4ecdc4] mb-3" />
               <h4 className="text-3xl font-extrabold text-[#0f2240] mb-1">ISO 9001</h4>
               <p className="text-[#6b82a3] font-semibold text-sm m-0">2015 Certified</p>
@@ -146,7 +146,7 @@ async function HomeDynamic() {
       <section className="py-20 bg-gray-50/50">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
-            <div data-aos="fade-right" className="lg:max-w-2xl">
+            <div  className="lg:max-w-2xl">
               <div className="inline-flex items-center text-sm font-bold text-[#2196d3] uppercase tracking-wider mb-3 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
                 <Stethoscope className="w-4 h-4 mr-2" /> Home Care Services
               </div>
@@ -154,7 +154,7 @@ async function HomeDynamic() {
               <div className="w-20 h-1.5 bg-gradient-to-r from-[#1a3a6b] to-[#4ecdc4] rounded-full mb-6"></div>
               <p className="text-lg text-[#6b82a3]">Every service is designed around patient comfort, clinical excellence, and family peace of mind.</p>
             </div>
-            <div data-aos="fade-left" className="text-left lg:text-right">
+            <div  className="text-left lg:text-right">
               <Link href="/services" className="inline-flex items-center px-6 py-3 rounded-full font-bold text-white bg-gradient-to-r from-[#1a3a6b] to-[#2196d3] shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
                 <LayoutGrid className="w-4 h-4 mr-2" /> View All Services
               </Link>
@@ -164,7 +164,7 @@ async function HomeDynamic() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.length > 0 ? (
               services.map((svc, d) => (
-                <div key={svc.id} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 group" data-aos="fade-up" data-aos-delay={(d % 3) * 100}>
+                <div key={svc.id} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 group"  data-aos-delay={(d % 3) * 100}>
                   <div className="relative h-64 overflow-hidden">
                     <Image src={svc.image ? `/uploads/services/${svc.image}` : '/images/equip.avif'} alt={svc.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
                     <div className="absolute bottom-4 right-4 bg-white p-3 rounded-xl shadow-lg text-[#0CB8C9]">
@@ -183,7 +183,7 @@ async function HomeDynamic() {
               ))
             ) : (
               staticServices.map(([img, tag, title, desc, icon], d) => (
-                <div key={title} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 group" data-aos="fade-up" data-aos-delay={(d % 3) * 100}>
+                <div key={title} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 group"  data-aos-delay={(d % 3) * 100}>
                   <div className="relative h-64 overflow-hidden">
                     <Image src={`/images/${img}`} alt={title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
                     <div className="absolute bottom-4 right-4 bg-white p-3 rounded-xl shadow-lg text-[#0CB8C9]">
@@ -208,7 +208,7 @@ async function HomeDynamic() {
       {/* ══ HOW IT WORKS ══ */}
       <section className="py-20 bg-[#f8fbff] overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16" data-aos="fade-up">
+          <div className="text-center mb-16" >
             <div className="inline-flex items-center text-sm font-bold text-[#2196d3] uppercase tracking-wider mb-3 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
               <ListTodo className="w-4 h-4 mr-2" /> Simple Process
             </div>
@@ -218,7 +218,7 @@ async function HomeDynamic() {
           <div className="relative max-w-5xl mx-auto">
             <div className="hidden md:block absolute top-[60px] left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#2196d3] to-transparent opacity-20"></div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
-              <div data-aos="fade-up" data-aos-delay="0">
+              <div  >
                 <div className="bg-white rounded-2xl p-8 text-center shadow-xl border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
                   <div className="w-16 h-16 mx-auto bg-gradient-to-br from-[#1a3a6b] to-[#2196d3] rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/30 mb-6">
                     1
@@ -227,7 +227,7 @@ async function HomeDynamic() {
                   <p className="text-[#6b82a3]">Fill out our quick form or call us directly. Our care coordinator connects with you within 60 minutes.</p>
                 </div>
               </div>
-              <div data-aos="fade-up" data-aos-delay="100">
+              <div  >
                 <div className="bg-white rounded-2xl p-8 text-center shadow-xl border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
                   <div className="w-16 h-16 mx-auto bg-gradient-to-br from-[#1a3a6b] to-[#2196d3] rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/30 mb-6">
                     2
@@ -236,7 +236,7 @@ async function HomeDynamic() {
                   <p className="text-[#6b82a3]">Our medical experts assess your specific needs and match you with the right ICU-trained professionals.</p>
                 </div>
               </div>
-              <div data-aos="fade-up" data-aos-delay="200">
+              <div  >
                 <div className="bg-white rounded-2xl p-8 text-center shadow-xl border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
                   <div className="w-16 h-16 mx-auto bg-gradient-to-br from-[#1a3a6b] to-[#2196d3] rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/30 mb-6">
                     3
@@ -254,7 +254,7 @@ async function HomeDynamic() {
       <section className="py-20 bg-gradient-to-br from-[#0f2240] to-[#1a3a6b]">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            <div className="lg:col-span-4" data-aos="fade-right">
+            <div className="lg:col-span-4" >
               <div className="sticky top-24">
                 <div className="inline-flex items-center text-sm font-bold text-[#4ecdc4] uppercase tracking-wider mb-4 bg-white/10 px-3 py-1 rounded-full border border-white/20 backdrop-blur-sm">
                   <Star className="w-4 h-4 mr-2" /> Why Choose Stoic
@@ -271,7 +271,7 @@ async function HomeDynamic() {
             <div className="lg:col-span-8">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                 {whys.map(([icon, title, text, size], d) => (
-                  <div key={title} className={`bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 hover:bg-white/10 transition-colors ${size === 'bento-lg' ? 'sm:col-span-2' : ''}`} data-aos="fade-up" data-aos-delay={d*50}>
+                  <div key={title} className={`bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 hover:bg-white/10 transition-colors ${size === 'bento-lg' ? 'sm:col-span-2' : ''}`}  data-aos-delay={d*50}>
                     <div className="flex flex-col h-full">
                       <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#2196d3] to-[#4ecdc4] flex items-center justify-center text-white shadow-lg mb-6">
                         {icon === "verified" ? <ShieldPlus className="w-6 h-6"/> : icon === "biotech" ? <Boxes className="w-6 h-6"/> : icon === "schedule" ? <CalendarCheck className="w-6 h-6"/> : icon === "payments" ? <Award className="w-6 h-6"/> : icon === "home_health" ? <Hospital className="w-6 h-6"/> : icon === "health_and_safety" ? <Activity className="w-6 h-6"/> : <Star className="w-6 h-6"/>}
@@ -300,7 +300,7 @@ async function HomeDynamic() {
                 ['50+','Expert Staff'],
                 ['5+','Years Excellence']
               ].map(([num,lbl], d) => (
-                <div key={lbl} data-aos="zoom-in" data-aos-delay={d*100}>
+                <div key={lbl}  data-aos-delay={d*100}>
                   <div className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#1a3a6b] to-[#2196d3] mb-2">{num}</div>
                   <div className="text-[#6b82a3] font-bold text-sm uppercase tracking-wider">{lbl}</div>
                 </div>
@@ -314,7 +314,7 @@ async function HomeDynamic() {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
-            <div data-aos="fade-right" className="lg:max-w-2xl">
+            <div  className="lg:max-w-2xl">
               <div className="inline-flex items-center text-sm font-bold text-[#2196d3] uppercase tracking-wider mb-3 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
                 <Activity className="w-4 h-4 mr-2" /> Equipment on Rent
               </div>
@@ -322,7 +322,7 @@ async function HomeDynamic() {
               <div className="w-20 h-1.5 bg-gradient-to-r from-[#1a3a6b] to-[#4ecdc4] rounded-full mb-6"></div>
               <p className="text-lg text-[#6b82a3]">Hospital-grade devices on flexible rental plans. Doorstep delivery, installation and maintenance included.</p>
             </div>
-            <div data-aos="fade-left" className="text-left lg:text-right">
+            <div  className="text-left lg:text-right">
               <Link href="/equipment" className="inline-flex items-center px-6 py-3 rounded-full font-bold text-white bg-gradient-to-r from-[#1a3a6b] to-[#2196d3] shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
                 <Boxes className="w-4 h-4 mr-2" /> All Equipment
               </Link>
@@ -380,7 +380,7 @@ async function HomeDynamic() {
         <div className="absolute -bottom-[100px] -right-[100px] w-[500px] h-[500px] bg-[#2196d3]/10 blur-[100px] rounded-full z-0 pointer-events-none"></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-12" data-aos="fade-up">
+          <div className="text-center mb-12" >
             <div className="inline-flex items-center text-sm font-bold text-[#2196d3] uppercase tracking-wider mb-3 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
               <MessageCircle className="w-4 h-4 mr-2" /> Patient Stories
             </div>
@@ -415,7 +415,7 @@ async function HomeDynamic() {
       {/* ══ ENQUIRY FORM ══ */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="bg-gradient-to-r from-[#2196d3] to-[#4ecdc4] rounded-3xl p-8 md:p-12 mb-16 shadow-2xl relative overflow-hidden" data-aos="zoom-in">
+          <div className="bg-gradient-to-r from-[#2196d3] to-[#4ecdc4] rounded-3xl p-8 md:p-12 mb-16 shadow-2xl relative overflow-hidden" >
             <div className="absolute top-0 right-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIvPjwvc3ZnPg==')] opacity-30 pointer-events-none"></div>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
               <div className="lg:col-span-7">
@@ -434,7 +434,7 @@ async function HomeDynamic() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-5" data-aos="fade-right">
+            <div className="lg:col-span-5" >
               <div className="inline-flex items-center text-sm font-bold text-[#2196d3] uppercase tracking-wider mb-3 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
                 <ClipboardList className="w-4 h-4 mr-2" /> Quick Enquiry
               </div>
@@ -467,7 +467,7 @@ async function HomeDynamic() {
                 </div>
               </div>
             </div>
-            <div className="lg:col-span-7" data-aos="fade-left">
+            <div className="lg:col-span-7" >
               {/* Home Enquiry Form Component */}
               <HomeEnquiryForm />
             </div>
