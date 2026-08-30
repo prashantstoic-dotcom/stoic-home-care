@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* ============================================================
    STOIC HEALTHCARE — style.css
    Core design system: variables, typography, layout, utilities
