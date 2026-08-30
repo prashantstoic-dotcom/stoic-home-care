@@ -6,7 +6,8 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {
+    container: { center: true, padding: '1rem' },
+      extend: { keyframes: { floatY: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-15px)' } } }, animation: { 'float': 'floatY 4s ease-in-out infinite', 'float-reverse': 'floatY 5s ease-in-out infinite reverse' },
       colors: {
         primary: 'var(--primary)',
         secondary: 'var(--secondary)',
