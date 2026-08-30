@@ -2,7 +2,11 @@ import { getServices, getEquipment } from '@/lib/supabase';
 import HomeEnquiryForm from '@/components/HomeEnquiryForm';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Hospital, Stethoscope, Users, Baby, ShieldPlus, Activity, Phone, CalendarCheck, Star } from 'lucide-react';
+import { 
+  Hospital, Stethoscope, Users, Baby, ShieldPlus, Activity, Phone, 
+  CalendarCheck, Star, Zap, Award, LayoutGrid, ArrowRight, ListTodo, 
+  Boxes, MessageCircle, MapPin, ClipboardList, CheckCircle, Pill, Dumbbell 
+} from 'lucide-react';
 import { Suspense } from 'react';
 
 export const metadata = {
@@ -25,7 +29,7 @@ async function HomeDynamic() {
   }
 
   const tickers = ['ICU Setup @ Home','Nursing Attendant','Old Age Care','Mother & Baby Care','Doctor on Call','Physiotherapy','Oxygen Concentrators','Hospital Beds','Wheelchairs'];
-  const icons   = ['fa-hospital','fa-pills','fa-user-nurse','fa-baby','fa-stethoscope','fa-dumbbell','fa-lungs','fa-bed-pulse','fa-wheelchair'];
+  const TickerIcons = [Hospital, Pill, Users, Baby, Stethoscope, Dumbbell, Activity, Activity, Activity];
   
   const mergedTickers = [...tickers, ...tickers];
 
@@ -97,88 +101,102 @@ async function HomeDynamic() {
   return (
     <div>
       {/* ══ TICKER ══ */}
-      <div className="ticker-wrap">
-        <div className="ticker-inner">
-          {mergedTickers.map((t, i) => (
-            <span key={i} className="ticker-item"><i className={`fa-solid ${icons[i % icons.length]} me-1`}></i> {t}</span>
-          ))}
+      <div className="w-full bg-[#1a3a6b] text-white overflow-hidden py-3 text-sm font-semibold border-b border-[#2196d3]/30">
+        <div className="flex animate-[ticker_30s_linear_infinite] whitespace-nowrap">
+          {mergedTickers.map((t, i) => {
+            const Icon = TickerIcons[i % TickerIcons.length];
+            return (
+              <span key={i} className="inline-flex items-center px-6">
+                <Icon className="w-4 h-4 mr-2 text-[#4ecdc4]" /> {t}
+              </span>
+            );
+          })}
         </div>
       </div>
 
       {/* ══ PREMIUM METRICS BAR ══ */}
-      <section style={{background:'#fff', padding:'3rem 0', borderBottom:'1px solid rgba(0,0,0,0.05)'}}>
-        <div className="container">
-          <div className="row g-4 text-center">
-            <div className="col-6 col-md-3" data-aos="fade-up" data-aos-delay="0">
-              <div style={{fontSize:'2.5rem', color:'#4ecdc4', marginBottom:'0.5rem'}}><i className="fa-solid fa-users"></i></div>
-              <h4 style={{fontSize:'1.8rem', fontWeight:800, color:'#0f2240', marginBottom:'0.2rem'}}>10,000+</h4>
-              <p style={{color:'#6b82a3', fontWeight:600, fontSize:'0.9rem', margin:0}}>Patients Served</p>
+      <section className="bg-white py-12 border-b border-black/5">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div data-aos="fade-up" data-aos-delay="0">
+              <Users className="w-10 h-10 mx-auto text-[#4ecdc4] mb-3" />
+              <h4 className="text-3xl font-extrabold text-[#0f2240] mb-1">10,000+</h4>
+              <p className="text-[#6b82a3] font-semibold text-sm m-0">Patients Served</p>
             </div>
-            <div className="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
-              <div style={{fontSize:'2.5rem', color:'#4ecdc4', marginBottom:'0.5rem'}}><i className="fa-solid fa-user-nurse"></i></div>
-              <h4 style={{fontSize:'1.8rem', fontWeight:800, color:'#0f2240', marginBottom:'0.2rem'}}>50+</h4>
-              <p style={{color:'#6b82a3', fontWeight:600, fontSize:'0.9rem', margin:0}}>ICU Trained Staff</p>
+            <div data-aos="fade-up" data-aos-delay="100">
+              <Hospital className="w-10 h-10 mx-auto text-[#4ecdc4] mb-3" />
+              <h4 className="text-3xl font-extrabold text-[#0f2240] mb-1">50+</h4>
+              <p className="text-[#6b82a3] font-semibold text-sm m-0">ICU Trained Staff</p>
             </div>
-            <div className="col-6 col-md-3" data-aos="fade-up" data-aos-delay="200">
-              <div style={{fontSize:'2.5rem', color:'#4ecdc4', marginBottom:'0.5rem'}}><i className="fa-solid fa-bolt"></i></div>
-              <h4 style={{fontSize:'1.8rem', fontWeight:800, color:'#0f2240', marginBottom:'0.2rem'}}>2 Hours</h4>
-              <p style={{color:'#6b82a3', fontWeight:600, fontSize:'0.9rem', margin:0}}>Fast Deployment</p>
+            <div data-aos="fade-up" data-aos-delay="200">
+              <Zap className="w-10 h-10 mx-auto text-[#4ecdc4] mb-3" />
+              <h4 className="text-3xl font-extrabold text-[#0f2240] mb-1">2 Hours</h4>
+              <p className="text-[#6b82a3] font-semibold text-sm m-0">Fast Deployment</p>
             </div>
-            <div className="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
-              <div style={{fontSize:'2.5rem', color:'#4ecdc4', marginBottom:'0.5rem'}}><i className="fa-solid fa-award"></i></div>
-              <h4 style={{fontSize:'1.8rem', fontWeight:800, color:'#0f2240', marginBottom:'0.2rem'}}>ISO 9001</h4>
-              <p style={{color:'#6b82a3', fontWeight:600, fontSize:'0.9rem', margin:0}}>2015 Certified</p>
+            <div data-aos="fade-up" data-aos-delay="300">
+              <Award className="w-10 h-10 mx-auto text-[#4ecdc4] mb-3" />
+              <h4 className="text-3xl font-extrabold text-[#0f2240] mb-1">ISO 9001</h4>
+              <p className="text-[#6b82a3] font-semibold text-sm m-0">2015 Certified</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ══ SERVICES PREVIEW ══ */}
-      <section className="section-pad">
-        <div className="container">
-          <div className="row align-items-end mb-5">
-            <div className="col-lg-7" data-aos="fade-right">
-              <div className="section-badge"><i className="fa-solid fa-stethoscope me-1"></i> Home Care Services</div>
-              <h2 className="section-title">Complete Home Care Solutions</h2>
-              <div className="divider-grad"></div>
-              <p className="section-sub">Every service is designed around patient comfort, clinical excellence, and family peace of mind.</p>
+      <section className="py-20 bg-gray-50/50">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+            <div data-aos="fade-right" className="lg:max-w-2xl">
+              <div className="inline-flex items-center text-sm font-bold text-[#2196d3] uppercase tracking-wider mb-3 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
+                <Stethoscope className="w-4 h-4 mr-2" /> Home Care Services
+              </div>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[#0f2240] mb-4">Complete Home Care Solutions</h2>
+              <div className="w-20 h-1.5 bg-gradient-to-r from-[#1a3a6b] to-[#4ecdc4] rounded-full mb-6"></div>
+              <p className="text-lg text-[#6b82a3]">Every service is designed around patient comfort, clinical excellence, and family peace of mind.</p>
             </div>
-            <div className="col-lg-5 text-lg-end mt-3 mt-lg-0" data-aos="fade-left">
-              <Link href="/services" className="btn-primary-grad text-center"><i className="fa-solid fa-grid-2 me-2"></i>View All Services</Link>
+            <div data-aos="fade-left" className="text-left lg:text-right">
+              <Link href="/services" className="inline-flex items-center px-6 py-3 rounded-full font-bold text-white bg-gradient-to-r from-[#1a3a6b] to-[#2196d3] shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                <LayoutGrid className="w-4 h-4 mr-2" /> View All Services
+              </Link>
             </div>
           </div>
-          <div className="row g-4">
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.length > 0 ? (
               services.map((svc, d) => (
-                <div key={svc.id} className="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay={(d % 3) * 100}>
-                  <div className="service-card">
-                    <div className="sc-img">
-                      <Image src={svc.image ? `/uploads/services/${svc.image}` : '/images/equip.avif'} alt={svc.title} width={400} height={300} sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
-                      <div className="sc-icon"><Hospital className="me-2" style={{color:"#0CB8C9"}} /></div>
+                <div key={svc.id} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 group" data-aos="fade-up" data-aos-delay={(d % 3) * 100}>
+                  <div className="relative h-64 overflow-hidden">
+                    <Image src={svc.image ? `/uploads/services/${svc.image}` : '/images/equip.avif'} alt={svc.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
+                    <div className="absolute bottom-4 right-4 bg-white p-3 rounded-xl shadow-lg text-[#0CB8C9]">
+                      <Hospital className="w-6 h-6" />
                     </div>
-                    <div className="sc-body">
-                      <div className="sc-tag">{svc.category || ''}</div>
-                      <h5>{svc.title}</h5>
-                      <p>{svc.description}</p>
-                      <Link href="/services" className="sc-link">Learn More <i className="fa-solid fa-arrow-right fa-xs"></i></Link>
-                    </div>
+                  </div>
+                  <div className="p-8">
+                    <div className="text-xs font-bold uppercase tracking-wider text-[#2196d3] mb-3">{svc.category || 'Service'}</div>
+                    <h5 className="text-xl font-bold text-[#0f2240] mb-3">{svc.title}</h5>
+                    <p className="text-[#6b82a3] mb-6 line-clamp-3">{svc.description}</p>
+                    <Link href="/services" className="inline-flex items-center font-bold text-[#4ecdc4] hover:text-[#2196d3] transition-colors">
+                      Learn More <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
                   </div>
                 </div>
               ))
             ) : (
               staticServices.map(([img, tag, title, desc, icon], d) => (
-                <div key={title} className="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay={(d % 3) * 100}>
-                  <div className="service-card">
-                    <div className="sc-img">
-                      <Image src={`/images/${img}`} alt={title} width={400} height={300} sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
-                      <div className="sc-icon">{icon === "local_hospital" ? <Hospital /> : icon === "medical_services" ? <Stethoscope /> : icon === "elderly" ? <Users /> : icon === "child_care" ? <Baby /> : icon === "health_and_safety" ? <ShieldPlus /> : <Activity />}</div>
+                <div key={title} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 group" data-aos="fade-up" data-aos-delay={(d % 3) * 100}>
+                  <div className="relative h-64 overflow-hidden">
+                    <Image src={`/images/${img}`} alt={title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
+                    <div className="absolute bottom-4 right-4 bg-white p-3 rounded-xl shadow-lg text-[#0CB8C9]">
+                      {icon === "local_hospital" ? <Hospital className="w-6 h-6"/> : icon === "medical_services" ? <Stethoscope className="w-6 h-6"/> : icon === "elderly" ? <Users className="w-6 h-6"/> : icon === "child_care" ? <Baby className="w-6 h-6"/> : icon === "health_and_safety" ? <ShieldPlus className="w-6 h-6"/> : <Activity className="w-6 h-6"/>}
                     </div>
-                    <div className="sc-body">
-                      <div className="sc-tag">{tag}</div>
-                      <h5>{title}</h5>
-                      <p>{desc}</p>
-                      <Link href="/services" className="sc-link">Learn More <i className="fa-solid fa-arrow-right fa-xs"></i></Link>
-                    </div>
+                  </div>
+                  <div className="p-8">
+                    <div className="text-xs font-bold uppercase tracking-wider text-[#2196d3] mb-3">{tag}</div>
+                    <h5 className="text-xl font-bold text-[#0f2240] mb-3">{title}</h5>
+                    <p className="text-[#6b82a3] mb-6 line-clamp-3">{desc}</p>
+                    <Link href="/services" className="inline-flex items-center font-bold text-[#4ecdc4] hover:text-[#2196d3] transition-colors">
+                      Learn More <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
                   </div>
                 </div>
               ))
@@ -188,44 +206,46 @@ async function HomeDynamic() {
       </section>
 
       {/* ══ HOW IT WORKS ══ */}
-      <section className="section-pad" style={{background:'#f8fbff', overflow:'hidden'}}>
-        <div className="container">
-          <div className="text-center mb-5" data-aos="fade-up">
-            <div className="section-badge"><i className="fa-solid fa-bars-progress me-1"></i> Simple Process</div>
-            <h2 className="section-title">How It Works</h2>
-            <p className="section-sub">Get hospital-grade care at home in 3 simple steps</p>
+      <section className="py-20 bg-[#f8fbff] overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16" data-aos="fade-up">
+            <div className="inline-flex items-center text-sm font-bold text-[#2196d3] uppercase tracking-wider mb-3 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
+              <ListTodo className="w-4 h-4 mr-2" /> Simple Process
+            </div>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#0f2240] mb-4">How It Works</h2>
+            <p className="text-lg text-[#6b82a3] max-w-2xl mx-auto">Get hospital-grade care at home in 3 simple steps</p>
           </div>
-          <div className="timeline-container">
-            <div className="timeline-track"></div>
-            <div className="row g-4 position-relative" style={{zIndex: 1}}>
-              <div className="col-md-4 timeline-step" data-aos="fade-up" data-aos-delay="0">
-                <div className="how-step-card text-center">
-                  <div className="how-num-wrapper">
-                    <div className="how-num-glow"></div>
-                    <div className="how-num">1</div>
+          <div className="relative max-w-5xl mx-auto">
+            <div className="hidden md:block absolute top-[60px] left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#2196d3] to-transparent opacity-20"></div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+              <div data-aos="fade-up" data-aos-delay="0">
+                <div className="bg-white rounded-2xl p-8 text-center shadow-xl border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
+                  <div className="w-16 h-16 mx-auto bg-gradient-to-br from-[#1a3a6b] to-[#2196d3] rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/30 mb-6 relative">
+                    1
+                    <div className="absolute inset-0 rounded-full animate-ping bg-[#2196d3] opacity-20"></div>
                   </div>
-                  <h4>Request a Callback</h4>
-                  <p className="text-muted mb-0">Fill out our quick form or call us directly. Our care coordinator connects with you within 60 minutes.</p>
+                  <h4 className="text-xl font-bold text-[#0f2240] mb-3">Request a Callback</h4>
+                  <p className="text-[#6b82a3]">Fill out our quick form or call us directly. Our care coordinator connects with you within 60 minutes.</p>
                 </div>
               </div>
-              <div className="col-md-4 timeline-step" data-aos="fade-up" data-aos-delay="100">
-                <div className="how-step-card text-center">
-                  <div className="how-num-wrapper">
-                    <div className="how-num-glow"></div>
-                    <div className="how-num">2</div>
+              <div data-aos="fade-up" data-aos-delay="100">
+                <div className="bg-white rounded-2xl p-8 text-center shadow-xl border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
+                  <div className="w-16 h-16 mx-auto bg-gradient-to-br from-[#1a3a6b] to-[#2196d3] rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/30 mb-6 relative">
+                    2
+                    <div className="absolute inset-0 rounded-full animate-ping bg-[#2196d3] opacity-20" style={{animationDelay:'0.5s'}}></div>
                   </div>
-                  <h4>Clinical Assessment</h4>
-                  <p className="text-muted mb-0">Our medical experts assess your specific needs and match you with the right ICU-trained professionals.</p>
+                  <h4 className="text-xl font-bold text-[#0f2240] mb-3">Clinical Assessment</h4>
+                  <p className="text-[#6b82a3]">Our medical experts assess your specific needs and match you with the right ICU-trained professionals.</p>
                 </div>
               </div>
-              <div className="col-md-4 timeline-step" data-aos="fade-up" data-aos-delay="200">
-                <div className="how-step-card text-center">
-                  <div className="how-num-wrapper">
-                    <div className="how-num-glow"></div>
-                    <div className="how-num">3</div>
+              <div data-aos="fade-up" data-aos-delay="200">
+                <div className="bg-white rounded-2xl p-8 text-center shadow-xl border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
+                  <div className="w-16 h-16 mx-auto bg-gradient-to-br from-[#1a3a6b] to-[#2196d3] rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/30 mb-6 relative">
+                    3
+                    <div className="absolute inset-0 rounded-full animate-ping bg-[#2196d3] opacity-20" style={{animationDelay:'1s'}}></div>
                   </div>
-                  <h4>Care Starts at Home</h4>
-                  <p className="text-muted mb-0">We deliver equipment, and our verified nursing staff begins providing compassionate care at your home.</p>
+                  <h4 className="text-xl font-bold text-[#0f2240] mb-3">Care Starts at Home</h4>
+                  <p className="text-[#6b82a3]">We deliver equipment, and our verified nursing staff begins providing compassionate care at your home.</p>
                 </div>
               </div>
             </div>
@@ -234,27 +254,34 @@ async function HomeDynamic() {
       </section>
 
       {/* ══ WHY CHOOSE US ══ */}
-      <section className="section-pad bg-grad">
-        <div className="container">
-          <div className="row g-5">
-            <div className="col-lg-4" data-aos="fade-right">
-              <div className="pt-4 sticky-top-lg" style={{zIndex: 1}}>
-                <div className="section-badge light"><i className="fa-solid fa-star me-1"></i> Why Choose Stoic</div>
-                <h2 className="section-title text-white">Dedicated to Your Health & Well-being</h2>
-                <div className="divider-grad"></div>
-                <p className="text-white-50" style={{lineHeight:1.9, marginBottom:'2rem'}}>At Stoic Home Care, we go beyond medical treatment. Our holistic approach ensures emotional and physical well-being through enterprise-grade home care.</p>
-                <Image src="/images/nurse.avif" alt="Care" width={500} height={600} sizes="(max-width: 991px) 100vw, 33vw" className="bento-hero-img" loading="lazy" />
+      <section className="py-20 bg-gradient-to-br from-[#0f2240] to-[#1a3a6b]">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div className="lg:col-span-4" data-aos="fade-right">
+              <div className="sticky top-24">
+                <div className="inline-flex items-center text-sm font-bold text-[#4ecdc4] uppercase tracking-wider mb-4 bg-white/10 px-3 py-1 rounded-full border border-white/20 backdrop-blur-sm">
+                  <Star className="w-4 h-4 mr-2" /> Why Choose Stoic
+                </div>
+                <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-6">Dedicated to Your Health & Well-being</h2>
+                <div className="w-20 h-1.5 bg-gradient-to-r from-[#2196d3] to-[#4ecdc4] rounded-full mb-8"></div>
+                <p className="text-white/70 leading-relaxed mb-8">At Stoic Home Care, we go beyond medical treatment. Our holistic approach ensures emotional and physical well-being through enterprise-grade home care.</p>
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 hidden md:block">
+                  <Image src="/images/nurse.avif" alt="Care" width={500} height={600} sizes="(max-width: 991px) 100vw, 33vw" className="object-cover w-full h-[400px]" loading="lazy" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f2240] to-transparent opacity-60"></div>
+                </div>
               </div>
             </div>
-            <div className="col-lg-8">
-              <div className="bento-grid">
+            <div className="lg:col-span-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                 {whys.map(([icon, title, text, size], d) => (
-                  <div key={title} className={`bento-item ${size}`} data-aos="fade-up" data-aos-delay={d*50}>
-                    <div className="why-card-bento">
-                      <div className="wc-icon-bento">{icon === "local_hospital" ? <Hospital /> : icon === "medical_services" ? <Stethoscope /> : icon === "elderly" ? <Users /> : icon === "child_care" ? <Baby /> : icon === "health_and_safety" ? <ShieldPlus /> : <Activity />}</div>
-                      <div className="wc-content-bento">
-                        <h5>{title}</h5>
-                        <p>{text}</p>
+                  <div key={title} className={`bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 hover:bg-white/10 transition-colors ${size === 'bento-lg' ? 'sm:col-span-2' : ''}`} data-aos="fade-up" data-aos-delay={d*50}>
+                    <div className="flex flex-col h-full">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#2196d3] to-[#4ecdc4] flex items-center justify-center text-white shadow-lg mb-6">
+                        {icon === "local_hospital" ? <Hospital className="w-6 h-6"/> : icon === "medical_services" ? <Stethoscope className="w-6 h-6"/> : icon === "elderly" ? <Users className="w-6 h-6"/> : icon === "child_care" ? <Baby className="w-6 h-6"/> : icon === "health_and_safety" ? <ShieldPlus className="w-6 h-6"/> : <Activity className="w-6 h-6"/>}
+                      </div>
+                      <div className="mt-auto">
+                        <h5 className="text-xl font-bold text-white mb-2">{title}</h5>
+                        <p className="text-white/70">{text}</p>
                       </div>
                     </div>
                   </div>
@@ -266,21 +293,21 @@ async function HomeDynamic() {
       </section>
 
       {/* ══ STATS ══ */}
-      <section className="section-pad" style={{background:'var(--light)'}}>
-        <div className="container">
-          <div className="stats-strip">
-            <div className="row g-4 text-center">
+      <section className="py-12 bg-gray-50 border-t border-b border-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="bg-white rounded-3xl shadow-xl shadow-blue-900/5 p-8 md:p-12 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[#4ecdc4] to-transparent opacity-10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-[#2196d3] to-transparent opacity-10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4"></div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center relative z-10">
               {[
                 ['5000+','Patients Served'],
                 ['15+','Services Offered'],
                 ['50+','Expert Staff'],
                 ['5+','Years Excellence']
               ].map(([num,lbl], d) => (
-                <div key={lbl} className="col-6 col-md-3" data-aos="zoom-in" data-aos-delay={d*100}>
-                  <div className="stat-item">
-                    <div className="stat-num premium-stat-num">{num}</div>
-                    <div className="stat-lbl premium-stat-lbl">{lbl}</div>
-                  </div>
+                <div key={lbl} data-aos="zoom-in" data-aos-delay={d*100}>
+                  <div className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#1a3a6b] to-[#2196d3] mb-2">{num}</div>
+                  <div className="text-[#6b82a3] font-bold text-sm uppercase tracking-wider">{lbl}</div>
                 </div>
               ))}
             </div>
@@ -289,33 +316,38 @@ async function HomeDynamic() {
       </section>
 
       {/* ══ EQUIPMENT PREVIEW ══ */}
-      <section className="section-pad">
-        <div className="container">
-          <div className="row align-items-end mb-5">
-            <div className="col-lg-7" data-aos="fade-right">
-              <div className="section-badge"><Activity size={16} style={{verticalAlign:"middle"}} className="me-1" /> Equipment on Rent</div>
-              <h2 className="section-title">Medical Equipment Delivered to You</h2>
-              <p className="section-sub">Hospital-grade devices on flexible rental plans. Doorstep delivery, installation and maintenance included.</p>
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+            <div data-aos="fade-right" className="lg:max-w-2xl">
+              <div className="inline-flex items-center text-sm font-bold text-[#2196d3] uppercase tracking-wider mb-3 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
+                <Activity className="w-4 h-4 mr-2" /> Equipment on Rent
+              </div>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[#0f2240] mb-4">Medical Equipment Delivered to You</h2>
+              <div className="w-20 h-1.5 bg-gradient-to-r from-[#1a3a6b] to-[#4ecdc4] rounded-full mb-6"></div>
+              <p className="text-lg text-[#6b82a3]">Hospital-grade devices on flexible rental plans. Doorstep delivery, installation and maintenance included.</p>
             </div>
-            <div className="col-lg-5 text-lg-end mt-3 mt-lg-0" data-aos="fade-left">
-              <Link href="/equipment" className="btn-primary-grad text-center"><i className="fa-solid fa-boxes-stacked me-2"></i>All Equipment</Link>
+            <div data-aos="fade-left" className="text-left lg:text-right">
+              <Link href="/equipment" className="inline-flex items-center px-6 py-3 rounded-full font-bold text-white bg-gradient-to-r from-[#1a3a6b] to-[#2196d3] shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                <Boxes className="w-4 h-4 mr-2" /> All Equipment
+              </Link>
             </div>
           </div>
-          <div className="swiper equip-home-swiper">
+          <div className="swiper equip-home-swiper !pb-12">
             <div className="swiper-wrapper">
               {equipment.length > 0 ? (
                 equipment.map(eq => (
-                  <div key={eq.id} className="swiper-slide">
-                    <div className="equip-card">
-                      <div className="ec-img">
-                        <Image src={eq.image ? `/uploads/equipment/${eq.image}` : '/images/equip.avif'} alt={eq.title} width={400} height={300} sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
+                  <div key={eq.id} className="swiper-slide h-auto">
+                    <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-full flex flex-col group">
+                      <div className="relative h-56 overflow-hidden">
+                        <Image src={eq.image ? `/uploads/equipment/${eq.image}` : '/images/equip.avif'} alt={eq.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
                       </div>
-                      <div className="ec-body">
-                        <h5>{eq.title}</h5>
-                        <p>{eq.description}</p>
-                        <div className="ec-footer">
-                          <span className="ec-price">{eq.price || 'Call for pricing'}</span>
-                          <Link href="/contact" className="ec-rent-btn">Rent Now</Link>
+                      <div className="p-6 flex flex-col flex-grow">
+                        <h5 className="text-xl font-bold text-[#0f2240] mb-3">{eq.title}</h5>
+                        <p className="text-[#6b82a3] mb-6 flex-grow">{eq.description}</p>
+                        <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
+                          <span className="font-bold text-[#2196d3]">{eq.price || 'Call for pricing'}</span>
+                          <Link href="/contact" className="inline-flex items-center px-4 py-2 bg-[#1a3a6b] text-white text-sm font-bold rounded-lg hover:bg-[#0CB8C9] transition-colors">Rent Now</Link>
                         </div>
                       </div>
                     </div>
@@ -323,18 +355,18 @@ async function HomeDynamic() {
                 ))
               ) : (
                 staticEq.map(([img, title, desc, price, badge]) => (
-                  <div key={title} className="swiper-slide">
-                    <div className="equip-card">
-                      <div className="ec-img">
-                        <Image src={`/images/${img}`} alt={title} width={400} height={300} sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
-                        <span className="ec-badge">{badge}</span>
+                  <div key={title} className="swiper-slide h-auto">
+                    <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-full flex flex-col group relative">
+                      <div className="relative h-56 overflow-hidden bg-gray-50 flex items-center justify-center p-4">
+                        <Image src={`/images/${img}`} alt={title} width={300} height={200} className="object-contain group-hover:scale-105 transition-transform duration-500 max-h-full" sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
+                        <span className="absolute top-4 right-4 bg-[#4ecdc4] text-white text-xs font-bold px-3 py-1 rounded-full shadow-md z-10">{badge}</span>
                       </div>
-                      <div className="ec-body">
-                        <h5>{title}</h5>
-                        <p>{desc}</p>
-                        <div className="ec-footer">
-                          <span className="ec-price">{price}</span>
-                          <Link href="/contact" className="ec-rent-btn">Rent Now</Link>
+                      <div className="p-6 flex flex-col flex-grow">
+                        <h5 className="text-xl font-bold text-[#0f2240] mb-3">{title}</h5>
+                        <p className="text-[#6b82a3] mb-6 flex-grow">{desc}</p>
+                        <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
+                          <span className="font-bold text-[#2196d3]">{price}</span>
+                          <Link href="/contact" className="inline-flex items-center px-4 py-2 bg-[#1a3a6b] text-white text-sm font-bold rounded-lg hover:bg-[#0CB8C9] transition-colors">Rent Now</Link>
                         </div>
                       </div>
                     </div>
@@ -342,75 +374,105 @@ async function HomeDynamic() {
                 ))
               )}
             </div>
-            <div className="swiper-pagination" style={{position:'relative', marginTop:'1.5rem'}}></div>
+            <div className="swiper-pagination"></div>
           </div>
         </div>
       </section>
 
       {/* ══ TESTIMONIALS ══ */}
-      <section className="section-pad" style={{background:'var(--light)', position: 'relative', overflow: 'hidden'}}>
-        <div style={{position:'absolute', top: '-100px', left: '-100px', width: '400px', height: '400px', background: 'rgba(78,205,196,0.15)', filter: 'blur(80px)', borderRadius: '50%', zIndex: 0}}></div>
-        <div style={{position:'absolute', bottom: '-100px', right: '-100px', width: '500px', height: '500px', background: 'rgba(33,150,211,0.1)', filter: 'blur(100px)', borderRadius: '50%', zIndex: 0}}></div>
+      <section className="py-20 bg-[#f4f8ff] relative overflow-hidden">
+        <div className="absolute -top-[100px] -left-[100px] w-[400px] h-[400px] bg-[#4ecdc4]/15 blur-[80px] rounded-full z-0 pointer-events-none"></div>
+        <div className="absolute -bottom-[100px] -right-[100px] w-[500px] h-[500px] bg-[#2196d3]/10 blur-[100px] rounded-full z-0 pointer-events-none"></div>
         
-        <div className="container" style={{position: 'relative', zIndex: 1}}>
-          <div className="text-center mb-5" data-aos="fade-up">
-            <div className="section-badge"><i className="fa-solid fa-comments me-1"></i> Patient Stories</div>
-            <h2 className="section-title">What Families Say About Us</h2>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-12" data-aos="fade-up">
+            <div className="inline-flex items-center text-sm font-bold text-[#2196d3] uppercase tracking-wider mb-3 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
+              <MessageCircle className="w-4 h-4 mr-2" /> Patient Stories
+            </div>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#0f2240] mb-4">What Families Say About Us</h2>
           </div>
-          <div className="swiper testi-swiper" style={{paddingBottom: '2rem'}}>
+          <div className="swiper testi-swiper !pb-12">
             <div className="swiper-wrapper">
               {testis.map(([av, name, role, text]) => (
-                <div key={name} className="swiper-slide" style={{padding: '1rem'}}>
-                  <div className="testi-card premium-testi-card">
-                    <div className="testi-quote-icon">"</div>
-                    <div className="testi-stars mb-3">
-                      <i className="fa-solid fa-star"></i><i className="fa-solid fa-star"></i><i className="fa-solid fa-star"></i><i className="fa-solid fa-star"></i><i className="fa-solid fa-star"></i>
+                <div key={name} className="swiper-slide h-auto p-4">
+                  <div className="bg-white rounded-2xl p-8 shadow-xl shadow-blue-900/5 h-full flex flex-col relative border border-gray-100">
+                    <div className="absolute -top-4 -left-2 text-[8rem] text-blue-50 font-serif leading-none z-0">"</div>
+                    <div className="flex text-[#F5B041] mb-4 relative z-10">
+                      <Star className="w-5 h-5 fill-current" /><Star className="w-5 h-5 fill-current" /><Star className="w-5 h-5 fill-current" /><Star className="w-5 h-5 fill-current" /><Star className="w-5 h-5 fill-current" />
                     </div>
-                    <p className="testi-text premium-testi-text">{text}</p>
-                    <div className="testi-author pt-4 mt-auto border-top">
-                      <div className="testi-av premium-testi-av">{av}</div>
+                    <p className="text-[#354a6b] italic mb-8 relative z-10 flex-grow text-lg">"{text}"</p>
+                    <div className="flex items-center pt-6 border-t border-gray-100 mt-auto">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#1a3a6b] to-[#2196d3] text-white flex items-center justify-center font-bold text-xl mr-4 flex-shrink-0 shadow-md">{av}</div>
                       <div>
-                        <div className="testi-name premium-testi-name">{name}</div>
-                        <div className="testi-role premium-testi-role"><i className="fa-solid fa-location-dot fa-xs me-1"></i>{role}</div>
+                        <div className="font-extrabold text-[#0f2240] text-lg">{name}</div>
+                        <div className="text-[#6b82a3] text-sm flex items-center"><MapPin className="w-3 h-3 mr-1" /> {role}</div>
                       </div>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-            <div className="swiper-pagination" style={{position:'relative', marginTop:'1.5rem'}}></div>
+            <div className="swiper-pagination"></div>
           </div>
         </div>
       </section>
 
       {/* ══ ENQUIRY FORM ══ */}
-      <section className="section-pad">
-        <div className="container">
-          <div className="cta-banner mb-5" data-aos="zoom-in">
-            <div className="row align-items-center g-4">
-              <div className="col-lg-8">
-                <h2 style={{fontSize:'clamp(1.6rem,3vw,2.4rem)', marginBottom:'.8rem'}}>Ready for Hospital-Grade Care at Home?</h2>
-                <p>Our team is available 24/7. Call for emergencies or fill the form for scheduled services.</p>
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="bg-gradient-to-r from-[#2196d3] to-[#4ecdc4] rounded-3xl p-8 md:p-12 mb-16 shadow-2xl relative overflow-hidden" data-aos="zoom-in">
+            <div className="absolute top-0 right-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIvPjwvc3ZnPg==')] opacity-30 pointer-events-none"></div>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+              <div className="lg:col-span-7">
+                <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">Ready for Hospital-Grade Care at Home?</h2>
+                <p className="text-white/90 text-lg">Our team is available 24/7. Call for emergencies or fill the form for scheduled services.</p>
               </div>
-              <div className="col-lg-4 d-flex gap-3 flex-wrap justify-content-lg-end">
-                <a href="tel:+917668232867" style={{background:'#fff', color:'var(--primary)', padding:'.85rem 1.8rem', borderRadius:'50px', fontWeight:700, textDecoration:'none', display:'inline-flex', alignItems:'center', gap:'.5rem'}}><i className="fa-solid fa-phone"></i> Call Now</a>
-                <a href="https://wa.me/917668232867" target="_blank" rel="noreferrer" className="btn-wa" style={{padding:'.85rem 1.6rem'}}><i className="fa-brands fa-whatsapp"></i> WhatsApp</a>
+              <div className="lg:col-span-5 flex flex-wrap gap-4 lg:justify-end">
+                <a href="tel:+917668232867" className="inline-flex items-center px-8 py-3 bg-white text-[#1a3a6b] rounded-full font-bold shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
+                  <Phone className="w-5 h-5 mr-2" /> Call Now
+                </a>
+                <a href="https://wa.me/917668232867" target="_blank" rel="noreferrer" className="inline-flex items-center px-8 py-3 bg-[#25D366] text-white rounded-full font-bold shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
+                  <MessageCircle className="w-5 h-5 mr-2" /> WhatsApp
+                </a>
               </div>
             </div>
           </div>
 
-          <div className="row g-5 align-items-center">
-            <div className="col-lg-5" data-aos="fade-right">
-              <div className="section-badge"><i className="fa-solid fa-clipboard-list me-1"></i> Quick Enquiry</div>
-              <h2 className="section-title">Request a Callback</h2>
-              <div className="divider-grad"></div>
-              <p className="section-sub mb-4">Fill out the form and our care coordinator will call you within 1 hour.</p>
-              <div className="d-flex flex-column gap-3">
-                <div className="contact-info-card"><div className="ci-icon"><i className="fa-solid fa-phone"></i></div><div><div className="ci-title">Emergency Contact</div><div className="ci-val">+91 76682 32867<br/><small>Available 24/7 – 365 days</small></div></div></div>
-                <div className="contact-info-card"><div className="ci-icon"><i className="fa-brands fa-whatsapp"></i></div><div><div className="ci-title">WhatsApp</div><div className="ci-val"><a href="https://wa.me/917668232867" target="_blank" rel="noreferrer">Chat with us directly →</a></div></div></div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-5" data-aos="fade-right">
+              <div className="inline-flex items-center text-sm font-bold text-[#2196d3] uppercase tracking-wider mb-3 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
+                <ClipboardList className="w-4 h-4 mr-2" /> Quick Enquiry
+              </div>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[#0f2240] mb-4">Request a Callback</h2>
+              <div className="w-20 h-1.5 bg-gradient-to-r from-[#1a3a6b] to-[#4ecdc4] rounded-full mb-6"></div>
+              <p className="text-lg text-[#6b82a3] mb-8">Fill out the form and our care coordinator will call you within 1 hour.</p>
+              
+              <div className="space-y-6">
+                <div className="flex items-start p-6 bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
+                  <div className="w-12 h-12 bg-blue-50 text-[#2196d3] rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
+                    <Phone className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <div className="font-bold text-[#0f2240] text-lg mb-1">Emergency Contact</div>
+                    <div className="text-[#354a6b] font-semibold text-lg">+91 76682 32867</div>
+                    <div className="text-[#6b82a3] text-sm mt-1">Available 24/7 – 365 days</div>
+                  </div>
+                </div>
+                
+                <div className="flex items-start p-6 bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
+                  <div className="w-12 h-12 bg-green-50 text-[#25D366] rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
+                    <MessageCircle className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <div className="font-bold text-[#0f2240] text-lg mb-1">WhatsApp</div>
+                    <a href="https://wa.me/917668232867" target="_blank" rel="noreferrer" className="text-[#2196d3] font-semibold hover:underline flex items-center">
+                      Chat with us directly <ArrowRight className="w-4 h-4 ml-1" />
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="col-lg-7" data-aos="fade-left">
+            <div className="lg:col-span-7" data-aos="fade-left">
               {/* Home Enquiry Form Component */}
               <HomeEnquiryForm />
             </div>
