@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
+
 import { GoogleTagManager } from '@next/third-parties/google';
 import dynamic from "next/dynamic";
 import { Outfit } from "next/font/google";
@@ -23,45 +23,35 @@ const outfit = Outfit({
   variable: "--font-outfit",
 });
 
-export async function generateMetadata(): Promise<Metadata> {
-  const headersList = headers();
-  const abVariant = headersList.get('X-AB-Version') || 'A';
-  
-  const baseTitle = "Stoic Home Care – Expert Home Care Services";
-  const aggressiveTitle = "Top Home Care Services in 2026 | Stoic Home Care";
-  
-  const finalTitle = abVariant === 'B' ? aggressiveTitle : baseTitle;
-
-  return {
-    metadataBase: new URL('https://stoiccare.in'),
-    title: finalTitle,
+export const metadata: Metadata = {
+  metadataBase: new URL('https://stoiccare.in'),
+  title: "Stoic Home Care | Expert Home Care Services",
+  description: "Stoic Home Care provides hospital-grade home care – ICU setup, nursing, old age care, mother & baby care, doctor on call and medical equipment rental. Available 24/7.",
+  robots: {
+    index: true,
+    follow: true,
+    'max-snippet': -1,
+    'max-image-preview': "large",
+    'max-video-preview': -1,
+  },
+  openGraph: {
+    title: "Stoic Home Care | Expert Home Care Services",
     description: "Stoic Home Care provides hospital-grade home care – ICU setup, nursing, old age care, mother & baby care, doctor on call and medical equipment rental. Available 24/7.",
-    robots: {
-      index: true,
-      follow: true,
-      'max-snippet': -1,
-      'max-image-preview': "large",
-      'max-video-preview': -1,
-    },
-    openGraph: {
-      title: finalTitle,
-      description: "Stoic Home Care provides hospital-grade home care – ICU setup, nursing, old age care, mother & baby care, doctor on call and medical equipment rental. Available 24/7.",
-      type: "website",
-      siteName: "Stoic Home Care",
-      images: [
-        {
-          url: "/images/carousel-1.avif",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: finalTitle,
-      description: "Stoic Home Care provides hospital-grade home care – ICU setup, nursing, old age care, mother & baby care, doctor on call and medical equipment rental. Available 24/7.",
-      images: ["/images/carousel-1.avif"],
-    },
-  };
-}
+    type: "website",
+    siteName: "Stoic Home Care",
+    images: [
+      {
+        url: "/images/carousel-1.avif",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Stoic Home Care | Expert Home Care Services",
+    description: "Stoic Home Care provides hospital-grade home care – ICU setup, nursing, old age care, mother & baby care, doctor on call and medical equipment rental. Available 24/7.",
+    images: ["/images/carousel-1.avif"],
+  },
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
