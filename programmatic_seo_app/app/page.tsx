@@ -220,9 +220,8 @@ async function HomeDynamic() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
               <div data-aos="fade-up" data-aos-delay="0">
                 <div className="bg-white rounded-2xl p-8 text-center shadow-xl border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
-                  <div className="w-16 h-16 mx-auto bg-gradient-to-br from-[#1a3a6b] to-[#2196d3] rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/30 mb-6 relative">
+                  <div className="w-16 h-16 mx-auto bg-gradient-to-br from-[#1a3a6b] to-[#2196d3] rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/30 mb-6">
                     1
-                    <div className="absolute inset-0 rounded-full animate-ping bg-[#2196d3] opacity-20"></div>
                   </div>
                   <h4 className="text-xl font-bold text-[#0f2240] mb-3">Request a Callback</h4>
                   <p className="text-[#6b82a3]">Fill out our quick form or call us directly. Our care coordinator connects with you within 60 minutes.</p>
@@ -230,9 +229,8 @@ async function HomeDynamic() {
               </div>
               <div data-aos="fade-up" data-aos-delay="100">
                 <div className="bg-white rounded-2xl p-8 text-center shadow-xl border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
-                  <div className="w-16 h-16 mx-auto bg-gradient-to-br from-[#1a3a6b] to-[#2196d3] rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/30 mb-6 relative">
+                  <div className="w-16 h-16 mx-auto bg-gradient-to-br from-[#1a3a6b] to-[#2196d3] rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/30 mb-6">
                     2
-                    <div className="absolute inset-0 rounded-full animate-ping bg-[#2196d3] opacity-20" style={{animationDelay:'0.5s'}}></div>
                   </div>
                   <h4 className="text-xl font-bold text-[#0f2240] mb-3">Clinical Assessment</h4>
                   <p className="text-[#6b82a3]">Our medical experts assess your specific needs and match you with the right ICU-trained professionals.</p>
@@ -240,9 +238,8 @@ async function HomeDynamic() {
               </div>
               <div data-aos="fade-up" data-aos-delay="200">
                 <div className="bg-white rounded-2xl p-8 text-center shadow-xl border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
-                  <div className="w-16 h-16 mx-auto bg-gradient-to-br from-[#1a3a6b] to-[#2196d3] rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/30 mb-6 relative">
+                  <div className="w-16 h-16 mx-auto bg-gradient-to-br from-[#1a3a6b] to-[#2196d3] rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/30 mb-6">
                     3
-                    <div className="absolute inset-0 rounded-full animate-ping bg-[#2196d3] opacity-20" style={{animationDelay:'1s'}}></div>
                   </div>
                   <h4 className="text-xl font-bold text-[#0f2240] mb-3">Care Starts at Home</h4>
                   <p className="text-[#6b82a3]">We deliver equipment, and our verified nursing staff begins providing compassionate care at your home.</p>
@@ -277,7 +274,7 @@ async function HomeDynamic() {
                   <div key={title} className={`bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 hover:bg-white/10 transition-colors ${size === 'bento-lg' ? 'sm:col-span-2' : ''}`} data-aos="fade-up" data-aos-delay={d*50}>
                     <div className="flex flex-col h-full">
                       <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#2196d3] to-[#4ecdc4] flex items-center justify-center text-white shadow-lg mb-6">
-                        {icon === "local_hospital" ? <Hospital className="w-6 h-6"/> : icon === "medical_services" ? <Stethoscope className="w-6 h-6"/> : icon === "elderly" ? <Users className="w-6 h-6"/> : icon === "child_care" ? <Baby className="w-6 h-6"/> : icon === "health_and_safety" ? <ShieldPlus className="w-6 h-6"/> : <Activity className="w-6 h-6"/>}
+                        {icon === "verified" ? <ShieldPlus className="w-6 h-6"/> : icon === "biotech" ? <Boxes className="w-6 h-6"/> : icon === "schedule" ? <CalendarCheck className="w-6 h-6"/> : icon === "payments" ? <Award className="w-6 h-6"/> : icon === "home_health" ? <Hospital className="w-6 h-6"/> : icon === "health_and_safety" ? <Activity className="w-6 h-6"/> : <Star className="w-6 h-6"/>}
                       </div>
                       <div className="mt-auto">
                         <h5 className="text-xl font-bold text-white mb-2">{title}</h5>
@@ -296,8 +293,6 @@ async function HomeDynamic() {
       <section className="py-12 bg-gray-50 border-t border-b border-gray-100">
         <div className="container mx-auto px-4">
           <div className="bg-white rounded-3xl shadow-xl shadow-blue-900/5 p-8 md:p-12 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[#4ecdc4] to-transparent opacity-10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4"></div>
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-[#2196d3] to-transparent opacity-10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4"></div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center relative z-10">
               {[
                 ['5000+','Patients Served'],
@@ -600,7 +595,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <Suspense fallback={<div style={{minHeight: '50vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><div className="spinner-border text-primary" role="status"></div></div>}>
+      <Suspense fallback={<div style={{minHeight: '50vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><div style={{width:32,height:32,border:'3px solid #e5e7eb',borderTopColor:'#0CB8C9',borderRadius:'50%',animation:'spin 0.6s linear infinite'}}></div></div>}>
         <HomeDynamic />
       </Suspense>
     </main>

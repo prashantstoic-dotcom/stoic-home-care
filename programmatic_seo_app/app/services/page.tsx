@@ -1,5 +1,25 @@
 import Link from 'next/link';
 import { getServices } from '@/lib/supabase';
+import {
+  Stethoscope,
+  CalendarCheck,
+  Phone,
+  ArrowRight,
+  Check,
+  ListChecks,
+  Hospital,
+  ShieldPlus,
+  HeartHandshake,
+  Baby,
+  ShieldCheck,
+  Activity,
+  Virus,
+  Brain,
+  PhoneCall,
+  ClipboardList,
+  Home
+} from 'lucide-react';
+
 export const metadata = {
   title: 'Home Care Services – ICU Setup, Nursing, Elder Care | Stoic Home Care',
   description: 'Explore all Home Care services by Stoic Home Care: ICU setup, nursing, old age care, physiotherapy and more.',
@@ -15,17 +35,16 @@ export default async function ServicesPage() {
     console.warn("Supabase fetch failed for ServicesPage.", err);
   }
 
-
   const staticServices = [
-    ['equip.avif','Critical Care','ICU Setup @ Home','Complete ICU infrastructure with ventilators, monitors and critical care nurses.','local_hospital',['Ventilator & BiPAP support','Multi-parameter monitors','ICU-trained nurses 24/7']],
-    ['nurse.avif','Nursing','ICU Trained Nursing','Certified nurses for post-op care, IV therapy, wound management and monitoring.','medical_services',['Post-operative care','IV infusion & wound dressing','Catheter & stoma care']],
-    ['old.jpg','Elder Care','Old Age Care','Compassionate full-time care for seniors including daily assistance and health monitoring.','elderly',['Daily living assistance','Medication reminders','Fall prevention & mobility']],
-    ['child.jpg','Maternity','Mother & Baby Care','Post-natal support for new mothers and neonatal care for newborns by specialists.','child_care',['Post-natal recovery','Breastfeeding support','Newborn hygiene & care']],
-    ['doctor_03.jpg','Doctor Visit','Doctor on Call','Board-certified physicians visiting your home for diagnosis, prescriptions and follow-ups.','health_and_safety',['Home consultation','Prescription & lab coordination','Emergency response']],
-    ['physio.webp','Rehabilitation','Physiotherapy @ Home','Expert physiotherapists for stroke rehab, post-surgical recovery and pain management.','sports_gymnastics',['Stroke & neuro rehab','Orthopaedic recovery','Geriatric physiotherapy']],
-    ['nurse.webp','Nursing','Nursing Attendant','Trained nursing attendants providing round-the-clock care and support for patients.','support',['Personal hygiene care','Patient mobility','Vital signs monitoring']],
-    ['ab-1.avif','Specialised','Covid Care @ Home','Specialised care for Covid-19 patients including oxygen therapy and monitoring.','coronavirus',['Oxygen saturation monitoring','Prescribed medication','Isolation protocol']],
-    ['ab-2.avif','Mental Health','Psychologist @ Home','Qualified psychologists providing therapy and counselling in the comfort of your home.','psychology',['Individual therapy','Anxiety & depression support','Family counselling']],
+    ['equip.avif','Critical Care','ICU Setup @ Home','Complete ICU infrastructure with ventilators, monitors and critical care nurses.', Hospital, ['Ventilator & BiPAP support','Multi-parameter monitors','ICU-trained nurses 24/7']],
+    ['nurse.avif','Nursing','ICU Trained Nursing','Certified nurses for post-op care, IV therapy, wound management and monitoring.', ShieldPlus, ['Post-operative care','IV infusion & wound dressing','Catheter & stoma care']],
+    ['old.jpg','Elder Care','Old Age Care','Compassionate full-time care for seniors including daily assistance and health monitoring.', HeartHandshake, ['Daily living assistance','Medication reminders','Fall prevention & mobility']],
+    ['child.jpg','Maternity','Mother & Baby Care','Post-natal support for new mothers and neonatal care for newborns by specialists.', Baby, ['Post-natal recovery','Breastfeeding support','Newborn hygiene & care']],
+    ['doctor_03.jpg','Doctor Visit','Doctor on Call','Board-certified physicians visiting your home for diagnosis, prescriptions and follow-ups.', ShieldCheck, ['Home consultation','Prescription & lab coordination','Emergency response']],
+    ['physio.webp','Rehabilitation','Physiotherapy @ Home','Expert physiotherapists for stroke rehab, post-surgical recovery and pain management.', Activity, ['Stroke & neuro rehab','Orthopaedic recovery','Geriatric physiotherapy']],
+    ['nurse.webp','Nursing','Nursing Attendant','Trained nursing attendants providing round-the-clock care and support for patients.', HeartHandshake, ['Personal hygiene care','Patient mobility','Vital signs monitoring']],
+    ['ab-1.avif','Specialised','Covid Care @ Home','Specialised care for Covid-19 patients including oxygen therapy and monitoring.', Virus, ['Oxygen saturation monitoring','Prescribed medication','Isolation protocol']],
+    ['ab-2.avif','Mental Health','Psychologist @ Home','Qualified psychologists providing therapy and counselling in the comfort of your home.', Brain, ['Individual therapy','Anxiety & depression support','Family counselling']],
   ];
 
   const customSchema = services.length > 0 ? services.map(svc => ({
@@ -65,35 +84,30 @@ export default async function ServicesPage() {
 
   return (
     <main id="main-content">
-      <style dangerouslySetInnerHTML={{__html: `
-        @media (max-width: 991.98px) {
-          .short-hero .container {
-            min-height: 72vh !important;
-            padding-bottom: 1.2rem !important;
-          }
-          .hero-title { margin-bottom: 0.6rem; line-height: 1.15; }
-          .hero-sub { margin-bottom: 1rem; font-size: 0.92rem; }
-          .hero-badge { margin-bottom: 0.6rem; }
-          .hero-btns { margin-top: 0.8rem; }
-        }
-      `}} />
-
       {/* ══ HERO STATIC ══ */}
-      <header className="short-hero position-relative" aria-label="Services Page Hero">
-        <img className="hero-bg" src="/images/ab-3.avif" alt="Home Care Services" loading="eager" width="1920" height="1080" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: -2 }} />
-        <div className="hero-overlay" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(90deg, rgba(15,34,64,0.95) 0%, rgba(15,34,64,0.7) 100%)', zIndex: -1 }}></div>
-        <div className="container hero-content position-relative" style={{ zIndex: 1 }}>
-          <div className="row align-items-center" style={{ minHeight: '60vh', paddingTop: '10px', paddingBottom: '2rem' }}>
-            <div className="col-lg-8 text-white mt-5">
-              <div className="hero-badge" style={{ display: 'inline-block', background: 'rgba(255,255,255,0.1)', padding: '0.4rem 1rem', borderRadius: '50px', marginBottom: '1rem', fontSize: '0.9rem' }}><i className="fa-solid fa-stethoscope me-2"></i>15+ Specialized Services</div>
-              <h1 className="hero-title" style={{ fontSize: '3.5rem', fontWeight: 800, marginBottom: '1rem' }}>Comprehensive Home<br/><span style={{ color: '#0CB8C9' }}>Home Care Services</span></h1>
-              <p className="hero-sub" style={{ fontSize: '1.1rem', opacity: 0.9, marginBottom: '2rem', maxWidth: '600px' }}>Professional medical care tailored to your needs — delivered with clinical precision and human compassion, right at your doorstep. Available 24/7.</p>
-              <div className="hero-btns d-flex gap-3 flex-wrap">
-                <Link href="/contact" className="btn-primary-grad px-4 py-3" style={{ background: 'linear-gradient(135deg, #0CB8C9, #1D9E75)', borderRadius: '50px', color: '#fff', textDecoration: 'none', fontWeight: 600 }}>
-                  <i className="fa-solid fa-calendar-check me-2"></i>Book Now
+      <header className="relative w-full overflow-hidden min-h-[72vh] lg:min-h-[60vh] flex items-center pt-4 pb-8" aria-label="Services Page Hero">
+        <img src="/images/ab-3.avif" alt="Home Care Services" loading="eager" width={1920} height={1080} className="absolute inset-0 w-full h-full object-cover -z-20" />
+        <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-dark/95 to-dark/70 -z-10"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
+            <div className="lg:col-span-8 text-white mt-12 lg:mt-20">
+              <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-1.5 rounded-full mb-4 text-sm font-medium">
+                <Stethoscope className="w-4 h-4" /> 15+ Specialized Services
+              </div>
+              <h1 className="text-4xl lg:text-6xl font-extrabold mb-4 leading-tight">
+                Comprehensive Home<br/>
+                <span className="text-accent">Home Care Services</span>
+              </h1>
+              <p className="text-lg opacity-90 mb-8 max-w-2xl">
+                Professional medical care tailored to your needs — delivered with clinical precision and human compassion, right at your doorstep. Available 24/7.
+              </p>
+              <div className="flex flex-wrap items-center gap-4">
+                <Link href="/contact" className="inline-flex items-center gap-2 bg-gradient-to-br from-accent to-[#1D9E75] hover:opacity-90 transition-opacity px-6 py-3 rounded-full text-white font-semibold no-underline shadow-lg">
+                  <CalendarCheck className="w-5 h-5" /> Book Now
                 </Link>
-                <a href="tel:+917668232867" className="btn-outline-white px-4 py-3" style={{ border: '2px solid rgba(255,255,255,0.5)', borderRadius: '50px', color: '#fff', textDecoration: 'none', fontWeight: 600 }}>
-                  <i className="fa-solid fa-phone me-2"></i>Emergency Call
+                <a href="tel:+917668232867" className="inline-flex items-center gap-2 border-2 border-white/50 hover:bg-white/10 transition-colors px-6 py-3 rounded-full text-white font-semibold no-underline">
+                  <Phone className="w-5 h-5" /> Emergency Call
                 </a>
               </div>
             </div>
@@ -102,54 +116,62 @@ export default async function ServicesPage() {
       </header>
 
       {/* ══ SERVICES CATALOG ══ */}
-      <section className="section-pad" style={{ background: 'var(--light)' }}>
-        <div className="container">
-          <div className="text-center mb-5" data-aos="fade-up">
-            <div className="section-badge"><i className="fa-solid fa-stethoscope me-1"></i> Our Services</div>
-            <h2 className="section-title">Complete Home Care Services</h2>
-            <div className="divider-grad mx-auto"></div>
-            <p className="section-sub mx-auto">Every service designed around patient comfort, clinical excellence, and family peace of mind.</p>
+      <section className="py-16 lg:py-24 bg-light">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 text-accent font-semibold mb-2 uppercase tracking-wide text-sm">
+              <Stethoscope className="w-4 h-4" /> Our Services
+            </div>
+            <h2 className="text-3xl lg:text-4xl font-bold text-dark mb-4">Complete Home Care Services</h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-accent to-teal mx-auto rounded-full mb-4"></div>
+            <p className="text-muted max-w-2xl mx-auto">Every service designed around patient comfort, clinical excellence, and family peace of mind.</p>
           </div>
 
-          <div className="row g-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.length > 0 ? (
-              services.map((svc: any, d: number) => (
-                <article key={svc.id} className="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay={(d % 3) * 100}>
-                  <div className="service-card" style={{ background: '#fff', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', height: '100%', display: 'flex', flexDirection: 'column' }}>
-                    <div className="sc-img position-relative">
-                      <img src={svc.image ? `/uploads/services/${svc.image}` : '/images/equip.avif'} alt={svc.title} loading="lazy" width="400" height="250" style={{ width: '100%', objectFit: 'cover' }} />
-                      <div className="sc-icon" style={{ position: 'absolute', bottom: '-20px', right: '20px', width: '50px', height: '50px', background: '#0CB8C9', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', boxShadow: '0 5px 15px rgba(12,184,201,0.4)' }}><span className="material-icons-round">local_hospital</span></div>
+              services.map((svc: any) => (
+                <article key={svc.id}>
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)] h-full flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <div className="relative">
+                      <img src={svc.image ? `/uploads/services/${svc.image}` : '/images/equip.avif'} alt={svc.title} loading="lazy" width={400} height={250} className="w-full h-[250px] object-cover" />
+                      <div className="absolute -bottom-5 right-5 w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white shadow-[0_5px_15px_rgba(12,184,201,0.4)]">
+                        <Hospital className="w-6 h-6" />
+                      </div>
                     </div>
-                    <div className="sc-body p-4 flex-grow-1 d-flex flex-column">
-                      <div className="sc-tag" style={{ color: '#0CB8C9', fontWeight: 600, fontSize: '0.85rem', marginBottom: '0.5rem', textTransform: 'uppercase' }}>{svc.category || ''}</div>
-                      <h5 style={{ fontWeight: 700, marginBottom: '1rem', color: '#0f2240' }}>{svc.title}</h5>
-                      <p style={{ color: '#6c757d', fontSize: '0.95rem', marginBottom: '1.5rem', flexGrow: 1 }}>{svc.description || ''}</p>
-                      <Link href={`/contact?service=${encodeURIComponent(svc.title)}`} className="btn btn-outline-info w-100 text-center" style={{ borderRadius: '8px', fontWeight: 600, padding: '0.6rem' }}>
-                        Book Now <i className="fa-solid fa-arrow-right fa-xs ms-1"></i>
+                    <div className="p-6 flex-grow flex flex-col">
+                      <div className="text-accent font-semibold text-sm mb-2 uppercase">{svc.category || ''}</div>
+                      <h5 className="font-bold text-xl mb-4 text-dark">{svc.title}</h5>
+                      <p className="text-muted text-sm mb-6 flex-grow">{svc.description || ''}</p>
+                      <Link href={`/contact?service=${encodeURIComponent(svc.title)}`} className="w-full inline-flex items-center justify-center gap-2 border border-accent text-accent hover:bg-accent hover:text-white transition-colors rounded-lg font-semibold py-2.5">
+                        Book Now <ArrowRight className="w-4 h-4" />
                       </Link>
                     </div>
                   </div>
                 </article>
               ))
             ) : (
-              staticServices.map(([img, tag, title, desc, icon, features]: any, d: number) => (
-                <article key={title} className="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay={(d % 3) * 100}>
-                  <div className="service-card" style={{ background: '#fff', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', height: '100%', display: 'flex', flexDirection: 'column' }}>
-                    <div className="sc-img position-relative">
-                      <img src={`/images/${img}`} alt={title} loading="lazy" width="400" height="250" style={{ width: '100%', objectFit: 'cover' }} />
-                      <div className="sc-icon" style={{ position: 'absolute', bottom: '-20px', right: '20px', width: '50px', height: '50px', background: '#0CB8C9', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', boxShadow: '0 5px 15px rgba(12,184,201,0.4)' }}><span className="material-icons-round">{icon}</span></div>
+              staticServices.map(([img, tag, title, desc, Icon, features]: any) => (
+                <article key={title}>
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)] h-full flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <div className="relative">
+                      <img src={`/images/${img}`} alt={title} loading="lazy" width={400} height={250} className="w-full h-[250px] object-cover" />
+                      <div className="absolute -bottom-5 right-5 w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white shadow-[0_5px_15px_rgba(12,184,201,0.4)]">
+                        <Icon className="w-6 h-6" />
+                      </div>
                     </div>
-                    <div className="sc-body p-4 flex-grow-1 d-flex flex-column">
-                      <div className="sc-tag" style={{ color: '#0CB8C9', fontWeight: 600, fontSize: '0.85rem', marginBottom: '0.5rem', textTransform: 'uppercase' }}>{tag}</div>
-                      <h5 style={{ fontWeight: 700, marginBottom: '1rem', color: '#0f2240' }}>{title}</h5>
-                      <p style={{ color: '#6c757d', fontSize: '0.95rem', marginBottom: '1.5rem' }}>{desc}</p>
-                      <ul className="sc-features mb-4 ps-0 flex-grow-1" style={{ listStyle: 'none' }}>
+                    <div className="p-6 flex-grow flex flex-col mt-2">
+                      <div className="text-accent font-semibold text-sm mb-2 uppercase">{tag}</div>
+                      <h5 className="font-bold text-xl mb-4 text-dark">{title}</h5>
+                      <p className="text-muted text-sm mb-6">{desc}</p>
+                      <ul className="mb-6 pl-0 flex-grow list-none">
                         {features.map((f: string) => (
-                          <li key={f} style={{ fontSize: '0.9rem', color: '#495057', marginBottom: '0.5rem' }}><i className="fa-solid fa-check text-teal me-2"></i>{f}</li>
+                          <li key={f} className="text-sm text-gray-700 mb-2 flex items-start gap-2">
+                            <Check className="w-4 h-4 text-teal shrink-0 mt-0.5" /> {f}
+                          </li>
                         ))}
                       </ul>
-                      <Link href={`/contact?service=${encodeURIComponent(title)}`} className="btn btn-outline-info w-100 text-center" style={{ borderRadius: '8px', fontWeight: 600, padding: '0.6rem' }}>
-                        Book Now <i className="fa-solid fa-arrow-right fa-xs ms-1"></i>
+                      <Link href={`/contact?service=${encodeURIComponent(title)}`} className="w-full inline-flex items-center justify-center gap-2 border border-accent text-accent hover:bg-accent hover:text-white transition-colors rounded-lg font-semibold py-2.5">
+                        Book Now <ArrowRight className="w-4 h-4" />
                       </Link>
                     </div>
                   </div>
@@ -161,41 +183,43 @@ export default async function ServicesPage() {
       </section>
 
       {/* ══ HOW IT WORKS ══ */}
-      <section className="section-pad" style={{ background: 'var(--light)' }}>
-        <div className="container">
-          <div className="text-center mb-5" data-aos="fade-up">
-            <div className="section-badge"><i className="fa-solid fa-list-check me-1"></i> Our Process</div>
-            <h2 className="section-title">How It Works</h2>
-            <p className="section-sub mx-auto">Getting started is simple. We handle everything so you can focus on recovery.</p>
+      <section className="py-16 lg:py-24 bg-light">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 text-accent font-semibold mb-2 uppercase tracking-wide text-sm">
+              <ListChecks className="w-4 h-4" /> Our Process
+            </div>
+            <h2 className="text-3xl lg:text-4xl font-bold text-dark mb-4">How It Works</h2>
+            <p className="text-muted max-w-2xl mx-auto">Getting started is simple. We handle everything so you can focus on recovery.</p>
           </div>
-          <div className="row g-4">
-            <div className="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
-              <div className="process-card text-center p-4" style={{ background: '#fff', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.04)', height: '100%' }}>
-                <div className="p-icon mb-4" style={{ width: '70px', height: '70px', background: 'rgba(12,184,201,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}><span className="material-icons-round" style={{ fontSize: '2.2rem', color: '#0CB8C9' }}>phone_in_talk</span></div>
-                <h5 style={{ fontWeight: 700, color: '#0f2240' }}>Contact Us</h5>
-                <p style={{ color: '#6c757d', fontSize: '0.95rem' }}>Call or fill the form. Our coordinator calls back within 1 hour.</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-white rounded-2xl p-6 text-center shadow-[0_10px_30px_rgba(0,0,0,0.04)] h-full flex flex-col items-center">
+              <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-6">
+                <PhoneCall className="w-8 h-8 text-accent" />
               </div>
+              <h5 className="font-bold text-dark text-lg mb-2">Contact Us</h5>
+              <p className="text-muted text-sm">Call or fill the form. Our coordinator calls back within 1 hour.</p>
             </div>
-            <div className="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-              <div className="process-card text-center p-4" style={{ background: '#fff', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.04)', height: '100%' }}>
-                <div className="p-icon mb-4" style={{ width: '70px', height: '70px', background: 'rgba(12,184,201,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}><span className="material-icons-round" style={{ fontSize: '2.2rem', color: '#0CB8C9' }}>assignment</span></div>
-                <h5 style={{ fontWeight: 700, color: '#0f2240' }}>Need Assessment</h5>
-                <p style={{ color: '#6c757d', fontSize: '0.95rem' }}>We assess your needs and create a custom care plan tailored to you.</p>
+            <div className="bg-white rounded-2xl p-6 text-center shadow-[0_10px_30px_rgba(0,0,0,0.04)] h-full flex flex-col items-center">
+              <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-6">
+                <ClipboardList className="w-8 h-8 text-accent" />
               </div>
+              <h5 className="font-bold text-dark text-lg mb-2">Need Assessment</h5>
+              <p className="text-muted text-sm">We assess your needs and create a custom care plan tailored to you.</p>
             </div>
-            <div className="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-              <div className="process-card text-center p-4" style={{ background: '#fff', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.04)', height: '100%' }}>
-                <div className="p-icon mb-4" style={{ width: '70px', height: '70px', background: 'rgba(12,184,201,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}><span className="material-icons-round" style={{ fontSize: '2.2rem', color: '#0CB8C9' }}>home</span></div>
-                <h5 style={{ fontWeight: 700, color: '#0f2240' }}>Care Begins</h5>
-                <p style={{ color: '#6c757d', fontSize: '0.95rem' }}>Our certified professional arrives, sets up equipment and begins care.</p>
+            <div className="bg-white rounded-2xl p-6 text-center shadow-[0_10px_30px_rgba(0,0,0,0.04)] h-full flex flex-col items-center">
+              <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-6">
+                <Home className="w-8 h-8 text-accent" />
               </div>
+              <h5 className="font-bold text-dark text-lg mb-2">Care Begins</h5>
+              <p className="text-muted text-sm">Our certified professional arrives, sets up equipment and begins care.</p>
             </div>
-            <div className="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-              <div className="process-card text-center p-4" style={{ background: '#fff', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.04)', height: '100%' }}>
-                <div className="p-icon mb-4" style={{ width: '70px', height: '70px', background: 'rgba(12,184,201,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}><span className="material-icons-round" style={{ fontSize: '2.2rem', color: '#0CB8C9' }}>health_and_safety</span></div>
-                <h5 style={{ fontWeight: 700, color: '#0f2240' }}>Ongoing Support</h5>
-                <p style={{ color: '#6c757d', fontSize: '0.95rem' }}>Regular health updates, doctor coordination and 24/7 helpline throughout.</p>
+            <div className="bg-white rounded-2xl p-6 text-center shadow-[0_10px_30px_rgba(0,0,0,0.04)] h-full flex flex-col items-center">
+              <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-6">
+                <ShieldCheck className="w-8 h-8 text-accent" />
               </div>
+              <h5 className="font-bold text-dark text-lg mb-2">Ongoing Support</h5>
+              <p className="text-muted text-sm">Regular health updates, doctor coordination and 24/7 helpline throughout.</p>
             </div>
           </div>
         </div>

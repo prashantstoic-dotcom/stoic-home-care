@@ -13,13 +13,8 @@ import ClientInit from "../components/ClientInit";
 
 import 'swiper/css';
 import 'swiper/css/pagination';
-import "bootstrap/dist/css/bootstrap.min.css";
 import "../public/css/uno.css";
-import "../public/css/style.css";
-import "../public/css/responsive.css";
-import "../public/css/custom.css";
-import "../public/css/animations.css";
-import "../public/css/a11y.css";
+import "../public/css/base.css";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -88,7 +83,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <BookServiceModal />
         <AskQuestionModal />
 
-        {/* JS Dependencies handled via ES modules */}
         <GoogleTagManager gtmId="GTM-MZBGCCQ4" />
       </body>
     </html>

@@ -8,7 +8,6 @@ export default function FloatingCTA() {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
-    // Show after interaction or 4 seconds fallback
     const showCta = () => {
       setIsVisible(true);
       window.removeEventListener("scroll", showCta);
@@ -64,41 +63,32 @@ export default function FloatingCTA() {
           padding: 0 20px 0 16px;
           height: 50px;
           border-radius: 999px;
-          color: #fff !important;
-          text-decoration: none;
+          color: #fff;
           font-size: 14px;
           font-weight: 600;
           white-space: nowrap;
-          box-shadow: 0 4px 18px rgba(0,0,0,0.20);
-          transition: transform .15s ease, box-shadow .15s ease;
+          box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+          will-change: transform;
+          transition: transform 0.15s ease;
         }
-        .float-cta-btn:hover {
-          transform: translateY(-2px);
-        }
-        
+        .float-cta-btn:hover { transform: translateY(-2px); }
+
         @keyframes waPulse {
-          0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-          70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-          100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.06); }
         }
         @keyframes callPulse {
-          0% { box-shadow: 0 0 0 0 rgba(12, 184, 201, 0.7); }
-          70% { box-shadow: 0 0 0 15px rgba(12, 184, 201, 0); }
-          100% { box-shadow: 0 0 0 0 rgba(12, 184, 201, 0); }
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.06); }
         }
 
-        .float-wa { 
-          background: #25D366; 
-          animation: waPulse 2s infinite;
-        }
-        .float-call { 
-          background: #0CB8C9; 
-          animation: callPulse 2s infinite;
-        }
-        
+        .float-wa { background: #25D366; animation: waPulse 2.5s ease-in-out infinite; }
+        .float-call { background: #0CB8C9; animation: callPulse 2.5s ease-in-out infinite 0.3s; }
+        .float-cta-btn:hover { animation-play-state: paused; }
+
         @media (max-width: 767px) {
           .float-cta-wrap { bottom: 16px; left: 12px; gap: 8px; }
-          .float-cta-btn { width: 44px; height: 44px; padding: 0; justify-content: center; border-radius: 50%; }
+          .float-cta-btn { width: 48px; height: 48px; padding: 0; justify-content: center; border-radius: 50%; }
           .float-cta-btn span { display: none; }
         }
 
@@ -110,18 +100,17 @@ export default function FloatingCTA() {
           height: 44px;
           background: #0f2240;
           color: #fff;
-          border: none;
           border-radius: 50%;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.12);
           display: flex;
           align-items: center;
           justify-content: center;
-          cursor: pointer;
           z-index: 9998;
-          transition: all 0.3s ease;
           opacity: 0;
           visibility: hidden;
           transform: translateY(16px);
+          will-change: transform, opacity;
+          transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
         }
         .scroll-top-btn.visible { opacity: 1; visibility: visible; transform: translateY(0); }
         .scroll-top-btn:hover { background: #0CB8C9; transform: translateY(-3px); }

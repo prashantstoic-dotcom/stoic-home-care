@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { logoutAdmin } from "@/lib/auth-actions";
 import { ReactNode } from "react";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   return (
