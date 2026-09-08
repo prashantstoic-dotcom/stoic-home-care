@@ -1,25 +1,10 @@
-import { TwitterApi } from 'twitter-api-v2';
+// Twitter integration placeholder
+// twitter-api-v2 has been removed from dependencies.
+// To re-enable, run: npm install twitter-api-v2
+// Then uncomment the implementation below.
 
-// Ensure all environment variables exist
-const apiKey = process.env.TWITTER_API_KEY;
-const apiSecret = process.env.TWITTER_API_SECRET;
-const accessToken = process.env.TWITTER_ACCESS_TOKEN;
-const accessSecret = process.env.TWITTER_ACCESS_SECRET;
-
-export function getTwitterClient() {
-  if (!apiKey || !apiSecret || !accessToken || !accessSecret) {
-    throw new Error("Missing Twitter API credentials in .env.local");
-  }
-
-  // Initialize the v1 & v2 client using User Context auth (OAuth 1.0a)
-  // This auth method allows us to tweet on behalf of the single connected account.
-  const client = new TwitterApi({
-    appKey: apiKey,
-    appSecret: apiSecret,
-    accessToken: accessToken,
-    accessSecret: accessSecret,
-  });
-
-  // We primarily use v2 for tweeting, so we return the readWrite client
-  return client.readWrite;
+export function getTwitterClient(): never {
+  throw new Error(
+    "Twitter integration is not configured. Install twitter-api-v2 and set TWITTER_API_KEY, TWITTER_API_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET in .env to enable."
+  );
 }

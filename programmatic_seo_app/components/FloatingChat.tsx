@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
-import type { Socket } from 'socket.io-client';
+type Socket = any; // socket.io-client removed from dependencies
 
 type Message = { id: string, role: 'user' | 'ai', text: string };
 
