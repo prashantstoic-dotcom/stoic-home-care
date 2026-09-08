@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { SUPABASE_URL, SUPABASE_KEY } from '@/lib/supabase';
 import { enquirySchema } from '@/lib/validations';
-import path from 'path';
+import { sendAdminAlert, sendClientConfirmation } from '@/lib/email';
 
 /* ============================================================
    Stoic Home Care — app/api/enquiry/route.ts
@@ -79,9 +79,9 @@ export async function POST(request: Request) {
     `;
 
     // Non-blocking dispatch
-    Promise.all([
-      import('@/lib/email').then(m => m.sendAdminAlert(`New Enquiry Received from ${email || phone}`, adminHtml, email ? `"${name}" <${email}>` : undefined)),
-      email ? import('@/lib/email').then(m => m.sendClientConfirmation(email, name, service || 'our services')) : Promise.resolve()
+    await Promise.all([
+      sendAdminAlert(`New Enquiry Received from ${email || phone}`, adminHtml, email ? `"${name}" <${email}>` : undefined),
+      email ? sendClientConfirmation(email, name, service || 'our services') : Promise.resolve()
     ]).catch(err => console.error("API Email Dispatch Error:", err));
 
     return NextResponse.json({ success: true, message: 'Enquiry submitted successfully' });

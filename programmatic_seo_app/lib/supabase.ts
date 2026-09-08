@@ -205,11 +205,11 @@ export async function getLinkDictionary() {
 }
 
 export async function getServices() {
-  const data = await fetchSupabase('stoic_services?order=id.desc');
+  const data = await fetchSupabase('stoic_services?order=id.desc&limit=6');
   return data || [];
 }
 
 export async function getEquipment() {
-  const data = await fetchSupabase('stoic_equipment?order=id.desc');
+  const data = await fetchSupabase('stoic_equipment?order=id.desc&limit=8');
   return data || [];
 }

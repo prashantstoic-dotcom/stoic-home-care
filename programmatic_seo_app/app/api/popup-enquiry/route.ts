@@ -68,7 +68,7 @@ export async function POST(req: Request) {
     `;
 
     // Non-blocking email dispatch
-    sendAdminAlert(`🚨 QUICK CALLBACK LEAD: ${name} (${phone})`, adminHtml);
+    await sendAdminAlert(`🚨 QUICK CALLBACK LEAD: ${name} (${phone})`, adminHtml);
 
     return NextResponse.json({ success: true, message: 'Thanks! We are calling you right away.' });
 

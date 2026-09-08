@@ -4,12 +4,16 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { SignJWT, jwtVerify } from 'jose';
 
-const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'stoic_admin';
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'St0!cH3@lth#2024$Adm!n';
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 const JWT_SECRET = process.env.JWT_SECRET || 'stoic_home_care_secure_jwt_secret_key_2026';
 const secretKey = new TextEncoder().encode(JWT_SECRET);
 
 export async function loginAdmin(prevState: any, formData: FormData) {
+  if (!ADMIN_USERNAME || !ADMIN_PASSWORD) {
+    return { success: false, message: 'Admin credentials not configured. Set ADMIN_USERNAME and ADMIN_PASSWORD environment variables.' };
+  }
+
   const username = formData.get('username') as string;
   const password = formData.get('password') as string;
 

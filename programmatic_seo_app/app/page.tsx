@@ -20,10 +20,10 @@ async function HomeDynamic() {
   let equipment: any[] = [];
   try {
     const servicesRows = await getServices();
-    services = servicesRows ? servicesRows.slice(0, 6) : [];
+    services = servicesRows ? servicesRows : [];
 
     const equipmentRows = await getEquipment();
-    equipment = equipmentRows ? equipmentRows.slice(0, 8) : [];
+    equipment = equipmentRows ? equipmentRows : [];
   } catch (err) {
     console.warn("Supabase fetch failed, rendering with static components.", err);
   }
@@ -66,37 +66,6 @@ async function HomeDynamic() {
     ['V','Vijay Patil',"Stroke Patient, Nashik","A stroke left my left side completely paralyzed. The neuro-physiotherapist from Stoic set up a rigorous, daily rehabilitation plan at home. His dedication and patient encouragement got me back on my feet in less than 3 months."],
     ['S','Suresh Iyer',"Patient's Grandson, Bangalore","We needed a compassionate caregiver for my 85-year-old grandfather with dementia. The attendant from Stoic was incredibly patient, gentle, and kept detailed daily vitals charts. He restored dignity to my grandfather's final months."],
   ];
-
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "name": "Stoic Home Care",
-        "url": "https://stoiccare.in",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://stoiccare.in/services?q={search_term_string}",
-          "query-input": "required name=search_term_string"
-        }
-      },
-      {
-        "@type": "MedicalOrganization",
-        "name": "Stoic Home Care",
-        "url": "https://stoiccare.in",
-        "logo": "https://stoiccare.in/logo.png",
-        "description": "Hospital-grade home care in Greater Noida – ICU setup, certified nursing, old age care, mother & baby care, and medical equipment rental.",
-        "telephone": "+91-7668232867",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Greater Noida",
-          "addressLocality": "Greater Noida",
-          "addressRegion": "UP",
-          "addressCountry": "IN"
-        }
-      }
-    ]
-  };
 
   return (
     <div>
@@ -164,7 +133,7 @@ async function HomeDynamic() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.length > 0 ? (
               services.map((svc, d) => (
-                <div key={svc.id} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 group"  data-aos-delay={(d % 3) * 100}>
+                <div key={svc.id} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 group" data-aos="fade-up" data-aos-delay={(d % 3) * 100}>
                   <div className="relative h-64 overflow-hidden">
                     <Image src={svc.image ? `/uploads/services/${svc.image}` : '/images/equip.avif'} alt={svc.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
                     <div className="absolute bottom-4 right-4 bg-white p-3 rounded-xl shadow-lg text-[#0CB8C9]">
@@ -183,7 +152,7 @@ async function HomeDynamic() {
               ))
             ) : (
               staticServices.map(([img, tag, title, desc, icon], d) => (
-                <div key={title} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 group"  data-aos-delay={(d % 3) * 100}>
+                <div key={title} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 group" data-aos="fade-up" data-aos-delay={(d % 3) * 100}>
                   <div className="relative h-64 overflow-hidden">
                     <Image src={`/images/${img}`} alt={title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
                     <div className="absolute bottom-4 right-4 bg-white p-3 rounded-xl shadow-lg text-[#0CB8C9]">
@@ -271,7 +240,7 @@ async function HomeDynamic() {
             <div className="lg:col-span-8">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                 {whys.map(([icon, title, text, size], d) => (
-                  <div key={title} className={`bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 hover:bg-white/10 transition-colors ${size === 'bento-lg' ? 'sm:col-span-2' : ''}`}  data-aos-delay={d*50}>
+                  <div key={title} className={`bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 hover:bg-white/10 transition-colors ${size === 'bento-lg' ? 'sm:col-span-2' : ''}`} data-aos="fade-up" data-aos-delay={d*50}>
                     <div className="flex flex-col h-full">
                       <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#2196d3] to-[#4ecdc4] flex items-center justify-center text-white shadow-lg mb-6">
                         {icon === "verified" ? <ShieldPlus className="w-6 h-6"/> : icon === "biotech" ? <Boxes className="w-6 h-6"/> : icon === "schedule" ? <CalendarCheck className="w-6 h-6"/> : icon === "payments" ? <Award className="w-6 h-6"/> : icon === "home_health" ? <Hospital className="w-6 h-6"/> : icon === "health_and_safety" ? <Activity className="w-6 h-6"/> : <Star className="w-6 h-6"/>}
@@ -300,7 +269,7 @@ async function HomeDynamic() {
                 ['50+','Expert Staff'],
                 ['5+','Years Excellence']
               ].map(([num,lbl], d) => (
-                <div key={lbl}  data-aos-delay={d*100}>
+                <div key={lbl} data-aos="fade-up" data-aos-delay={d*100}>
                   <div className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#1a3a6b] to-[#2196d3] mb-2">{num}</div>
                   <div className="text-[#6b82a3] font-bold text-sm uppercase tracking-wider">{lbl}</div>
                 </div>
@@ -513,11 +482,11 @@ export default function HomePage() {
   };
 
   return (
-    <main id="main-content">
+    <div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <style dangerouslySetInnerHTML={{__html: `
         @media (max-width: 991px) {
-          .hero-row-short { align-items: flex-start !important; padding-top: 100px !important; min-height: auto !important; height: 100vh; }
+          .hero-row-short { align-items: flex-start !important; padding-top: 100px !important; min-height: auto !important; height: 100dvh; }
           .hero-swiper .swiper-slide { display: flex; flex-direction: column; justify-content: flex-start; }
         }
         @media (max-width: 575px) {
@@ -598,6 +567,6 @@ export default function HomePage() {
       <Suspense fallback={<div style={{minHeight: '50vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><div style={{width:32,height:32,border:'3px solid #e5e7eb',borderTopColor:'#0CB8C9',borderRadius:'50%',animation:'spin 0.6s linear infinite'}}></div></div>}>
         <HomeDynamic />
       </Suspense>
-    </main>
+    </div>
   );
 }

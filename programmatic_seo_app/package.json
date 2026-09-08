@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "unocss \"app/**/*.tsx\" \"components/**/*.tsx\" -o public/css/uno.css --watch & node server.js",
+    "dev": "unocss \"app/**/*.tsx\" \"components/**/*.tsx\" -o public/css/uno.css && node server.js",
+    "dev:watch": "unocss \"app/**/*.tsx\" \"components/**/*.tsx\" -o public/css/uno.css --watch",
     "build": "unocss \"app/**/*.tsx\" \"components/**/*.tsx\" -o public/css/uno.css && next build",
     "start": "next start"
   },
@@ -25,16 +26,11 @@
     "jose": "^6.2.8",
     "lucide-react": "^1.33.0",
     "next": "^14.2.24",
-    "openai": "^7.5.0",
+    "nodemailer": "^6.9.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.6.0",
-    "replicate": "^1.4.0",
-    "resend": "^6.20.0",
-    "socket.io": "^4.8.3",
-    "socket.io-client": "^4.8.3",
     "swiper": "^14.1.0",
-    "twitter-api-v2": "^1.29.1",
     "zod": "^3.25.76",
     "zod-to-json-schema": "^3.25.2"
   },

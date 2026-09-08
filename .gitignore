@@ -31,3 +31,14 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+.env
+.env.local
+.env.production
+.env.*.local
+node_modules/
+
+programmatic_seo_app_legacy_extracted/
+seo-tools-extracted/
+test_extract/
+

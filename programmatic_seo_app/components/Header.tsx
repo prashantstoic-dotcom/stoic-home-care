@@ -43,15 +43,8 @@ export default function Header() {
         }
       `}</style>
 
-      {/* Google Tag Manager (noscript) */}
-      <noscript>
-        <iframe
-          src="https://www.googletagmanager.com/ns.html?id=GTM-MZBGCCQ4"
-          height="0"
-          width="0"
-          className="hidden invisible"
-        />
-      </noscript>
+      {/* Google Tag Manager (noscript) handled in layout.tsx */}
+
 
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:p-2 focus:bg-white focus:text-[var(--primary)] focus:z-[100]">
         Skip to main content
@@ -126,12 +119,6 @@ export default function Header() {
             <a href="tel:+917668232867" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-white bg-[var(--teal)] hover:opacity-90 transition-opacity text-sm font-medium whitespace-nowrap">
               <Phone size={16} /> +91 76682 32867
             </a>
-            <Link
-              href="/admin"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-300 text-gray-600 hover:bg-gray-50 transition-colors text-xs font-medium ml-2"
-            >
-              <ShieldCheck size={14} /> Admin
-            </Link>
           </div>
         </div>
 
@@ -173,9 +160,6 @@ export default function Header() {
               <a href="tel:+917668232867" onClick={() => setIsMobileMenuOpen(false)} className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full text-white bg-[var(--teal)] text-sm font-medium">
                 <Phone size={16} /> +91 76682 32867
               </a>
-              <Link href="/admin" onClick={() => setIsMobileMenuOpen(false)} className="inline-flex items-center justify-center gap-1.5 px-4 py-2 mt-2 rounded-full border border-gray-300 text-gray-600 hover:bg-gray-50 text-sm font-medium">
-                <ShieldCheck size={16} /> Admin Login
-              </Link>
             </div>
           </div>
         </div>

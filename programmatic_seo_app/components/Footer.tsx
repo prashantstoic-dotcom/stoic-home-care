@@ -56,7 +56,7 @@ export default async function Footer() {
                 <a href="https://wa.me/917668232867" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--teal)] transition-colors text-white">
                   <MessageCircle size={18} />
                 </a>
-                <a href="#" aria-label="Instagram" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--teal)] transition-colors text-white">
+                <a href="https://instagram.com/stoichomecare" aria-label="Instagram" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--teal)] transition-colors text-white">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 </a>
                 <a href="https://www.justdial.com/Greater-Noida/Stoic-care-Galaxy-Hospital-Sector-Mu-2-Greater-Noida/011PXX11-XX11-260103102151-G3L9_BZDET" aria-label="justdial" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--teal)] transition-colors text-white">
@@ -112,19 +112,12 @@ export default async function Footer() {
           <div className="mt-10 mb-6">
             <h6 className="mb-4 text-gray-400 font-semibold text-sm uppercase tracking-wider">Service Areas (Top Locations)</h6>
             <div className="flex flex-wrap gap-2 text-sm">
-              {seoPages.map((page, idx) => {
-                if (!page.slug) return null;
-                const readable = page.slug.replace(/[-_]/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase());
-                return (
-                  <Link key={idx} href={`/service/${page.slug}`} className="text-gray-400 border border-white/10 px-3 py-1.5 rounded-full hover:bg-[var(--teal)] hover:text-white transition-colors hover:border-[var(--teal)]">
-                    {readable}
-                  </Link>
-                );
-              })}
-              {/* Fallback if DB is empty for UI testing */}
-              {seoPages.length === 0 && (
-                <span className="text-gray-400 italic">Locations loading dynamically...</span>
-              )}
+              <Link href={`/location/delhi`} className="text-gray-400 border border-white/10 px-3 py-1.5 rounded-full hover:bg-[var(--teal)] hover:text-white transition-colors hover:border-[var(--teal)]">Delhi</Link>
+              <Link href={`/location/greater-noida`} className="text-gray-400 border border-white/10 px-3 py-1.5 rounded-full hover:bg-[var(--teal)] hover:text-white transition-colors hover:border-[var(--teal)]">Greater Noida</Link>
+              <Link href={`/location/noida`} className="text-gray-400 border border-white/10 px-3 py-1.5 rounded-full hover:bg-[var(--teal)] hover:text-white transition-colors hover:border-[var(--teal)]">Noida</Link>
+              <Link href={`/location/ghaziabad`} className="text-gray-400 border border-white/10 px-3 py-1.5 rounded-full hover:bg-[var(--teal)] hover:text-white transition-colors hover:border-[var(--teal)]">Ghaziabad</Link>
+              <Link href={`/location/faridabad`} className="text-gray-400 border border-white/10 px-3 py-1.5 rounded-full hover:bg-[var(--teal)] hover:text-white transition-colors hover:border-[var(--teal)]">Faridabad</Link>
+              <Link href={`/location/gurugram`} className="text-gray-400 border border-white/10 px-3 py-1.5 rounded-full hover:bg-[var(--teal)] hover:text-white transition-colors hover:border-[var(--teal)]">Gurugram</Link>
             </div>
           </div>
 
@@ -133,7 +126,7 @@ export default async function Footer() {
           </div>
 
           <div className="flex flex-wrap justify-between items-center gap-4 pt-6 border-t border-white/10 mt-8 text-gray-400 text-sm">
-            <p className="m-0">© {new Date().getFullYear()} <span itemProp="name">Stoic Home Care</span>. All rights reserved. | <Link href="#" className="hover:text-white transition-colors inline">Privacy Policy</Link></p>
+            <p className="m-0">© {new Date().getFullYear()} <span itemProp="name">Stoic Home Care</span>. All rights reserved. | <Link href="/privacy-policy" className="hover:text-white transition-colors inline">Privacy Policy</Link></p>
             <p className="m-0 flex items-center gap-1">Designed with <Heart size={14} className="text-[var(--teal)]" fill="currentColor" /> for better Home Care</p>
           </div>
         </div>

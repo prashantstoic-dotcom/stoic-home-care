@@ -1,5 +1,4 @@
 import React from 'react'
-import Head from 'next/head'
 
 // ==============================================================================
 // PROJECT 3: The Central Knowledge Graph Component (Next.js)
@@ -14,10 +13,10 @@ export default function EntityGraph({ articleData, authorData, companyData, wiki
   // 1. Organization Node (The Brand)
   const organizationSchema = {
     "@type": "Organization",
-    "@id": "https://yourwebsite.com/#organization",
+    "@id": "https://stoiccare.in/#organization",
     "name": companyData.name || "My Company",
-    "url": "https://yourwebsite.com",
-    "logo": "https://yourwebsite.com/logo.png",
+    "url": "https://stoiccare.in",
+    "logo": "https://stoiccare.in/logo.png",
     ...(companyData.linkedinUrl || companyData.twitterUrl ? {
       "sameAs": [
         ...(companyData.linkedinUrl ? [companyData.linkedinUrl] : []),
@@ -29,10 +28,10 @@ export default function EntityGraph({ articleData, authorData, companyData, wiki
   // 2. Person Node (The Author Authority)
   const authorSchema = {
     "@type": "Person",
-    "@id": `https://yourwebsite.com/author/${authorData.slug || 'unknown'}#person`,
+    "@id": `https://stoiccare.in/author/${authorData.slug || 'unknown'}#person`,
     "name": authorData.name || "Unknown Author",
     ...(authorData.title && { "jobTitle": authorData.title }),
-    "worksFor": { "@id": "https://yourwebsite.com/#organization" }, // INTERLINKING!
+    "worksFor": { "@id": "https://stoiccare.in/#organization" }, // INTERLINKING!
     ...(authorData.linkedinUrl || authorData.personalWebsite ? {
       "sameAs": [
         ...(authorData.linkedinUrl ? [authorData.linkedinUrl] : []),
@@ -44,11 +43,11 @@ export default function EntityGraph({ articleData, authorData, companyData, wiki
   // 3. Article Node (The Content)
   const articleSchema = {
     "@type": "Article",
-    "@id": `https://yourwebsite.com/${articleData.slug || 'article'}#article`,
+    "@id": `https://stoiccare.in/${articleData.slug || 'article'}#article`,
     "headline": articleData.title || "Untitled Article",
     "description": articleData.description || "",
-    "author": { "@id": `https://yourwebsite.com/author/${authorData.slug || 'unknown'}#person` }, // INTERLINKING!
-    "publisher": { "@id": "https://yourwebsite.com/#organization" }, // INTERLINKING!
+    "author": { "@id": `https://stoiccare.in/author/${authorData.slug || 'unknown'}#person` }, // INTERLINKING!
+    "publisher": { "@id": "https://stoiccare.in/#organization" }, // INTERLINKING!
     ...(wikidataLinks && wikidataLinks.length > 0 ? {
       "about": wikidataLinks.map(url => ({
         "@type": "Thing",
@@ -68,12 +67,9 @@ export default function EntityGraph({ articleData, authorData, companyData, wiki
   }
 
   return (
-    <Head>
-      {/* Injecting the Master Knowledge Graph silently into the page head */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(masterGraph) }}
-      />
-    </Head>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(masterGraph) }}
+    />
   )
 }

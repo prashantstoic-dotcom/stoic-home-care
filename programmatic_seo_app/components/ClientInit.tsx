@@ -76,7 +76,13 @@ export default function ClientInit() {
       requestAnimationFrame(initSwipers);
     });
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      const equipEl = document.querySelector('.equip-home-swiper') as any;
+      if (equipEl?.swiper) equipEl.swiper.destroy(true, true);
+      const testiEl = document.querySelector('.testi-swiper') as any;
+      if (testiEl?.swiper) testiEl.swiper.destroy(true, true);
+    };
   }, [pathname]);
 
   return null;

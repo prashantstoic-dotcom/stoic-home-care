@@ -53,6 +53,13 @@ export async function middleware(request: NextRequest) {
       }
     }
 
+    if (url.pathname.startsWith('/api/admin')) {
+      const token = request.cookies.get('admin_session');
+      if (!token) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      }
+    }
+
     // ----------------------------------------------------------------------------
     // 1. Bot Routing & Edge A/B Testing Engine
     // ----------------------------------------------------------------------------
@@ -99,6 +106,6 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // Optimized Vercel Edge Matcher
-    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!api/(?!admin)|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 };

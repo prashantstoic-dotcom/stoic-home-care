@@ -11,8 +11,6 @@ const AskQuestionModal = dynamic(() => import("../components/modals/AskQuestionM
 import ModalGlobals from "../components/ModalGlobals";
 import ClientInit from "../components/ClientInit";
 
-import 'swiper/css';
-import 'swiper/css/pagination';
 import "../public/css/uno.css";
 import "../public/css/base.css";
 
