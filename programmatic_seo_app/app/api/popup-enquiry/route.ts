@@ -28,8 +28,8 @@ export async function POST(req: Request) {
 
     const { name, phone, service_interest } = validatedData.data;
 
-    // 3. Save to Supabase popup_enquiries table
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/popup_enquiries`, {
+    // 3. Save to Supabase service_bookings table since popup_enquiries doesn't exist
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/service_bookings`, {
       method: 'POST',
       headers: {
         'apikey': SUPABASE_KEY,
@@ -40,7 +40,9 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         name,
         phone,
-        service_interest,
+        service_name: service_interest || 'Popup Lead (12s)',
+        city: 'Not specified',
+        message: 'Lead captured from quick 12s popup form.',
         created_at: new Date().toISOString()
       })
     });

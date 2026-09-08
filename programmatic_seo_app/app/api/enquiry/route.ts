@@ -41,7 +41,8 @@ export async function POST(request: Request) {
     const { name, email, phone, service, city, message } = validatedFields.data;
 
     // 3. Database Insertion (using Supabase REST API)
-    const supabaseRes = await fetch(`${SUPABASE_URL}/rest/v1/enquiries`, {
+    // Fallback to service_bookings since 'enquiries' table doesn't exist
+    const supabaseRes = await fetch(`${SUPABASE_URL}/rest/v1/service_bookings`, {
       method: 'POST',
       headers: {
         'apikey': SUPABASE_KEY,
@@ -53,10 +54,10 @@ export async function POST(request: Request) {
         name,
         phone,
         email,
-        service,
-        city,
-        message,
-        status: 'pending'
+        service_name: service || 'General Enquiry',
+        city: city || 'Not specified',
+        message: message || '',
+        created_at: new Date().toISOString()
       })
     });
 
