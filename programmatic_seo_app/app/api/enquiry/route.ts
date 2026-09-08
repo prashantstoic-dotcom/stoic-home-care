@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     const { name, email, phone, service, city, message } = validatedFields.data;
 
     // 3. Database Insertion (using Supabase REST API)
-    const supabaseRes = await fetch(`${SUPABASE_URL}/rest/v1/stoic_enquiries`, {
+    const supabaseRes = await fetch(`${SUPABASE_URL}/rest/v1/enquiries`, {
       method: 'POST',
       headers: {
         'apikey': SUPABASE_KEY,
