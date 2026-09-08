@@ -34,20 +34,20 @@ export default function FloatingChat() {
           const data = await res.json();
           if (data.success) {
             setSessionId(data.session_id);
-            const { io } = await import('socket.io-client');
-            const newSocket = io({ path: '/socket.io' });
-            setSocket(newSocket);
-            
-            // Listen to AI events
-            newSocket.on('ai_typing', (data: { status: boolean }) => setIsTyping(data.status));
-            
-            newSocket.on('ai_response', (data: { text: string }) => {
-              setMessages(prev => [...prev, { id: Date.now().toString(), role: 'ai', text: data.text }]);
-            });
-
-            newSocket.on('error_message', (data: { error: string }) => {
-               setMessages(prev => [...prev, { id: Date.now().toString(), role: 'ai', text: `⚠️ ${data.error}` }]);
-            });
+            // Socket.io has been removed to reduce bundle size
+            // const { io } = await import('socket.io-client');
+            // const newSocket = io({ path: '/socket.io' });
+            // setSocket(newSocket);
+            // 
+            // newSocket.on('ai_typing', (data: { status: boolean }) => setIsTyping(data.status));
+            // 
+            // newSocket.on('ai_response', (data: { text: string }) => {
+            //   setMessages(prev => [...prev, { id: Date.now().toString(), role: 'ai', text: data.text }]);
+            // });
+            // 
+            // newSocket.on('error_message', (data: { error: string }) => {
+            //    setMessages(prev => [...prev, { id: Date.now().toString(), role: 'ai', text: `⚠️ ${data.error}` }]);
+            // });
           }
         } catch (err) {
           console.error("Chat init failed", err);
