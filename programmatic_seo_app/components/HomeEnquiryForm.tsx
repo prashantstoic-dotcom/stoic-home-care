@@ -27,6 +27,7 @@ export default function HomeEnquiryForm() {
       if (result.success) {
         setSuccess(true);
         (e.target as HTMLFormElement).reset();
+        window.location.href = '/thank-you';
       } else {
         setErrorMsg(result.message || 'Something went wrong. Please try again.');
       }

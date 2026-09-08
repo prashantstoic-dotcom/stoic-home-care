@@ -48,9 +48,7 @@ export default function RentModal() {
     if (result.success) {
       setSuccess(true);
       (e.target as HTMLFormElement).reset();
-      setTimeout(() => {
-        closeModal();
-      }, 3500);
+      window.location.href = '/thank-you';
     } else {
       setErrorMsg(result.message);
     }

@@ -48,9 +48,7 @@ export default function AskQuestionModal() {
     if (result.success) {
       setSuccess(true);
       (e.target as HTMLFormElement).reset();
-      setTimeout(() => {
-        closeModal();
-      }, 4000);
+      window.location.href = '/thank-you';
     } else {
       setErrorMsg(result.message);
     }
