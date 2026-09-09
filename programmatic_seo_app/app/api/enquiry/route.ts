@@ -38,7 +38,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const { name, email, phone, service, city, message } = validatedFields.data;
+    const { name, email, phone, service_name, city, message } = validatedFields.data;
 
     // 3. Database Insertion (using Supabase REST API)
     const supabaseRes = await fetch(`${SUPABASE_URL}/rest/v1/enquiries`, {
@@ -53,7 +53,7 @@ export async function POST(request: Request) {
         name,
         phone,
         email,
-        service_name: service || 'General Enquiry',
+        service_name: service_name || 'General Enquiry',
         city: city || 'Not specified',
         message: message || '',
         created_at: new Date().toISOString()
@@ -76,7 +76,7 @@ export async function POST(request: Request) {
             <tr><th style='background:#0a7cff;color:#fff;padding:8px'>Name</th><td style='padding:8px;border:1px solid #ddd'>${name}</td></tr>
             <tr><th style='background:#0a7cff;color:#fff;padding:8px'>Phone</th><td style='padding:8px;border:1px solid #ddd'>${phone}</td></tr>
             <tr><th style='background:#0a7cff;color:#fff;padding:8px;border:1px solid #ddd'>Email</th><td style='padding:8px;border:1px solid #ddd'>${email}</td></tr>
-            <tr><th style='background:#0a7cff;color:#fff;padding:8px'>Service</th><td style='padding:8px;border:1px solid #ddd'>${service}</td></tr>
+            <tr><th style='background:#0a7cff;color:#fff;padding:8px'>Service</th><td style='padding:8px;border:1px solid #ddd'>${service_name}</td></tr>
             <tr><th style='background:#0a7cff;color:#fff;padding:8px'>City</th><td style='padding:8px;border:1px solid #ddd'>${city}</td></tr>
             <tr><th style='background:#0a7cff;color:#fff;padding:8px'>Message</th><td style='padding:8px;border:1px solid #ddd'>${message}</td></tr>
         </table>
@@ -85,7 +85,7 @@ export async function POST(request: Request) {
     // Non-blocking dispatch
     await Promise.all([
       sendAdminAlert(`New Enquiry Received from ${email || phone}`, adminHtml, email ? `"${name}" <${email}>` : undefined),
-      email ? sendClientConfirmation(email, name, service || 'our services') : Promise.resolve()
+      email ? sendClientConfirmation(email, name, service_name || 'our services') : Promise.resolve()
     ]).catch(err => console.error("API Email Dispatch Error:", err));
 
     return NextResponse.json({ success: true, message: 'Enquiry submitted successfully' });

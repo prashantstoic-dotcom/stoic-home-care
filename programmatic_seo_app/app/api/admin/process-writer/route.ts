@@ -8,7 +8,7 @@ import OpenAI from "openai";
 
 // Initialize Supabase Admin Client
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dummy.supabase.co',
+  process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL,
   process.env.SUPABASE_SERVICE_ROLE_KEY || 'dummy' // Bypass RLS for admin background route
 );
 

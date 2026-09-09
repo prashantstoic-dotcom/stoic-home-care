@@ -7,7 +7,7 @@ export const enquirySchema = z.object({
   name: z.string().trim().min(1, 'Name is required.').max(150, 'Name is too long.'),
   phone: z.string().trim().regex(phoneRegex, 'Please enter a valid phone number.'),
   email: z.string().trim().email('Please enter a valid email.').max(150, 'Email is too long.').optional().or(z.literal('')),
-  service: z.string().trim().optional(),
+  service_name: z.string().trim().optional(),
   city: z.string().trim().optional(),
   message: z.string().trim().optional(),
 });

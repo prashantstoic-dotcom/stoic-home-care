@@ -76,7 +76,7 @@ export async function POST(request: Request) {
 
     // 5.3. Save to Supabase Temporary Storage (Part 1.5)
     // We assume NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are in env
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dummy.supabase.co';
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
     const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'dummy';
     
     if (supabaseUrl && supabaseKey) {

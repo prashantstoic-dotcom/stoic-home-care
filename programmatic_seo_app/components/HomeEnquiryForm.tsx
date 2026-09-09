@@ -65,7 +65,7 @@ export default function HomeEnquiryForm() {
           </div>
           <div>
             <label htmlFor="formService" className="stoic-label">Service <span className="opacity-60 font-normal">(Optional)</span></label>
-            <select name="service" className="stoic-input" id="formService" defaultValue="">
+            <select name="service_name" className="stoic-input" id="formService" defaultValue="">
               <option value="" disabled></option>
               <option value="ICU Setup @ Home">ICU Setup @ Home</option>
               <option value="ICU Trained Nursing">ICU Trained Nursing</option>

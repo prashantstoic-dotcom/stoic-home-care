@@ -3,7 +3,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { createClient } from '@supabase/supabase-js';
 
 // Initialize Supabase
-const supabaseUrl = process.env.SUPABASE_URL || 'https://dummy.supabase.co';
+const supabaseUrl = process.env.SUPABASE_URL || process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_KEY || 'dummy';
 const supabase = createClient(supabaseUrl, supabaseKey);
 

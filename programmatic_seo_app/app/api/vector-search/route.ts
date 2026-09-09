@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || SUPABASE_KEY;
     
     // Safely fallback to a dummy URL during build time to avoid createClient throwing Error
-    const supabase = createClient(supabaseUrl || 'https://dummy.supabase.co', supabaseKey || 'dummy');
+    const supabase = createClient(supabaseUrl || process.env.SUPABASE_URL, supabaseKey || 'dummy');
     
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || 'dummy_key');
     const body = await req.json();
