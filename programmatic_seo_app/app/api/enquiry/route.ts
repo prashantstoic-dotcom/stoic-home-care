@@ -41,8 +41,7 @@ export async function POST(request: Request) {
     const { name, email, phone, service, city, message } = validatedFields.data;
 
     // 3. Database Insertion (using Supabase REST API)
-    // Fallback to service_bookings since 'enquiries' table doesn't exist
-    const supabaseRes = await fetch(`${SUPABASE_URL}/rest/v1/service_bookings`, {
+    const supabaseRes = await fetch(`${SUPABASE_URL}/rest/v1/enquiries`, {
       method: 'POST',
       headers: {
         'apikey': SUPABASE_KEY,
@@ -62,8 +61,12 @@ export async function POST(request: Request) {
     });
 
     if (!supabaseRes.ok) {
-      console.error("Supabase Enquiry Insert Failed", await supabaseRes.text());
-      // Proceed to email even if DB fails, as a fallback mechanism
+      const errorText = await supabaseRes.text();
+      console.error("Supabase Enquiry Insert Failed", errorText);
+      return NextResponse.json(
+        { success: false, message: 'Database error. Please call us directly.' },
+        { status: 500 }
+      );
     }
 
     // 4. Dispatch Emails via the Zero Error Policy Wrapper in lib/email.ts

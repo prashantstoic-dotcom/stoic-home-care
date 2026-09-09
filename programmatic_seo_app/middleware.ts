@@ -105,7 +105,8 @@ export async function middleware(request: NextRequest) {
 // Ensure the middleware runs only on relevant paths, optimizing Edge performance
 export const config = {
   matcher: [
-    // Optimized Vercel Edge Matcher
-    '/((?!api/(?!admin)|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    // Exclude public API routes (enquiry, popup-enquiry, chat, etc.), static assets,
+    // and image files. /api/admin/* is NOT excluded so auth middleware runs for it.
+    '/((?!api/enquiry|api/popup-enquiry|api/chat|api/og|api/ping-sitemap|api/instant-index|api/sync-bigquery|api/vector-search|api/auth|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 };
