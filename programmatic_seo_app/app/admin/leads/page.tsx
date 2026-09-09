@@ -2,6 +2,7 @@ import { fetchSupabase } from "@/lib/supabase";
 import LeadsTable from "@/components/admin/LeadsTable";
 
 export const metadata = { title: "Leads Management | Stoic Admin" };
+export const revalidate = 0; // Prevent caching for admin data
 
 export default async function LeadsPage() {
   // Fetch service bookings

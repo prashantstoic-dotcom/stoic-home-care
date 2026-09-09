@@ -1,6 +1,7 @@
 import { fetchSupabaseCount, fetchSupabase } from "@/lib/supabase";
 
 export const metadata = { title: "Dashboard | Stoic Admin" };
+export const revalidate = 0; // Prevent caching for admin data
 
 export default async function AdminDashboard() {
   // Fetch counts from Supabase concurrently
