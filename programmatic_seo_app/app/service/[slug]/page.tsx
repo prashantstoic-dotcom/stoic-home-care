@@ -7,6 +7,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import HomeEnquiryForm from '@/components/HomeEnquiryForm';
 
+export async function generateStaticParams() {
+  const { getAllSeoPages } = await import('@/lib/supabase');
+  const pages = await getAllSeoPages();
+  return pages.map((page: any) => ({
+    slug: page.slug,
+  }));
+}
+
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const seoData = await getSeoPage(params.slug);
   if (!seoData) return { title: 'Service Not Found' };

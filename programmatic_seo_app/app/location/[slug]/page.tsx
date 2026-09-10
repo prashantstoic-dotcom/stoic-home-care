@@ -3,6 +3,14 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import HomeEnquiryForm from '@/components/HomeEnquiryForm';
 
+export async function generateStaticParams() {
+  const { getAllSeoPages } = await import('@/lib/supabase');
+  const pages = await getAllSeoPages();
+  // Extract unique locations
+  const locations = new Set(pages.map((p: any) => p.location.toLowerCase().replace(/\s+/g, '-')));
+  return Array.from(locations).map(slug => ({ slug }));
+}
+
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const cityName = params.slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
   return {

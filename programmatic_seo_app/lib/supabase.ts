@@ -61,18 +61,43 @@ export async function fetchSupabaseCount(endpoint: string, options: RequestInit 
 
 // Fallback Programmatic SEO Dataset
 const LOCATIONS = [
-  "Delhi", "Noida", "Greater Noida", "Gurgaon", "Ghaziabad", "Faridabad",
-  "Greater Kailash", "South Extension", "Safdarjung Enclave", "Hauz Khas",
-  "Vasant Vihar", "Vasant Kunj", "Defense Colony", "New Friends Colony",
-  "Saket", "Dwarka", "Indirapuram", "Sector 15 Noida", "Sector 62 Noida"
-];
+  // Delhi
+  "Delhi", "New Delhi", "South Delhi", "North Delhi", "East Delhi", "West Delhi",
+  "Greater Kailash", "South Extension", "Safdarjung Enclave", "Hauz Khas", "Vasant Vihar", 
+  "Vasant Kunj", "Defense Colony", "New Friends Colony", "Saket", "Dwarka", "Janakpuri", 
+  "Rohini", "Pitampura", "Punjabi Bagh", "Rajouri Garden", "Lajpat Nagar", "Green Park",
+  "Connaught Place", "Chanakyapuri", "Karol Bagh", "Model Town", "Preet Vihar", "Mayur Vihar",
+  // Noida & Greater Noida
+  "Noida", "Sector 15 Noida", "Sector 18 Noida", "Sector 62 Noida", "Sector 50 Noida", 
+  "Sector 137 Noida", "Sector 76 Noida", "Greater Noida", "Noida Extension", "Greater Noida West",
+  // Gurgaon
+  "Gurgaon", "DLF Phase 1", "DLF Phase 2", "DLF Phase 3", "DLF Phase 4", "DLF Phase 5", 
+  "Golf Course Road", "Sohna Road", "MG Road", "Cyber City",
+  // Ghaziabad & Faridabad
+  "Ghaziabad", "Indirapuram", "Vaishali", "Vasundhara", "Faridabad"
+]; // 55 Locations
 
 const CATEGORIES = [
   { id: "icu-nursing", cat: "ICU Nursing", title: "ICU Setup & Nursing at Home" },
   { id: "oxygen-cylinder", cat: "Oxygen Cylinder", title: "Oxygen Cylinder on Rent" },
   { id: "physiotherapy", cat: "Physiotherapy", title: "Physiotherapy at Home" },
-  { id: "elder-care", cat: "Elder Care", title: "Elder Care & Attendants" }
-];
+  { id: "elder-care", cat: "Elder Care", title: "Elder Care & Attendants" },
+  { id: "dementia-care", cat: "Elder Care", title: "Dementia Care Assistance" },
+  { id: "parkinsons-care", cat: "Elder Care", title: "Parkinson's Disease Care" },
+  { id: "post-stroke-care", cat: "Elder Care", title: "Post-Stroke Elder Care" },
+  { id: "bedridden-care", cat: "Elder Care", title: "Bedridden Patient Care" },
+  { id: "hospice-care", cat: "Elder Care", title: "Hospice Care at Home" },
+  { id: "tracheostomy-care", cat: "Nursing Care", title: "Tracheostomy Care" },
+  { id: "wound-dressing", cat: "Nursing Care", title: "Wound Dressing & Management" },
+  { id: "catheterization", cat: "Nursing Care", title: "Catheterization Services" },
+  { id: "post-natal-care", cat: "Nursing Care", title: "Post-Natal Nursing Care" },
+  { id: "oncology-support", cat: "Nursing Care", title: "Oncology Nursing Support" },
+  { id: "ventilator-care", cat: "Nursing Care", title: "Ventilator Patient Care" },
+  { id: "peg-feeding", cat: "Nursing Care", title: "Gastrostomy (PEG) Feeding" },
+  { id: "doctor-visit", cat: "Doctor Visit", title: "Doctor Consultation at Home" },
+  { id: "medical-equipment", cat: "Medical Equipment", title: "Medical Equipment on Rent" },
+  { id: "bipap-machine", cat: "Medical Equipment", title: "BiPAP Machine on Rent" }
+]; // 19 Categories (19 * 55 = 1045 Pages!)
 
 const FALLBACK_SEO_PAGES: any[] = [];
 LOCATIONS.forEach(loc => {
