@@ -228,7 +228,7 @@ async function HomeDynamic() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div className="lg:col-span-4" >
               <div className="sticky top-24">
-                <div className="inline-flex items-center text-sm font-bold text-[#4ecdc4] uppercase tracking-wider mb-4 bg-white/10 px-3 py-1 rounded-full border border-white/20 backdrop-blur-sm">
+                <div className="inline-flex items-center text-sm font-bold text-[#4ecdc4] uppercase tracking-wider mb-4 bg-white/10 px-3 py-1 rounded-full border border-white/20 md:backdrop-blur-sm">
                   <Star className="w-4 h-4 mr-2" /> Why Choose Stoic
                 </div>
                 <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-6">Dedicated to Your Health & Well-being</h2>
@@ -243,7 +243,7 @@ async function HomeDynamic() {
             <div className="lg:col-span-8">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                 {whys.map(([icon, title, text, size], d) => (
-                  <div key={title} className={`bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 hover:bg-white/10 transition-colors ${size === 'bento-lg' ? 'sm:col-span-2' : ''}`} data-aos="fade-up" data-aos-delay={d*50}>
+                  <div key={title} className={`bg-white/5 md:backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 hover:bg-white/10 transition-colors ${size === 'bento-lg' ? 'sm:col-span-2' : ''}`} data-aos="fade-up" data-aos-delay={d*50}>
                     <div className="flex flex-col h-full">
                       <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#2196d3] to-[#4ecdc4] flex items-center justify-center text-white shadow-lg mb-6">
                         {icon === "verified" ? <ShieldPlus className="w-6 h-6"/> : icon === "biotech" ? <Boxes className="w-6 h-6"/> : icon === "schedule" ? <CalendarCheck className="w-6 h-6"/> : icon === "payments" ? <Award className="w-6 h-6"/> : icon === "home_health" ? <Hospital className="w-6 h-6"/> : icon === "health_and_safety" ? <Activity className="w-6 h-6"/> : <Star className="w-6 h-6"/>}

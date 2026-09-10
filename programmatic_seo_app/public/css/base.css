@@ -86,11 +86,16 @@ input, select, textarea { font: inherit; }
 
 /* ── Navbar ── */
 #mainNav {
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.95); /* Solid fallback for mobile */
   border-bottom: 1px solid rgba(0,0,0,0.04);
   transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+@media (min-width: 992px) {
+  #mainNav {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
 }
 #mainNav.scrolled {
   background: rgba(255,255,255,0.98);
