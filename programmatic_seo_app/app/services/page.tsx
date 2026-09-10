@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getServices } from '@/lib/supabase';
+import { getServices, getAllServices } from '@/lib/supabase';
 import {
   Stethoscope,
   CalendarCheck,
@@ -28,7 +28,7 @@ export const metadata = {
 export default async function ServicesPage() {
   let services: any[] = [];
   try {
-    const rows = await getServices();
+    const rows = await getAllServices();
     services = rows || [];
   } catch (err) {
     console.warn("Supabase fetch failed for ServicesPage.", err);
@@ -141,9 +141,14 @@ export default async function ServicesPage() {
                       <div className="text-accent font-semibold text-sm mb-2 uppercase">{svc.category || ''}</div>
                       <h5 className="font-bold text-xl mb-4 text-dark">{svc.title}</h5>
                       <p className="text-muted text-sm mb-6 flex-grow">{svc.description || ''}</p>
-                      <Link href={`/contact?service=${encodeURIComponent(svc.title)}`} className="w-full inline-flex items-center justify-center gap-2 border border-accent text-accent hover:bg-accent hover:text-white transition-colors rounded-lg font-semibold py-2.5">
-                        Book Now <ArrowRight className="w-4 h-4" />
-                      </Link>
+                      <div className="flex flex-col gap-2">
+                        <Link href={`/services/${svc.title.toLowerCase().trim().replace(/[\s\W-]+/g, '-').replace(/^-+|-+$/g, '')}`} className="w-full inline-flex items-center justify-center gap-2 border border-accent text-accent hover:bg-accent hover:text-white transition-colors rounded-lg font-semibold py-2.5">
+                          View Details <ArrowRight className="w-4 h-4" />
+                        </Link>
+                        <button type="button" onClick={() => (window as any).openBookModal?.(svc.title)} className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4ecdc4] to-[#2196d3] text-white transition-all shadow-md hover:shadow-lg rounded-lg font-semibold py-2.5 border-none">
+                          Book Now <Phone className="w-4 h-4" />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </article>

@@ -147,7 +147,7 @@ async function HomeDynamic() {
                     <div className="text-xs font-bold uppercase tracking-wider text-[#2196d3] mb-3">{svc.category || 'Service'}</div>
                     <h5 className="text-xl font-bold text-[#0f2240] mb-3">{svc.title}</h5>
                     <p className="text-[#6b82a3] mb-6 line-clamp-3">{svc.description}</p>
-                    <Link href="/services" className="inline-flex items-center font-bold text-[#4ecdc4] hover:text-[#2196d3] transition-colors">
+                    <Link href={`/services/${svc.title.toLowerCase().trim().replace(/[\s\W-]+/g, '-').replace(/^-+|-+$/g, '')}`} className="inline-flex items-center font-bold text-[#4ecdc4] hover:text-[#2196d3] transition-colors">
                       Learn More <ArrowRight className="w-4 h-4 ml-2" />
                     </Link>
                   </div>

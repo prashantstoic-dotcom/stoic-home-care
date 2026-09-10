@@ -209,6 +209,11 @@ export async function getServices() {
   return data || [];
 }
 
+export async function getAllServices() {
+  const data = await fetchSupabase('stoic_services?order=id.desc&limit=1000');
+  return data || [];
+}
+
 export async function getEquipment() {
   const data = await fetchSupabase('stoic_equipment?order=id.desc&limit=8');
   return data || [];
