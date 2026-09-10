@@ -76,6 +76,7 @@ export default async function Footer() {
                 <Link href="/services" className="flex items-center gap-2 text-gray-300 hover:text-[var(--teal)] transition-colors"><ChevronRight size={14} className="text-[var(--teal)]" />Services</Link>
                 <Link href="/equipment" className="flex items-center gap-2 text-gray-300 hover:text-[var(--teal)] transition-colors"><ChevronRight size={14} className="text-[var(--teal)]" />Equipment</Link>
                 <Link href="/about" className="flex items-center gap-2 text-gray-300 hover:text-[var(--teal)] transition-colors"><ChevronRight size={14} className="text-[var(--teal)]" />About Us</Link>
+                <Link href="/locations" className="flex items-center gap-2 text-gray-300 hover:text-[var(--teal)] transition-colors"><ChevronRight size={14} className="text-[var(--teal)]" />Service Areas</Link>
                 <Link href="/contact" className="flex items-center gap-2 text-gray-300 hover:text-[var(--teal)] transition-colors"><ChevronRight size={14} className="text-[var(--teal)]" />Contact</Link>
               </div>
             </div>
@@ -118,6 +119,7 @@ export default async function Footer() {
               <Link href={`/location/ghaziabad`} className="text-gray-400 border border-white/10 px-3 py-1.5 rounded-full hover:bg-[var(--teal)] hover:text-white transition-colors hover:border-[var(--teal)]">Ghaziabad</Link>
               <Link href={`/location/faridabad`} className="text-gray-400 border border-white/10 px-3 py-1.5 rounded-full hover:bg-[var(--teal)] hover:text-white transition-colors hover:border-[var(--teal)]">Faridabad</Link>
               <Link href={`/location/gurugram`} className="text-gray-400 border border-white/10 px-3 py-1.5 rounded-full hover:bg-[var(--teal)] hover:text-white transition-colors hover:border-[var(--teal)]">Gurugram</Link>
+              <Link href={`/locations`} className="text-white border border-[var(--teal)] bg-white/5 px-4 py-1.5 rounded-full hover:bg-[var(--teal)] hover:text-white transition-colors font-bold shadow-[0_0_10px_rgba(12,184,201,0.2)]">Explore All 50+ Service Areas →</Link>
             </div>
           </div>
 

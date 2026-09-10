@@ -87,6 +87,7 @@ export default function Header() {
               { href: "/", label: "Home", active: pathname === '/' },
               { href: "/services", label: "Services", active: pathname?.startsWith('/services') },
               { href: "/equipment", label: "Equipment", active: pathname?.startsWith('/equipment') },
+              { href: "/locations", label: "Locations", active: pathname?.startsWith('/location') },
               { href: "/about", label: "About", active: pathname === '/about' },
               { href: "/contact", label: "Contact", active: pathname === '/contact' }
             ].map((link) => (
@@ -129,6 +130,7 @@ export default function Header() {
               { href: "/", label: "Home", active: pathname === '/' },
               { href: "/services", label: "Services", active: pathname?.startsWith('/services') },
               { href: "/equipment", label: "Equipment", active: pathname?.startsWith('/equipment') },
+              { href: "/locations", label: "Locations", active: pathname?.startsWith('/location') },
               { href: "/about", label: "About", active: pathname === '/about' },
               { href: "/contact", label: "Contact", active: pathname === '/contact' }
             ].map((link) => (
