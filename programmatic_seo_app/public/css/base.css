@@ -103,8 +103,13 @@ input, select, textarea { font: inherit; }
   100% { transform: translateX(-50%); }
 }
 
-/* ── Swiper Overrides (minimal) ── */
-.swiper-pagination-bullet { background: #cbd5e1; opacity: 1; width: 8px; height: 8px; }
+/* ── Swiper Overrides & CLS Fallback ── */
+.swiper:not(.swiper-initialized) .swiper-wrapper { display: flex; flex-wrap: nowrap; overflow: hidden; }
+.swiper:not(.swiper-initialized) .swiper-slide { flex-shrink: 0; width: 100%; }
+@media (min-width: 768px) { .swiper:not(.swiper-initialized) .swiper-slide { width: 50%; } }
+@media (min-width: 992px) { .swiper:not(.swiper-initialized) .swiper-slide { width: 33.3333%; } }
+
+.swiper-pagination-bullet { background: #cbd5e1; opacity: 1; width: 8px; height: 8px; transition: all 0.3s; }
 .swiper-pagination-bullet-active { background: var(--accent) !important; width: 24px; border-radius: 4px; }
 
 /* ── Form Inputs (replacing Bootstrap form-floating) ── */

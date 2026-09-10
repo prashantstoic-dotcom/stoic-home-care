@@ -15,15 +15,18 @@ export const metadata = {
   alternates: { canonical: '/' }
 };
 
+export const revalidate = 3600;
+
 async function HomeDynamic() {
   let services: any[] = [];
   let equipment: any[] = [];
   try {
-    const servicesRows = await getServices();
-    services = servicesRows ? servicesRows : [];
-
-    const equipmentRows = await getEquipment();
-    equipment = equipmentRows ? equipmentRows : [];
+    const [servicesRows, equipmentRows] = await Promise.all([
+      getServices(),
+      getEquipment()
+    ]);
+    services = servicesRows || [];
+    equipment = equipmentRows || [];
   } catch (err) {
     console.warn("Supabase fetch failed, rendering with static components.", err);
   }

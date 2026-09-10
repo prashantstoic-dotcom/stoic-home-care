@@ -13,6 +13,8 @@ import ClientInit from "../components/ClientInit";
 
 import "../public/css/uno.css";
 import "../public/css/base.css";
+import "swiper/css";
+import "swiper/css/pagination";
 
 const outfit = Outfit({
   subsets: ["latin"],
