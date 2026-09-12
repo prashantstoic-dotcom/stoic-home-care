@@ -43,7 +43,7 @@ export default async function ServiceDetailsPage({ params }: { params: { slug: s
     notFound();
   }
 
-  const imageUrl = service.image_url || (service.image ? `/uploads/services/${service.image}` : '/images/carousel-1.avif');
+  const imageUrl = service.image_url || (service.image ? (service.image.startsWith('/') ? service.image : `/uploads/services/${service.image}`) : '/images/carousel-1.avif');
 
   const benefits = [
     "24/7 Professional Medical Support",
@@ -69,9 +69,9 @@ export default async function ServiceDetailsPage({ params }: { params: { slug: s
             {service.description}
           </p>
           <div className="flex flex-wrap gap-4">
-            <button type="button" onClick={() => (window as any).openBookModal?.(service.title)} className="inline-flex items-center px-8 py-4 rounded-full font-bold text-[#0f2240] bg-gradient-to-r from-[#4ecdc4] to-[#2196d3] shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 text-lg">
+            <Link href={`/contact?service=${encodeURIComponent(service.title)}`} className="inline-flex items-center px-8 py-4 rounded-full font-bold text-[#0f2240] bg-gradient-to-r from-[#4ecdc4] to-[#2196d3] shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 text-lg no-underline">
               <Phone className="w-5 h-5 mr-2" /> Book {service.title}
-            </button>
+            </Link>
           </div>
         </div>
       </div>

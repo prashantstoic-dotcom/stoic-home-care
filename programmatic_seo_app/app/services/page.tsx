@@ -127,61 +127,31 @@ export default async function ServicesPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.length > 0 ? (
-              services.map((svc: any) => (
-                <article key={svc.id}>
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)] h-full flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                    <div className="relative">
-                      <img src={svc.image ? `/uploads/services/${svc.image}` : '/images/equip.avif'} alt={svc.title} loading="lazy" width={400} height={250} className="w-full h-[250px] object-cover" />
-                      <div className="absolute -bottom-5 right-5 w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white shadow-[0_5px_15px_rgba(12,184,201,0.4)]">
-                        <Hospital className="w-6 h-6" />
-                      </div>
-                    </div>
-                    <div className="p-6 flex-grow flex flex-col">
-                      <div className="text-accent font-semibold text-sm mb-2 uppercase">{svc.category || ''}</div>
-                      <h5 className="font-bold text-xl mb-4 text-dark">{svc.title}</h5>
-                      <p className="text-muted text-sm mb-6 flex-grow">{svc.description || ''}</p>
-                      <div className="flex flex-col gap-2">
-                        <Link href={`/services/${svc.title.toLowerCase().trim().replace(/[\s\W-]+/g, '-').replace(/^-+|-+$/g, '')}`} className="w-full inline-flex items-center justify-center gap-2 border border-accent text-accent hover:bg-accent hover:text-white transition-colors rounded-lg font-semibold py-2.5">
-                          View Details <ArrowRight className="w-4 h-4" />
-                        </Link>
-                        <button type="button" onClick={() => (window as any).openBookModal?.(svc.title)} className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4ecdc4] to-[#2196d3] text-white transition-all shadow-md hover:shadow-lg rounded-lg font-semibold py-2.5 border-none">
-                          Book Now <Phone className="w-4 h-4" />
-                        </button>
-                      </div>
+            {services.map((svc: any) => (
+              <article key={svc.id}>
+                <div className="bg-white rounded-2xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)] h-full flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                  <div className="relative">
+                    <img src={svc.image ? (svc.image.startsWith('/') ? svc.image : `/uploads/services/${svc.image}`) : '/images/equip.avif'} alt={svc.title} loading="lazy" width={400} height={250} className="w-full h-[250px] object-cover" />
+                    <div className="absolute -bottom-5 right-5 w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white shadow-[0_5px_15px_rgba(12,184,201,0.4)]">
+                      <Hospital className="w-6 h-6" />
                     </div>
                   </div>
-                </article>
-              ))
-            ) : (
-              staticServices.map(([img, tag, title, desc, Icon, features]: any) => (
-                <article key={title}>
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)] h-full flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                    <div className="relative">
-                      <img src={`/images/${img}`} alt={title} loading="lazy" width={400} height={250} className="w-full h-[250px] object-cover" />
-                      <div className="absolute -bottom-5 right-5 w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white shadow-[0_5px_15px_rgba(12,184,201,0.4)]">
-                        <Icon className="w-6 h-6" />
-                      </div>
-                    </div>
-                    <div className="p-6 flex-grow flex flex-col mt-2">
-                      <div className="text-accent font-semibold text-sm mb-2 uppercase">{tag}</div>
-                      <h5 className="font-bold text-xl mb-4 text-dark">{title}</h5>
-                      <p className="text-muted text-sm mb-6">{desc}</p>
-                      <ul className="mb-6 pl-0 flex-grow list-none">
-                        {features.map((f: string) => (
-                          <li key={f} className="text-sm text-gray-700 mb-2 flex items-start gap-2">
-                            <Check className="w-4 h-4 text-teal shrink-0 mt-0.5" /> {f}
-                          </li>
-                        ))}
-                      </ul>
-                      <Link href={`/contact?service=${encodeURIComponent(title)}`} className="w-full inline-flex items-center justify-center gap-2 border border-accent text-accent hover:bg-accent hover:text-white transition-colors rounded-lg font-semibold py-2.5">
-                        Book Now <ArrowRight className="w-4 h-4" />
+                  <div className="p-6 flex-grow flex flex-col">
+                    <div className="text-accent font-semibold text-sm mb-2 uppercase">{svc.category || ''}</div>
+                    <h5 className="font-bold text-xl mb-4 text-dark">{svc.title}</h5>
+                    <p className="text-muted text-sm mb-6 flex-grow">{svc.description || ''}</p>
+                    <div className="flex flex-col gap-2">
+                      <Link href={`/services/${svc.title.toLowerCase().trim().replace(/[\s\W-]+/g, '-').replace(/^-+|-+$/g, '')}`} className="w-full inline-flex items-center justify-center gap-2 border border-accent text-accent hover:bg-accent hover:text-white transition-colors rounded-lg font-semibold py-2.5">
+                        View Details <ArrowRight className="w-4 h-4" />
+                      </Link>
+                      <Link href={`/contact?service=${encodeURIComponent(svc.title)}`} className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4ecdc4] to-[#2196d3] text-white transition-all shadow-md hover:shadow-lg rounded-lg font-semibold py-2.5 border-none no-underline">
+                        Book Now <Phone className="w-4 h-4" />
                       </Link>
                     </div>
                   </div>
-                </article>
-              ))
-            )}
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>

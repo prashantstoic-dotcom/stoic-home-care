@@ -134,45 +134,24 @@ async function HomeDynamic() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.length > 0 ? (
-              services.map((svc, d) => (
-                <div key={svc.id} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 group" data-aos="fade-up" data-aos-delay={(d % 3) * 100}>
-                  <div className="relative h-64 overflow-hidden">
-                    <Image src={svc.image ? `/uploads/services/${svc.image}` : '/images/equip.avif'} alt={svc.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
-                    <div className="absolute bottom-4 right-4 bg-white p-3 rounded-xl shadow-lg text-[#0CB8C9]">
-                      <Hospital className="w-6 h-6" />
-                    </div>
-                  </div>
-                  <div className="p-8">
-                    <div className="text-xs font-bold uppercase tracking-wider text-[#2196d3] mb-3">{svc.category || 'Service'}</div>
-                    <h5 className="text-xl font-bold text-[#0f2240] mb-3">{svc.title}</h5>
-                    <p className="text-[#6b82a3] mb-6 line-clamp-3">{svc.description}</p>
-                    <Link href={`/services/${svc.title.toLowerCase().trim().replace(/[\s\W-]+/g, '-').replace(/^-+|-+$/g, '')}`} className="inline-flex items-center font-bold text-[#4ecdc4] hover:text-[#2196d3] transition-colors">
-                      Learn More <ArrowRight className="w-4 h-4 ml-2" />
-                    </Link>
+            {services.map((svc, d) => (
+              <div key={svc.id} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 group" data-aos="fade-up" data-aos-delay={(d % 3) * 100}>
+                <div className="relative h-64 overflow-hidden">
+                  <Image src={svc.image ? (svc.image.startsWith('/') ? svc.image : `/uploads/services/${svc.image}`) : '/images/equip.avif'} alt={svc.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
+                  <div className="absolute bottom-4 right-4 bg-white p-3 rounded-xl shadow-lg text-[#0CB8C9]">
+                    <Hospital className="w-6 h-6" />
                   </div>
                 </div>
-              ))
-            ) : (
-              staticServices.map(([img, tag, title, desc, icon], d) => (
-                <div key={title} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 group" data-aos="fade-up" data-aos-delay={(d % 3) * 100}>
-                  <div className="relative h-64 overflow-hidden">
-                    <Image src={`/images/${img}`} alt={title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
-                    <div className="absolute bottom-4 right-4 bg-white p-3 rounded-xl shadow-lg text-[#0CB8C9]">
-                      {icon === "local_hospital" ? <Hospital className="w-6 h-6"/> : icon === "medical_services" ? <Stethoscope className="w-6 h-6"/> : icon === "elderly" ? <Users className="w-6 h-6"/> : icon === "child_care" ? <Baby className="w-6 h-6"/> : icon === "health_and_safety" ? <ShieldPlus className="w-6 h-6"/> : <Activity className="w-6 h-6"/>}
-                    </div>
-                  </div>
-                  <div className="p-8">
-                    <div className="text-xs font-bold uppercase tracking-wider text-[#2196d3] mb-3">{tag}</div>
-                    <h5 className="text-xl font-bold text-[#0f2240] mb-3">{title}</h5>
-                    <p className="text-[#6b82a3] mb-6 line-clamp-3">{desc}</p>
-                    <Link href="/services" className="inline-flex items-center font-bold text-[#4ecdc4] hover:text-[#2196d3] transition-colors">
-                      Learn More <ArrowRight className="w-4 h-4 ml-2" />
-                    </Link>
-                  </div>
+                <div className="p-8">
+                  <div className="text-xs font-bold uppercase tracking-wider text-[#2196d3] mb-3">{svc.category || 'Service'}</div>
+                  <h5 className="text-xl font-bold text-[#0f2240] mb-3">{svc.title}</h5>
+                  <p className="text-[#6b82a3] mb-6 line-clamp-3">{svc.description}</p>
+                  <Link href={`/services/${svc.title.toLowerCase().trim().replace(/[\s\W-]+/g, '-').replace(/^-+|-+$/g, '')}`} className="inline-flex items-center font-bold text-[#4ecdc4] hover:text-[#2196d3] transition-colors">
+                    Learn More <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
                 </div>
-              ))
-            )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
