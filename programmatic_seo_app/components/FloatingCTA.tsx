@@ -3,6 +3,15 @@
 import React, { useEffect, useState } from "react";
 import { MessageCircle, Phone, ChevronUp } from "lucide-react";
 
+const WA_LINK =
+  "https://wa.me/917668232867?text=" +
+  encodeURIComponent("Hello Stoic Home Care, I need a patient attendant / nurse at home. Please share details and rates.");
+
+/**
+ * Mobile: a slim bottom bar with two big buttons (WhatsApp + Call Now) – thumb friendly.
+ * Desktop: two small floating pills at the bottom-left.
+ * Nothing else floats on the page, so there are never conflicting actions.
+ */
 export default function FloatingCTA() {
   const [isVisible, setIsVisible] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -14,12 +23,10 @@ export default function FloatingCTA() {
       window.removeEventListener("mousemove", showCta);
       window.removeEventListener("touchstart", showCta);
     };
-
     window.addEventListener("scroll", showCta, { once: true });
     window.addEventListener("mousemove", showCta, { once: true });
     window.addEventListener("touchstart", showCta, { once: true });
-    
-    const fallbackTimer = setTimeout(showCta, 4000);
+    const fallbackTimer = setTimeout(showCta, 2500);
 
     return () => {
       window.removeEventListener("scroll", showCta);
@@ -30,102 +37,54 @@ export default function FloatingCTA() {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 500);
-    };
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setShowScrollTop(window.scrollY > 500);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: `
-        .float-cta-wrap {
-          position: fixed;
-          bottom: 24px;
-          left: 16px;
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-          z-index: 9999;
-          transition: opacity 0.5s ease-in-out;
-          opacity: ${isVisible ? 1 : 0};
-          pointer-events: ${isVisible ? "auto" : "none"};
-        }
-        .float-cta-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          padding: 0 20px 0 16px;
-          height: 50px;
-          border-radius: 999px;
-          color: #fff;
-          font-size: 14px;
-          font-weight: 600;
-          white-space: nowrap;
-          box-shadow: 0 4px 18px rgba(0,0,0,0.15);
-          will-change: transform;
-          transition: transform 0.15s ease;
-        }
-        .float-cta-btn:hover { transform: translateY(-2px); }
-
-        @keyframes waPulse {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.06); }
-        }
-        @keyframes callPulse {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.06); }
-        }
-
-        .float-wa { background: #25D366; animation: waPulse 2.5s ease-in-out infinite; }
-        .float-call { background: #0CB8C9; animation: callPulse 2.5s ease-in-out infinite 0.3s; }
-        .float-cta-btn:hover { animation-play-state: paused; }
-
-        @media (max-width: 767px) {
-          .float-cta-wrap { bottom: 16px; left: 12px; gap: 8px; }
-          .float-cta-btn { width: 48px; height: 48px; padding: 0; justify-content: center; border-radius: 50%; }
-          .float-cta-btn span { display: none; }
-        }
-
         .scroll-top-btn {
-          position: fixed;
-          bottom: 24px;
-          right: 24px;
-          width: 44px;
-          height: 44px;
-          background: #0f2240;
-          color: #fff;
-          border-radius: 50%;
+          position: fixed; bottom: 24px; right: 24px; width: 44px; height: 44px;
+          background: #0f2240; color: #fff; border-radius: 50%;
           box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 9998;
-          opacity: 0;
-          visibility: hidden;
-          transform: translateY(16px);
-          will-change: transform, opacity;
+          display: flex; align-items: center; justify-content: center;
+          z-index: 9998; opacity: 0; visibility: hidden; transform: translateY(16px);
           transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
         }
         .scroll-top-btn.visible { opacity: 1; visibility: visible; transform: translateY(0); }
-        .scroll-top-btn:hover { background: #0CB8C9; transform: translateY(-3px); }
+        @media (max-width: 767px) { .scroll-top-btn { bottom: 82px; right: 14px; } }
       `}} />
 
-      <div className="float-cta-wrap">
-        <a className="float-cta-btn float-wa" href="https://wa.me/917668232867" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
-          <MessageCircle size={20} /><span>WhatsApp Us</span>
-        </a>
-        <a className="float-cta-btn float-call" href="tel:+917668232867" aria-label="Call Stoic Home Care">
-          <Phone size={20} /><span>Call Now</span>
-        </a>
+      <div
+        className={`fixed bottom-0 inset-x-0 z-[9999] p-2 bg-white/95 shadow-[0_-4px_16px_rgba(0,0,0,0.12)] transition-opacity duration-500 md:inset-x-auto md:left-4 md:bottom-6 md:p-0 md:bg-transparent md:shadow-none ${isVisible ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+      >
+        <div className="flex gap-2 md:flex-col md:gap-2.5">
+          <a
+            href={WA_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chat with Stoic Home Care on WhatsApp"
+            className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 h-12 md:px-5 rounded-full bg-[var(--wa)] text-white text-[15px] font-semibold shadow-lg"
+          >
+            <MessageCircle size={20} /> WhatsApp
+          </a>
+          <a
+            href="tel:+917668232867"
+            aria-label="Call Stoic Home Care"
+            className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 h-12 md:px-5 rounded-full bg-[var(--primary)] text-white text-[15px] font-semibold shadow-lg"
+          >
+            <Phone size={20} /> Call Now
+          </a>
+        </div>
       </div>
-      
-      <button onClick={scrollToTop} className={`scroll-top-btn ${showScrollTop ? 'visible' : ''}`} aria-label="Scroll to top">
+
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className={`scroll-top-btn ${showScrollTop ? "visible" : ""}`}
+        aria-label="Scroll to top"
+      >
         <ChevronUp size={24} />
       </button>
     </>

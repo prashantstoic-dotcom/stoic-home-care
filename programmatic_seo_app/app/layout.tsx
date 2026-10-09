@@ -10,6 +10,8 @@ const BookServiceModal = dynamic(() => import("../components/modals/BookServiceM
 const AskQuestionModal = dynamic(() => import("../components/modals/AskQuestionModal"), { ssr: false });
 import ModalGlobals from "../components/ModalGlobals";
 import ClientInit from "../components/ClientInit";
+import FloatingCTA from "../components/FloatingCTA";
+import EnquiryPopup from "../components/EnquiryPopup";
 
 import "../public/css/uno.css";
 import "../public/css/base.css";
@@ -26,7 +28,7 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   metadataBase: new URL('https://stoiccare.in'),
   title: "Stoic Home Care | Expert Home Care Services",
-  description: "Stoic Home Care provides hospital-grade home care – ICU setup, nursing, old age care, mother & baby care, doctor on call and medical equipment rental. Available 24/7.",
+  description: "Stoic Home Care provides compassionate, reliable home care - trained patient attendants, elderly care, nurses, mother & baby care, and domestic support. Available 24/7.",
   robots: {
     index: true,
     follow: true,
@@ -36,7 +38,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Stoic Home Care | Expert Home Care Services",
-    description: "Stoic Home Care provides hospital-grade home care – ICU setup, nursing, old age care, mother & baby care, doctor on call and medical equipment rental. Available 24/7.",
+    description: "Stoic Home Care provides compassionate, reliable home care - trained patient attendants, elderly care, nurses, mother & baby care, and domestic support. Available 24/7.",
     type: "website",
     siteName: "Stoic Home Care",
     images: [
@@ -48,7 +50,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Stoic Home Care | Expert Home Care Services",
-    description: "Stoic Home Care provides hospital-grade home care – ICU setup, nursing, old age care, mother & baby care, doctor on call and medical equipment rental. Available 24/7.",
+    description: "Stoic Home Care provides compassionate, reliable home care - trained patient attendants, elderly care, nurses, mother & baby care, and domestic support. Available 24/7.",
     images: ["/images/carousel-1.avif"],
   },
 };
@@ -66,6 +68,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         
         <Footer />
+        <FloatingCTA />
+        <EnquiryPopup />
 
         {/* Global Modals */}
         <ModalGlobals />

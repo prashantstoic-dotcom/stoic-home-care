@@ -20,8 +20,8 @@ import {
 } from 'lucide-react';
 
 export const metadata = {
-  title: 'Home Care Services – ICU Setup, Nursing, Elder Care | Stoic Home Care',
-  description: 'Explore all Home Care services by Stoic Home Care: ICU setup, nursing, old age care, physiotherapy and more.',
+  title: 'Home Care Services – Patient Attendant, Nursing, Elder Care | Stoic Home Care',
+  description: 'Explore all Home Care services by Stoic Home Care: Patient attendant, skilled nursing, old age care, physiotherapy and more.',
   alternates: { canonical: '/services' }
 };
 
@@ -35,11 +35,11 @@ export default async function ServicesPage() {
   }
 
   const staticServices = [
-    ['equip.avif','Critical Care','ICU Setup @ Home','Complete ICU infrastructure with ventilators, monitors and critical care nurses.', Hospital, ['Ventilator & BiPAP support','Multi-parameter monitors','ICU-trained nurses 24/7']],
-    ['nurse.avif','Nursing','ICU Trained Nursing','Certified nurses for post-op care, IV therapy, wound management and monitoring.', ShieldPlus, ['Post-operative care','IV infusion & wound dressing','Catheter & stoma care']],
+    ['equip.avif','Patient Care','Patient Attendant','Professional attendants to assist with daily activities and care.', Hospital, ['Bathing & hygiene','Mobility assistance','Medication reminders']],
+    ['nurse.avif','Nursing','Skilled Nursing','Certified nurses for post-op care, IV therapy, wound management and monitoring.', ShieldPlus, ['Post-operative care','IV infusion & wound dressing','Catheter & stoma care']],
     ['old.jpg','Elder Care','Old Age Care','Compassionate full-time care for seniors including daily assistance and health monitoring.', HeartHandshake, ['Daily living assistance','Medication reminders','Fall prevention & mobility']],
     ['child.jpg','Maternity','Mother & Baby Care','Post-natal support for new mothers and neonatal care for newborns by specialists.', Baby, ['Post-natal recovery','Breastfeeding support','Newborn hygiene & care']],
-    ['doctor_03.jpg','Doctor Visit','Doctor on Call','Board-certified physicians visiting your home for diagnosis, prescriptions and follow-ups.', ShieldCheck, ['Home consultation','Prescription & lab coordination','Emergency response']],
+    ['doctor_03.jpg','Doctor Visit','Doctor on Call','Board-certified physicians visiting your home for diagnosis, prescriptions and follow-ups.', ShieldCheck, ['Home consultation','Prescription & lab coordination','Care plan coordination']],
     ['physio.webp','Rehabilitation','Physiotherapy @ Home','Expert physiotherapists for stroke rehab, post-surgical recovery and pain management.', Activity, ['Stroke & neuro rehab','Orthopaedic recovery','Geriatric physiotherapy']],
     ['nurse.webp','Nursing','Nursing Attendant','Trained nursing attendants providing round-the-clock care and support for patients.', HeartHandshake, ['Personal hygiene care','Patient mobility','Vital signs monitoring']],
     ['ab-1.avif','Specialised','Covid Care @ Home','Specialised care for Covid-19 patients including oxygen therapy and monitoring.', Activity, ['Oxygen saturation monitoring','Prescribed medication','Isolation protocol']],
@@ -67,15 +67,15 @@ export default async function ServicesPage() {
         "name": "What Home Care services do you provide?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "We provide ICU at home, nursing care, elderly care, physiotherapy, and doctor on call services in the Delhi NCR region."
+          "text": "We provide skilled nursing, elderly care, patient attendants, physiotherapy, and doctor on call services in the Delhi NCR region."
         }
       },
       {
         "@type": "Question",
-        "name": "How quickly can you arrange an ICU setup at home?",
+        "name": "How quickly can you arrange a patient attendant at home?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "We can typically arrange a complete ICU setup at your home within 4 to 6 hours depending on your exact location in Delhi NCR."
+          "text": "We can typically arrange a patient attendant at your home within 4 to 6 hours depending on your exact location in Delhi NCR."
         }
       }
     ]
@@ -106,7 +106,7 @@ export default async function ServicesPage() {
                   <CalendarCheck className="w-5 h-5" /> Book Now
                 </Link>
                 <a href="tel:+917668232867" className="inline-flex items-center gap-2 border-2 border-white/50 hover:bg-white/10 transition-colors px-6 py-3 rounded-full text-white font-semibold no-underline">
-                  <Phone className="w-5 h-5" /> Emergency Call
+                  <Phone className="w-5 h-5" /> Call Now
                 </a>
               </div>
             </div>

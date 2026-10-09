@@ -6,8 +6,8 @@ import {
 } from 'lucide-react';
 
 export const metadata = {
-  title: 'About Stoic Home Care | Top Home Care & ICU Setup in Greater Noida',
-  description: 'Learn about Stoic Home Care – our mission to bring hospital-quality ICU setups, skilled nursing, and elder care to your doorstep in Greater Noida & Delhi NCR.',
+  title: 'About Stoic Home Care | Top Home Care in Greater Noida',
+  description: 'Learn about Stoic Home Care – our mission to bring high-quality home care, skilled nursing, and elder care to your doorstep in Greater Noida & Delhi NCR.',
   alternates: { canonical: '/about' }
 };
 
@@ -17,7 +17,7 @@ export default function AboutPage() {
     "@type": "AboutPage",
     "name": "About Stoic Home Care",
     "url": "https://stoiccare.in/about",
-    "description": "Learn about Stoic Home Care – our mission to bring hospital-quality ICU setups, skilled nursing, and elder care to your doorstep in Greater Noida & Delhi NCR.",
+    "description": "Learn about Stoic Home Care – our mission to bring high-quality home care, skilled nursing, and elder care to your doorstep in Greater Noida & Delhi NCR.",
     "publisher": {
       "@type": "MedicalOrganization",
       "name": "Stoic Home Care"
@@ -41,7 +41,7 @@ export default function AboutPage() {
                 <span className="text-[var(--accent)]">Home Care in India</span>
               </h1>
               <p className="text-lg text-white/80 mb-8 max-w-xl leading-relaxed">
-                Founded on the belief that exceptional Home Care shouldn't require leaving home. We bridge the gap between hospital-grade care and the comfort of your own space.
+                Founded on the belief that exceptional Home Care shouldn't require leaving home. We bridge the gap between high-quality care and the comfort of your own space.
               </p>
               <div className="flex flex-wrap items-center gap-4">
                 <Link href="/contact" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[var(--accent)] to-[var(--teal)] text-white font-medium hover:opacity-90 transition-opacity">
@@ -70,10 +70,10 @@ export default function AboutPage() {
               <h2 className="text-3xl lg:text-4xl font-bold text-[var(--dark)] mb-4">Our Mission &amp; Story</h2>
               <div className="h-1 w-16 bg-gradient-to-r from-[var(--accent)] to-[var(--teal)] rounded-full mb-6"></div>
               <p className="text-gray-800 leading-relaxed mb-5">
-                Stoic Home Care was founded with a simple but powerful belief: <strong>healing happens best where the heart is.</strong> We recognised a critical gap in Indian Home Care — patients had to choose between hospital-grade care and the comfort of home.
+                Stoic Home Care was founded with a simple but powerful belief: <strong>healing happens best where the heart is.</strong> We recognised a critical gap in Indian Home Care — patients had to choose between high-quality care and the comfort of home.
               </p>
               <p className="text-[var(--muted)] leading-relaxed mb-5">
-                Today, we bridge that gap by bringing ICU setups, skilled nursing, advanced medical equipment and pharmaceutical manufacturing directly to patient doorsteps. Our certified professionals work tirelessly to ensure every patient receives the dignity, respect, and expert care they deserve.
+                Today, we bridge that gap by bringing skilled nursing, advanced medical equipment and professional care directly to patient doorsteps. Our certified professionals work tirelessly to ensure every patient receives the dignity, respect, and expert care they deserve.
               </p>
               <p className="text-[var(--muted)] leading-relaxed mb-8">
                 Our approach is holistic — we treat not just the condition, but the whole person. We support families through difficult times with transparency, compassion, and clinical excellence.
@@ -143,7 +143,7 @@ export default function AboutPage() {
                 <ShieldCheck className="text-[var(--teal)] w-7 h-7" />
               </div>
               <h5 className="text-xl font-bold text-[var(--dark)] mb-3">Clinical Excellence</h5>
-              <p className="text-[var(--muted)] leading-relaxed">We never compromise on quality of care or equipment. ICU-grade standards, delivered at home.</p>
+              <p className="text-[var(--muted)] leading-relaxed">We never compromise on quality of care or equipment. Professional standards, delivered at home.</p>
             </div>
             <div className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300" data-aos="fade-up" data-aos-delay="0">
               <div className="w-14 h-14 rounded-2xl bg-[var(--light)] flex items-center justify-center mb-6">
@@ -221,8 +221,8 @@ export default function AboutPage() {
                   <div className="inline-flex items-center gap-1 text-[var(--teal)] text-sm font-semibold mb-2 uppercase tracking-wider">
                     <Rocket size={14} /> 2019 — Expansion
                   </div>
-                  <h5 className="text-xl font-bold text-white mb-2">ICU at Home Launched</h5>
-                  <p className="text-white/65 leading-relaxed">Pioneered ICU setup services at home in Maharashtra. First 500 patients served with critical care at home.</p>
+                  <h5 className="text-xl font-bold text-white mb-2">Specialized Care Launched</h5>
+                  <p className="text-white/65 leading-relaxed">Pioneered specialized home care services in Maharashtra. First 500 patients served.</p>
                 </div>
                 <div className="relative mb-10 last:mb-0">
                   <div className="absolute w-4 h-4 rounded-full bg-[var(--accent)] -left-[2.35rem] top-1"></div>

@@ -47,7 +47,7 @@ export default async function Footer() {
             <div>
               <Image src="/images/logo.png" alt="Stoic Home Care" width={180} height={50} loading="lazy" className="mb-4" />
               <p className="text-sm leading-relaxed max-w-[320px] text-gray-300">
-                Bringing hospital-quality care to your home — ICU setups, skilled nursing, medical equipment and pharmaceutical manufacturing, all under one roof.
+                Bringing high-quality care to your home — skilled nursing, patient attendants, and medical equipment, all under one roof.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <a href="https://www.facebook.com/p/Stoic-Home-Care-services-61581689589175/" aria-label="Facebook" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--teal)] transition-colors text-white">
@@ -85,8 +85,8 @@ export default async function Footer() {
             <div>
               <h6 className="text-lg font-bold mb-4 text-white">Our Services</h6>
               <div className="flex flex-col gap-3">
-                <Link href="/services" className="flex items-center gap-2 text-gray-300 hover:text-[var(--teal)] transition-colors"><ChevronRight size={14} className="text-[var(--teal)]" />ICU Setup @ Home</Link>
-                <Link href="/services" className="flex items-center gap-2 text-gray-300 hover:text-[var(--teal)] transition-colors"><ChevronRight size={14} className="text-[var(--teal)]" />ICU Trained Nursing</Link>
+                <Link href="/services" className="flex items-center gap-2 text-gray-300 hover:text-[var(--teal)] transition-colors"><ChevronRight size={14} className="text-[var(--teal)]" />Patient Attendant</Link>
+                <Link href="/services" className="flex items-center gap-2 text-gray-300 hover:text-[var(--teal)] transition-colors"><ChevronRight size={14} className="text-[var(--teal)]" />Skilled Nursing</Link>
                 <Link href="/services" className="flex items-center gap-2 text-gray-300 hover:text-[var(--teal)] transition-colors"><ChevronRight size={14} className="text-[var(--teal)]" />Old Age Care</Link>
                 <Link href="/services" className="flex items-center gap-2 text-gray-300 hover:text-[var(--teal)] transition-colors"><ChevronRight size={14} className="text-[var(--teal)]" />Mother &amp; Baby Care</Link>
                 <Link href="/services" className="flex items-center gap-2 text-gray-300 hover:text-[var(--teal)] transition-colors"><ChevronRight size={14} className="text-[var(--teal)]" />Doctor on Call</Link>
@@ -104,7 +104,7 @@ export default async function Footer() {
                 </address>
                 <a href="https://wa.me/917668232867" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-300 hover:text-[var(--teal)] transition-colors"><MessageCircle size={16} className="text-[var(--teal)] flex-shrink-0" />WhatsApp Us</a>
                 <a href="mailto:info@stoichomecare.com" className="flex items-center gap-2 text-gray-300 hover:text-[var(--teal)] transition-colors"><Mail size={16} className="text-[var(--teal)] flex-shrink-0" />info@stoichomecare.com</a>
-                <p className="flex items-center gap-2 text-sm text-gray-300 m-0"><Clock size={16} className="text-[var(--teal)] flex-shrink-0" />24/7 Emergency Support</p>
+                <p className="flex items-center gap-2 text-sm text-gray-300 m-0"><Clock size={16} className="text-[var(--teal)] flex-shrink-0" />24/7 Support</p>
               </div>
             </div>
           </div>

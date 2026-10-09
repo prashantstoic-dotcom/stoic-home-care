@@ -5,15 +5,19 @@ import Image from 'next/image';
 import { 
   Hospital, Stethoscope, Users, Baby, ShieldPlus, Activity, Phone, 
   CalendarCheck, Star, Zap, Award, LayoutGrid, ArrowRight, ListTodo, 
-  Boxes, MessageCircle, MapPin, ClipboardList, CheckCircle, Pill, Dumbbell 
+  Boxes, MessageCircle, MapPin, ClipboardList, CheckCircle, Pill, Dumbbell,
+  ShieldCheck, Check, Sun, Clock, HeartHandshake
 } from 'lucide-react';
 import { Suspense } from 'react';
 
 export const metadata = {
-  title: 'ICU at Home & Expert Nursing Services in Greater Noida | Stoic Home Care',
-  description: 'Stoic Home Care provides hospital-grade home care in Greater Noida – ICU setup, certified nursing, old age care, mother & baby care, and medical equipment rental. 24/7 Availability.',
+  title: 'Patient Attendant & Home Nurse in Noida & Greater Noida | Stoic Home Care',
+  description: 'Verified male & female patient attendants, elderly caretakers and trained home nurses for 12-hour & 24-hour duty in Noida & Greater Noida. Police-verified staff, same-day placement. घर पर मरीजों और बुजुर्गों की भरोसेमंद देखभाल।',
   alternates: { canonical: '/' }
 };
+
+const WA_NUMBER = '917668232867';
+const waLink = (msg: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 
 export const revalidate = 3600;
 
@@ -31,8 +35,8 @@ async function HomeDynamic() {
     console.warn("Supabase fetch failed, rendering with static components.", err);
   }
 
-  const tickers = ['ICU Setup @ Home','Nursing Attendant','Old Age Care','Mother & Baby Care','Doctor on Call','Physiotherapy','Oxygen Concentrators','Hospital Beds','Wheelchairs'];
-  const TickerIcons = [Hospital, Pill, Users, Baby, Stethoscope, Dumbbell, Activity, Activity, Activity];
+  const tickers = ['12-Hour Patient Attendant','24-Hour Patient Attendant','Home Nurse','Elderly Caretaker','Mother & Baby Care','Physiotherapy at Home','Doctor Visit at Home','Oxygen Concentrators','Hospital Beds','Wheelchairs'];
+  const TickerIcons = [Users, Users, Pill, Users, Baby, Dumbbell, Stethoscope, Activity, Activity, Activity];
   
   const mergedTickers = [...tickers, ...tickers];
 
@@ -46,12 +50,12 @@ async function HomeDynamic() {
   ];
 
   const whys = [
-    ['verified','Expert Professionals','ICU-certified nurses and doctors with verified credentials.','bento-lg'],
-    ['biotech','Advanced Equipment','Latest medical technology, sanitized and tested before every deployment.','bento-sm'],
-    ['schedule','24/7 Availability','Round-the-clock support for emergencies.','bento-sm'],
-    ['payments','Affordable Plans','Transparent pricing with zero hidden costs.','bento-md'],
-    ['home_health','Home Comfort','Recover in the familiar environment of your own home.','bento-md'],
-    ['health_and_safety','Safety First','Strict hygiene protocols, PPE compliance, and infection control.','bento-lg'],
+    ['verified','Verified, Trained Staff','Police-verified attendants and nurses, matched to your patient\'s needs.','bento-lg'],
+    ['biotech','Equipment When You Need It','Oxygen concentrators, hospital beds and wheelchairs on rent, cleaned before every delivery.','bento-sm'],
+    ['schedule','Same-Day Placement','Tell us what you need in the morning, we try to send staff the same day.','bento-sm'],
+    ['payments','Affordable & Clear Rates','You know the rate before duty starts. No hidden charges.','bento-md'],
+    ['home_health','Comfort of Your Own Home','Your family member recovers among their own people, in their own bed.','bento-md'],
+    ['health_and_safety','Clean & Careful','Hygiene, masks and gloves, and care in every task.','bento-lg'],
   ];
 
   const staticEq = [
@@ -98,7 +102,7 @@ async function HomeDynamic() {
             <div  >
               <Hospital className="w-10 h-10 mx-auto text-[#4ecdc4] mb-3" />
               <h4 className="text-3xl font-extrabold text-[#0f2240] mb-1">50+</h4>
-              <p className="text-[#6b82a3] font-semibold text-sm m-0">ICU Trained Staff</p>
+              <p className="text-[#6b82a3] font-semibold text-sm m-0">Trained Staff</p>
             </div>
             <div  >
               <Zap className="w-10 h-10 mx-auto text-[#4ecdc4] mb-3" />
@@ -124,7 +128,7 @@ async function HomeDynamic() {
               </div>
               <h2 className="text-3xl md:text-4xl font-extrabold text-[#0f2240] mb-4">Complete Home Care Solutions</h2>
               <div className="w-20 h-1.5 bg-gradient-to-r from-[#1a3a6b] to-[#4ecdc4] rounded-full mb-6"></div>
-              <p className="text-lg text-[#6b82a3]">Every service is designed around patient comfort, clinical excellence, and family peace of mind.</p>
+              <p className="text-lg text-[#6b82a3]">Every service is built around the patient's comfort and your family's peace of mind.</p>
             </div>
             <div  className="text-left lg:text-right">
               <Link href="/services" className="inline-flex items-center px-6 py-3 rounded-full font-bold text-white bg-gradient-to-r from-[#1a3a6b] to-[#2196d3] shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
@@ -164,7 +168,7 @@ async function HomeDynamic() {
               <ListTodo className="w-4 h-4 mr-2" /> Simple Process
             </div>
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#0f2240] mb-4">How It Works</h2>
-            <p className="text-lg text-[#6b82a3] max-w-2xl mx-auto">Get hospital-grade care at home in 3 simple steps</p>
+            <p className="text-lg text-[#6b82a3] max-w-2xl mx-auto">Getting a trusted caretaker at home is easy — 3 simple steps</p>
           </div>
           <div className="relative max-w-5xl mx-auto">
             <div className="hidden md:block absolute top-[60px] left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#2196d3] to-transparent opacity-20"></div>
@@ -174,8 +178,8 @@ async function HomeDynamic() {
                   <div className="w-16 h-16 mx-auto bg-gradient-to-br from-[#1a3a6b] to-[#2196d3] rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/30 mb-6">
                     1
                   </div>
-                  <h4 className="text-xl font-bold text-[#0f2240] mb-3">Request a Callback</h4>
-                  <p className="text-[#6b82a3]">Fill out our quick form or call us directly. Our care coordinator connects with you within 60 minutes.</p>
+                  <h4 className="text-xl font-bold text-[#0f2240] mb-3">Tell Us Your Need</h4>
+                  <p className="text-[#6b82a3]">Call or WhatsApp us, or fill the quick form. We get back to you within 60 minutes.</p>
                 </div>
               </div>
               <div  >
@@ -183,8 +187,8 @@ async function HomeDynamic() {
                   <div className="w-16 h-16 mx-auto bg-gradient-to-br from-[#1a3a6b] to-[#2196d3] rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/30 mb-6">
                     2
                   </div>
-                  <h4 className="text-xl font-bold text-[#0f2240] mb-3">Clinical Assessment</h4>
-                  <p className="text-[#6b82a3]">Our medical experts assess your specific needs and match you with the right ICU-trained professionals.</p>
+                  <h4 className="text-xl font-bold text-[#0f2240] mb-3">We Suggest the Right Staff</h4>
+                  <p className="text-[#6b82a3]">We ask about the patient's condition and duty hours, then match a suitable attendant or nurse.</p>
                 </div>
               </div>
               <div  >
@@ -192,8 +196,8 @@ async function HomeDynamic() {
                   <div className="w-16 h-16 mx-auto bg-gradient-to-br from-[#1a3a6b] to-[#2196d3] rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/30 mb-6">
                     3
                   </div>
-                  <h4 className="text-xl font-bold text-[#0f2240] mb-3">Care Starts at Home</h4>
-                  <p className="text-[#6b82a3]">We deliver equipment, and our verified nursing staff begins providing compassionate care at your home.</p>
+                  <h4 className="text-xl font-bold text-[#0f2240] mb-3">Care Starts at Your Home</h4>
+                  <p className="text-[#6b82a3]">Our verified staff reaches your home, and equipment is delivered if needed.</p>
                 </div>
               </div>
             </div>
@@ -202,7 +206,7 @@ async function HomeDynamic() {
       </section>
 
       {/* ══ WHY CHOOSE US ══ */}
-      <section className="py-20 bg-gradient-to-br from-[#0f2240] to-[#1a3a6b]">
+      <section id="why-us" className="scroll-mt-20 py-20 bg-gradient-to-br from-[#0f2240] to-[#1a3a6b]">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div className="lg:col-span-4" >
@@ -210,9 +214,9 @@ async function HomeDynamic() {
                 <div className="inline-flex items-center text-sm font-bold text-[#4ecdc4] uppercase tracking-wider mb-4 bg-white/10 px-3 py-1 rounded-full border border-white/20 md:backdrop-blur-sm">
                   <Star className="w-4 h-4 mr-2" /> Why Choose Stoic
                 </div>
-                <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-6">Dedicated to Your Health & Well-being</h2>
+                <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-6">Care You Can Trust, Right at Home</h2>
                 <div className="w-20 h-1.5 bg-gradient-to-r from-[#2196d3] to-[#4ecdc4] rounded-full mb-8"></div>
-                <p className="text-white/70 leading-relaxed mb-8">At Stoic Home Care, we go beyond medical treatment. Our holistic approach ensures emotional and physical well-being through enterprise-grade home care.</p>
+                <p className="text-white/70 leading-relaxed mb-8">At Stoic Home Care we send caring, verified people to look after your parents and patients — with the same respect we would want for our own family.</p>
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 hidden md:block">
                   <Image src="/images/nurse.avif" alt="Care" width={500} height={600} sizes="(max-width: 991px) 100vw, 33vw" className="object-cover w-full h-[400px]" loading="lazy" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0f2240] to-transparent opacity-60"></div>
@@ -370,8 +374,8 @@ async function HomeDynamic() {
             <div className="absolute top-0 right-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIvPjwvc3ZnPg==')] opacity-30 pointer-events-none"></div>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
               <div className="lg:col-span-7">
-                <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">Ready for Hospital-Grade Care at Home?</h2>
-                <p className="text-white/90 text-lg">Our team is available 24/7. Call for emergencies or fill the form for scheduled services.</p>
+                <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">Need a Caretaker for Your Family at Home?</h2>
+                <p className="text-white/90 text-lg">Call or WhatsApp us — tell us what you need and we will guide you.</p>
               </div>
               <div className="lg:col-span-5 flex flex-wrap gap-4 lg:justify-end">
                 <a href="tel:+917668232867" className="inline-flex items-center px-8 py-3 bg-white text-[#1a3a6b] rounded-full font-bold shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
@@ -387,9 +391,9 @@ async function HomeDynamic() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-5" >
               <div className="inline-flex items-center text-sm font-bold text-[#2196d3] uppercase tracking-wider mb-3 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
-                <ClipboardList className="w-4 h-4 mr-2" /> Quick Enquiry
+                <ClipboardList className="w-4 h-4 mr-2" /> Talk to Us
               </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-[#0f2240] mb-4">Request a Callback</h2>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[#0f2240] mb-4">We Will Call You Back</h2>
               <div className="w-20 h-1.5 bg-gradient-to-r from-[#1a3a6b] to-[#4ecdc4] rounded-full mb-6"></div>
               <p className="text-lg text-[#6b82a3] mb-8">Fill out the form and our care coordinator will call you within 1 hour.</p>
               
@@ -399,9 +403,9 @@ async function HomeDynamic() {
                     <Phone className="w-6 h-6" />
                   </div>
                   <div>
-                    <div className="font-bold text-[#0f2240] text-lg mb-1">Emergency Contact</div>
+                    <div className="font-bold text-[#0f2240] text-lg mb-1">Call Us</div>
                     <div className="text-[#354a6b] font-semibold text-lg">+91 76682 32867</div>
-                    <div className="text-[#6b82a3] text-sm mt-1">Available 24/7 – 365 days</div>
+                    <div className="text-[#6b82a3] text-sm mt-1">Phone and WhatsApp, 7 days a week</div>
                   </div>
                 </div>
                 
@@ -450,7 +454,7 @@ export default function HomePage() {
         "name": "Stoic Home Care",
         "url": "https://stoiccare.in",
         "logo": "https://stoiccare.in/logo.png",
-        "description": "Hospital-grade home care in Greater Noida – ICU setup, certified nursing, old age care, mother & baby care, and medical equipment rental.",
+        "description": "Patient attendants, elderly caretakers and trained home nurses for 12-hour and 24-hour duty in Noida & Greater Noida.",
         "telephone": "+91-7668232867",
         "address": {
           "@type": "PostalAddress",
@@ -466,85 +470,111 @@ export default function HomePage() {
   return (
     <div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <style dangerouslySetInnerHTML={{__html: `
-        @media (max-width: 991px) {
-          .hero-row-short { align-items: flex-start !important; padding-top: 100px !important; min-height: auto !important; height: 100dvh; }
-          .hero-swiper .swiper-slide { display: flex; flex-direction: column; justify-content: flex-start; }
-        }
-        @media (max-width: 575px) {
-          .hero-row-short { padding-top: 90px !important; }
-        }
-        @keyframes floatY {
-          0% { transform: translateY(0px); }
-          50% { transform: translateY(-15px); }
-          100% { transform: translateY(0px); }
-        }
-        @media (max-width: 991px) {
-          .hero-float { display: none !important; }
-          .main-hero { padding-top: 80px; min-height: auto !important; }
-        }
-        @media (min-width: 992px) { .sticky-top-lg { position: sticky; top: 100px; } }
-      `}} />
+      {/* ══ MAIN HERO — warm, family-first, two actions only ══ */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#fff4e6] via-[#fffaf3] to-white pt-[96px] pb-10 sm:pt-[110px] lg:pt-[135px] lg:pb-16">
+        <div className="container relative">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
-      {/* ══ MAIN HERO ══ */}
-      <div className="relative overflow-hidden bg-[#0f2240] flex items-center pt-[140px] pb-[80px] lg:pt-[180px] lg:pb-[100px] min-h-[auto] lg:min-h-0">
-        <Image className="absolute inset-0 w-full h-full object-cover opacity-40 z-0" src="/images/carousel-1.avif" alt="ICU Home Care" width={1920} height={1080} sizes="(max-width: 768px) 100vw, 1920px" priority fetchPriority="high" />
-        <div className="absolute inset-0 z-10" style={{background:'linear-gradient(135deg, rgba(15,34,64,0.95) 0%, rgba(33,150,211,0.8) 100%)'}}></div>
-        
-        <div className="container relative z-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            
-            {/* Left: Typography & CTAs */}
+            {/* Copy + the two buttons */}
             <div>
-              <div className="inline-flex items-center px-4 py-2 rounded-full text-[0.85rem] font-semibold mb-6 border" style={{background:'rgba(78,205,196,.15)', color:'#7ee8e2', borderColor:'rgba(78,205,196,.3)'}}>
-                <ShieldPlus className="w-4 h-4 mr-2" /> Trusted by 10,000+ Families
-              </div>
-              <h1 className="text-[clamp(2.5rem,5vw,4rem)] font-extrabold text-white leading-[1.1] mb-6 font-outfit">
-                Hospital-Quality Care<br/><span style={{color:'#4ecdc4'}}>Right at Home.</span>
-              </h1>
-              <p className="text-[1.1rem] text-white/85 leading-[1.7] mb-10 max-w-[540px]">
-                Expert ICU setups, certified nursing staff, and advanced medical equipment delivered to your doorstep. We bring the hospital to you, 24/7.
+              <p className="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 text-[0.82rem] font-semibold text-[#1a3a6b] border border-[#1a3a6b]/15 shadow-sm mb-4">
+                <ShieldCheck className="w-4 h-4 text-[#25a85a]" /> Police-verified staff · Same-day placement
               </p>
-              <div className="flex flex-wrap gap-4">
-                <a href="tel:+917668232867" className="inline-flex items-center px-8 py-3 rounded-full font-bold text-white shadow-lg transition-transform hover:-translate-y-1" style={{background:'#ff4b4b', boxShadow:'0 8px 25px rgba(255,75,75,0.4)'}}>
-                  <Phone className="w-5 h-5 mr-2" /> Call Emergency
+
+              <h1 className="font-outfit text-[clamp(1.85rem,4.6vw,3.2rem)] font-extrabold leading-[1.15] text-[#0f2240] mb-3">
+                Reliable Patient Attendants &amp; Home Nursing Care in <span className="text-[#0CB8C9]">Noida &amp; Greater Noida</span>
+              </h1>
+
+              <p className="text-[1.15rem] sm:text-[1.3rem] font-semibold text-[#c2410c] mb-4" lang="hi">
+                घर पर बुजुर्गों और मरीजों की भरोसेमंद देखभाल
+              </p>
+
+              <p className="text-[1.02rem] sm:text-[1.1rem] leading-[1.65] text-[#354a6b] mb-7 max-w-[560px]">
+                Verified male &amp; female attendants, elderly caretakers, and trained nurses available for 12-hour &amp; 24-hour home duty. Same-day staff placement.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-3 max-w-[560px]">
+                <a
+                  href={waLink("Hello Stoic Home Care, I need a patient attendant / nurse at home in Noida / Greater Noida. Please share staff details and rates.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 inline-flex flex-col items-center justify-center rounded-2xl bg-[#25D366] px-6 py-3.5 text-white shadow-lg shadow-green-600/25 transition-transform hover:-translate-y-0.5"
+                >
+                  <span className="inline-flex items-center gap-2 text-[1.05rem] font-bold"><MessageCircle className="w-5 h-5" /> Chat on WhatsApp</span>
+                  <span className="text-[0.9rem] font-medium opacity-95" lang="hi">स्टाफ की जानकारी लें</span>
                 </a>
-                <Link href="/contact" className="inline-flex items-center px-8 py-3 rounded-full font-bold text-[#0f2240] bg-white shadow-lg transition-transform hover:-translate-y-1" style={{boxShadow:'0 8px 25px rgba(0,0,0,0.1)'}}>
-                  <CalendarCheck className="w-5 h-5 mr-2" /> Book Consultation
-                </Link>
+                <a
+                  href="tel:+917668232867"
+                  className="flex-1 inline-flex flex-col items-center justify-center rounded-2xl bg-[#1a3a6b] px-6 py-3.5 text-white shadow-lg shadow-blue-900/25 transition-transform hover:-translate-y-0.5"
+                >
+                  <span className="inline-flex items-center gap-2 text-[1.05rem] font-bold"><Phone className="w-5 h-5" /> Call Now</span>
+                  <span className="text-[0.9rem] font-medium opacity-95" lang="hi">तुरंत बात करें</span>
+                </a>
               </div>
+
+              <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-[0.92rem] font-semibold text-[#354a6b]">
+                {["12-hour & 24-hour duty", "Male & female staff", "Affordable home care"].map((t) => (
+                  <li key={t} className="inline-flex items-center gap-1.5"><Check className="w-4 h-4 text-[#25a85a]" /> {t}</li>
+                ))}
+              </ul>
             </div>
 
-            {/* Right: Premium Image & Glassmorphism Badges */}
-            <div className="relative text-center lg:text-right flex justify-center lg:justify-end">
-              <div className="relative inline-block">
-                <Image src="/images/doctor.avif" alt="Home Doctor" width={500} height={600} sizes="(max-width: 991px) 100vw, 500px" priority className="w-full max-w-[500px] h-auto rounded-[30px] shadow-2xl relative z-10" style={{boxShadow:'0 30px 60px rgba(0,0,0,0.5)'}} />
-                
-                <div className="hidden xl:flex absolute bottom-[30px] left-[-80px] bg-white/95 px-4 py-3 rounded-xl items-center gap-3 shadow-xl z-20 animate-float">
-                  <div className="w-[35px] h-[35px] flex items-center justify-center rounded-full bg-green-500/15">
-                    <Star className="w-4 h-4 text-[#F5B041] fill-[#F5B041]" />
-                  </div>
-                  <div className="text-left">
-                    <div className="font-extrabold text-[1rem] text-[#0f2240] leading-[1.2]">4.9/5 Rating</div>
-                    <div className="text-[0.75rem] text-[#6b82a3] font-semibold">Google Reviews</div>
-                  </div>
-                </div>
-
-                <div className="hidden xl:flex absolute top-[30px] right-[-60px] bg-white/95 px-4 py-3 rounded-xl items-center gap-3 shadow-xl z-20 animate-float-reverse">
-                  <div className="w-[35px] h-[35px] flex items-center justify-center rounded-full bg-blue-500/15">
-                    <Users className="w-4 h-4 text-[#2196d3]" />
-                  </div>
-                  <div className="text-left">
-                    <div className="font-extrabold text-[1rem] text-[#0f2240] leading-[1.2]">Verified Staff</div>
-                    <div className="text-[0.75rem] text-[#6b82a3] font-semibold">100% Checked</div>
-                  </div>
-                </div>
+            {/* Warm photo: caretaker helping an elderly person at home */}
+            <div className="relative mx-auto w-full max-w-[560px] lg:max-w-none">
+              <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-[#ffd9b0]/60 to-[#bdeee9]/60 blur-2xl" aria-hidden="true"></div>
+              <Image
+                src="/images/hero-caretaker.jpg"
+                alt="A caring attendant helping an elderly man sit comfortably on the sofa at home"
+                width={1000}
+                height={747}
+                priority
+                sizes="(max-width: 1023px) 100vw, 560px"
+                className="relative w-full h-auto rounded-3xl shadow-xl object-cover"
+              />
+              <div className="absolute left-3 bottom-3 sm:left-4 sm:bottom-4 rounded-xl bg-white/95 px-3.5 py-2 shadow-lg">
+                <div className="text-[0.95rem] font-extrabold text-[#0f2240] leading-tight">Care at home, with respect</div>
+                <div className="text-[0.78rem] font-semibold text-[#6b82a3]" lang="hi">अपनों जैसी देखभाल, अपने घर में</div>
               </div>
             </div>
 
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* ══ PLANS — no prices shown; rate is shared on call/WhatsApp ══ */}
+      <section id="plans" className="scroll-mt-24 bg-white py-14 sm:py-16">
+        <div className="container">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <h2 className="font-outfit text-3xl md:text-4xl font-extrabold text-[#0f2240] mb-3">Choose the care your family needs</h2>
+            <p className="text-lg text-[#6b82a3]">Simple duty plans for patients and elders at home. Tell us the patient&apos;s condition and we will suggest the right staff and share the rate.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { Icon: Sun, title: "12-Hour Attendant", hi: "12 घंटे की ड्यूटी", text: "Day or night shift. Help with bathing, feeding, medicines on time, walking, hygiene and company for your patient.", msg: "12-hour patient attendant" },
+              { Icon: Clock, title: "24-Hour Attendant", hi: "24 घंटे की देखभाल", text: "Round-the-clock care for patients who cannot be left alone, so the family can rest and carry on with work.", msg: "24-hour patient attendant" },
+              { Icon: HeartHandshake, title: "Home Nurse", hi: "ट्रेंड नर्स घर पर", text: "Trained nurse for injections, IV drip, dressing, catheter and tube care, BP & sugar checks and care after surgery.", msg: "home nurse" },
+            ].map(({ Icon, title, hi, text, msg }) => (
+              <div key={title} className="flex flex-col rounded-2xl border border-gray-100 bg-[#fffaf3] p-6 shadow-sm">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white text-[#0CB8C9] shadow">
+                  <Icon className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-[#0f2240]">{title}</h3>
+                <p className="mb-3 text-sm font-semibold text-[#c2410c]" lang="hi">{hi}</p>
+                <p className="mb-6 flex-grow text-[#354a6b]">{text}</p>
+                <a
+                  href={waLink(`Hello Stoic Home Care, I need a ${msg} at home. Please share the rate and staff availability.`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-3 font-bold text-white"
+                >
+                  <MessageCircle className="h-5 w-5" /> Get today&apos;s rate
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <Suspense fallback={<div style={{minHeight: '50vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><div style={{width:32,height:32,border:'3px solid #e5e7eb',borderTopColor:'#0CB8C9',borderRadius:'50%',animation:'spin 0.6s linear infinite'}}></div></div>}>
         <HomeDynamic />

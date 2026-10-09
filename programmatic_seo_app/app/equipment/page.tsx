@@ -4,7 +4,8 @@ import { Ambulance, Package, Receipt, ShoppingCart, ClipboardEdit, Truck, Undo2 
 
 export const metadata = {
   title: 'Medical Equipment on Rent | Stoic Home Care',
-  description: 'Rent hospital-grade medical equipment: oxygen concentrators, hospital beds, wheelchairs, BiPAP, patient monitors and more. Doorstep delivery in Mumbai.',
+  description: 'Rent medical equipment: oxygen concentrators, hospital beds, wheelchairs, BiPAP, patient monitors and more. Doorstep delivery.',
+
   alternates: { canonical: '/equipment' }
 };
 
@@ -78,7 +79,7 @@ export default async function EquipmentPage() {
                 <span className="text-[var(--accent)]">Delivered to Your Door</span>
               </h1>
               <p className="text-lg lg:text-[1.1rem] opacity-90 mb-8 max-w-[600px]">
-                Hospital-grade oxygen concentrators, beds, wheelchairs, monitors and more — on flexible rental plans with same-day delivery and professional installation.
+                Reliable oxygen concentrators, beds, wheelchairs, monitors and more — on flexible rental plans with same-day delivery and professional installation.
               </p>
               <div className="flex flex-wrap gap-4 mb-6">
                 <a href="#equipment-catalog" className="inline-flex items-center px-6 py-3 bg-gradient-to-br from-[var(--accent)] to-[#1D9E75] rounded-full text-white font-semibold no-underline hover:opacity-90 transition-opacity">

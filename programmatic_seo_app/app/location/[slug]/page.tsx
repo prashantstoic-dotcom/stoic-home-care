@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     alternates: { canonical: `/location/${params.slug}` },
     openGraph: {
       title: `Best Home Care Services in ${cityName} | Stoic Home Care`,
-      description: `Discover top-rated ICU nursing, physiotherapy, elder care, and medical equipment rentals in ${cityName}. 24/7 support available.`,
+      description: `Discover top-rated skilled nursing, physiotherapy, elder care, and medical equipment rentals in ${cityName}. 24/7 support available.`,
       type: "website",
       images: [
         {
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     twitter: {
       card: "summary_large_image",
       title: `Best Home Care Services in ${cityName} | Stoic Home Care`,
-      description: `Discover top-rated ICU nursing, physiotherapy, elder care, and medical equipment rentals in ${cityName}. 24/7 support available.`,
+      description: `Discover top-rated skilled nursing, physiotherapy, elder care, and medical equipment rentals in ${cityName}. 24/7 support available.`,
       images: ["/images/carousel-1.avif"],
     }
   };

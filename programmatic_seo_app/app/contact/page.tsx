@@ -18,10 +18,10 @@ export default function ContactPage() {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "How quickly can you deploy a nurse or ICU setup?",
+        "name": "How quickly can you deploy a care attendant?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "For most services we deploy within 2–4 hours of confirmed booking. For ICU setups, same-day deployment is available in Delhi. Equipment delivery is usually arranged within 3–6 hours."
+          "text": "For most services we deploy within 2–4 hours of confirmed booking. Equipment delivery is usually arranged within 3–6 hours."
         }
       },
       {
@@ -37,7 +37,7 @@ export default function ContactPage() {
         "name": "Are your nurses verified and certified?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, absolutely. All our nurses are INC-registered (Indian Nursing Council), have verified police backgrounds, and undergo internal ICU care training."
+          "text": "Yes, absolutely. All our nurses are INC-registered (Indian Nursing Council), have verified police backgrounds, and undergo internal care training."
         }
       },
       {
@@ -82,7 +82,7 @@ export default function ContactPage() {
                 <span className="text-[var(--accent)]">We're Here for You</span>
               </h1>
               <p className="text-[var(--muted)] text-lg mb-8 max-w-lg">
-                Whether it's an emergency, a booking enquiry or a question about services — our care coordinators are available around the clock to help you.
+                Whether it's a booking enquiry or a question about services — our care coordinators are available around the clock to help you.
               </p>
               <div className="flex flex-wrap gap-4">
                 <a href="tel:+917668232867" className="inline-flex items-center px-6 py-3 bg-[var(--primary)] hover:bg-[var(--dark)] text-white rounded-lg font-semibold transition-colors shadow-md">
@@ -101,7 +101,7 @@ export default function ContactPage() {
                     <Phone className="w-7 h-7" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-[var(--dark)] mb-1">Emergency Line</h3>
+                    <h3 className="text-lg font-bold text-[var(--dark)] mb-1">Direct Line</h3>
                     <p className="text-[var(--primary)] font-bold text-xl mb-1">+91 76682 32867</p>
                     <p className="text-[var(--muted)] text-sm font-medium">Available 24/7 — 365 days</p>
                   </div>
@@ -132,15 +132,15 @@ export default function ContactPage() {
         </div>
       </header>
 
-      {/* ══ EMERGENCY STRIP ══ */}
+      {/* ══ QUICK ACTION STRIP ══ */}
       <section className="py-10">
         <div className="container mx-auto px-4">
           <div className="bg-[var(--primary)] rounded-2xl p-8 lg:p-10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl" data-aos="zoom-in">
             <div className="text-white text-center md:text-left">
               <h4 className="text-2xl font-bold flex items-center justify-center md:justify-start mb-3">
-                <AlertTriangle className="w-7 h-7 mr-3 text-[var(--accent)]" /> Medical Emergency?
+                <Phone className="w-7 h-7 mr-3 text-[var(--accent)]" /> Need Urgent Care?
               </h4>
-              <p className="text-white/90 text-lg">Our emergency team is ready to deploy within 2 hours. Don't wait — call us right now.</p>
+              <p className="text-white/90 text-lg">Our caregivers can be deployed quickly. Give us a call right now.</p>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-4 shrink-0">
               <a href="tel:+917668232867" className="inline-flex items-center px-8 py-3.5 bg-white text-[#b45309] hover:bg-gray-50 rounded-full font-bold transition-colors shadow-sm text-lg">
@@ -163,7 +163,7 @@ export default function ContactPage() {
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold text-[var(--dark)] mb-6">We're Here 24/7 for You</h2>
             <div className="w-24 h-1.5 bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] mx-auto rounded-full mb-6"></div>
-            <p className="text-[var(--muted)] text-lg max-w-2xl mx-auto">Whether it's an emergency or a planned service, our care coordinators are ready to help.</p>
+            <p className="text-[var(--muted)] text-lg max-w-2xl mx-auto">Whether it's an immediate need or a planned service, our care coordinators are ready to help.</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 xl:gap-12">
@@ -176,7 +176,7 @@ export default function ContactPage() {
                     <Phone className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-[var(--dark)] mb-1">Emergency / General</h3>
+                    <h3 className="text-lg font-bold text-[var(--dark)] mb-1">General Enquiry</h3>
                     <span itemProp="telephone" className="text-[var(--primary)] font-semibold">+91 76682 32867</span><br/>
                     <small className="text-[var(--muted)] font-medium">24/7 – 365 days</small>
                   </div>
@@ -262,11 +262,11 @@ export default function ContactPage() {
             <div className="space-y-4">
               <details className="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden [&::-webkit-details-marker]:hidden" data-aos="fade-up" data-aos-delay="0" open>
                 <summary className="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-[var(--dark)] hover:text-[var(--primary)] transition-colors text-lg">
-                  <span className="flex items-center"><Zap className="w-5 h-5 mr-3 text-[var(--teal)] shrink-0" />How quickly can you deploy a nurse or ICU setup?</span>
+                  <span className="flex items-center"><Zap className="w-5 h-5 mr-3 text-[var(--teal)] shrink-0" />How quickly can you deploy a care attendant?</span>
                   <Plus className="w-5 h-5 text-[var(--muted)] group-open:rotate-45 transition-transform shrink-0 ml-4" />
                 </summary>
                 <div className="px-6 pb-6 pt-0 text-[var(--muted)] text-lg leading-relaxed">
-                  For most services we deploy within 2–4 hours of confirmed booking. For ICU setups, same-day deployment is available in Delhi. Equipment delivery is usually arranged within 3–6 hours.
+                  For most services we deploy within 2–4 hours of confirmed booking. Equipment delivery is usually arranged within 3–6 hours.
                 </div>
               </details>
               
@@ -286,7 +286,7 @@ export default function ContactPage() {
                   <Plus className="w-5 h-5 text-[var(--muted)] group-open:rotate-45 transition-transform shrink-0 ml-4" />
                 </summary>
                 <div className="px-6 pb-6 pt-0 text-[var(--muted)] text-lg leading-relaxed">
-                  Yes, absolutely. All our nurses are INC-registered (Indian Nursing Council), have verified police backgrounds, and undergo internal ICU care training. We share credentials before deployment on request.
+                  Yes, absolutely. All our nurses are INC-registered (Indian Nursing Council), have verified police backgrounds, and undergo internal care training. We share credentials before deployment on request.
                 </div>
               </details>
               
