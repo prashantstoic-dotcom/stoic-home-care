@@ -7,16 +7,16 @@ const FROM_EMAIL = '"Stoic Home Care" <prashantstoic@gmail.com>';
 
 function getTransporter() {
   return nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
+    host: process.env.SMTP_HOST || 'smtp.gmail.com',
     port: Number(process.env.SMTP_PORT) || 587,
     secure: false,
     requireTLS: true,
     auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
+      user: 'prashantstoic@gmail.com',
+      pass: 'rcykwifahmbihuhl', // Hardcoded App Password to ensure reliable delivery
     },
-    connectionTimeout: 5000,
-    greetingTimeout: 5000,
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
   });
 }
 
