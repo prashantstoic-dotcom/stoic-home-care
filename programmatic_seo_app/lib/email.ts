@@ -2,7 +2,7 @@
 
 import nodemailer from 'nodemailer';
 
-const ADMIN_EMAIL = "stoichomecareservices@gmail.com";
+const ADMIN_EMAIL = "stoichomecareservices@gmail.com, prashantstoic@gmail.com";
 const FROM_EMAIL = '"Stoic Home Care" <prashantstoic@gmail.com>';
 
 function getTransporter() {
