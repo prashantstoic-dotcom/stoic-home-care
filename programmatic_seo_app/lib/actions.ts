@@ -55,10 +55,10 @@ export async function submitRentalRequest(formData: FormData) {
         <tr><th>Message</th><td>${message}</td></tr>
       </table>
     `;
-    sendAdminAlert(`New Equipment Rental — ${equipment_name}`, adminHtml, email);
+    await sendAdminAlert(`New Equipment Rental — ${equipment_name}`, adminHtml, email);
 
     if (email) {
-      sendClientConfirmation(email, name, equipment_name);
+      await sendClientConfirmation(email, name, equipment_name);
     }
     
     return { success: true, message: 'Rental request received! We will call you shortly.' };
@@ -118,10 +118,10 @@ export async function bookServiceRequest(formData: FormData) {
         <tr><th>Message</th><td>${message}</td></tr>
       </table>
     `;
-    sendAdminAlert(`New Service Booking — ${service_name}`, adminHtml, email);
+    await sendAdminAlert(`New Service Booking — ${service_name}`, adminHtml, email);
 
     if (email) {
-      sendClientConfirmation(email, name, service_name);
+      await sendClientConfirmation(email, name, service_name);
     }
     
     return { success: true, message: 'Booking Confirmed! Our care coordinator will call you within 1 hour.' };
