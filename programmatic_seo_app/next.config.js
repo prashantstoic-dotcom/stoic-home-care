@@ -41,7 +41,7 @@ const nextConfig = {
       {
         source: '/',
         headers: [
-          { key: 'Link', value: '</images/carousel-1.avif>; rel=preload; as=image; type=image/avif' }
+          { key: 'Link', value: '</images/hero-caretaker.webp>; rel=preload; as=image; type=image/webp' }
         ],
       },
     ];

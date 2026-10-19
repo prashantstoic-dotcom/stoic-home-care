@@ -523,10 +523,10 @@ export default function HomePage() {
             <div className="relative mx-auto w-full max-w-[560px] lg:max-w-none">
               <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-[#ffd9b0]/60 to-[#bdeee9]/60 blur-2xl" aria-hidden="true"></div>
               <Image
-                src="/images/hero-caretaker.jpg"
-                alt="A caring attendant helping an elderly man sit comfortably on the sofa at home"
-                width={1000}
-                height={747}
+                src="/images/hero-caretaker.webp"
+                alt="Patient attendant standing with an elderly man on a wheelchair outside a residential society in Greater Noida"
+                width={1200}
+                height={1529}
                 priority
                 sizes="(max-width: 1023px) 100vw, 560px"
                 className="relative w-full h-auto rounded-3xl shadow-xl object-cover"
