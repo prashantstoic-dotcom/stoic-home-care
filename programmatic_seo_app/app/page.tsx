@@ -545,30 +545,46 @@ export default function HomePage() {
       <section id="plans" className="scroll-mt-24 bg-white py-14 sm:py-16">
         <div className="container">
           <div className="text-center max-w-2xl mx-auto mb-10">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-[#15803d] font-bold text-xs uppercase tracking-wider mb-3">
+              Starting from ₹999 · पारदर्शी दरें
+            </span>
             <h2 className="font-outfit text-3xl md:text-4xl font-extrabold text-[#0f2240] mb-3">Choose the care your family needs</h2>
-            <p className="text-lg text-[#6b82a3]">Simple duty plans for patients and elders at home. Tell us the patient&apos;s condition and we will suggest the right staff and share the rate.</p>
+            <p className="text-lg text-[#6b82a3]">Simple duty plans for patients and elders at home. <strong>Service starts from ₹999.</strong> Tell us the patient&apos;s condition and we will suggest the right staff.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { Icon: Sun, title: "12-Hour Attendant", hi: "12 घंटे की ड्यूटी", text: "Day or night shift. Help with bathing, feeding, medicines on time, walking, hygiene and company for your patient.", msg: "12-hour patient attendant" },
-              { Icon: Clock, title: "24-Hour Attendant", hi: "24 घंटे की देखभाल", text: "Round-the-clock care for patients who cannot be left alone, so the family can rest and carry on with work.", msg: "24-hour patient attendant" },
-              { Icon: HeartHandshake, title: "Home Nurse", hi: "ट्रेंड नर्स घर पर", text: "Trained nurse for injections, IV drip, dressing, catheter and tube care, BP & sugar checks and care after surgery.", msg: "home nurse" },
-            ].map(({ Icon, title, hi, text, msg }) => (
-              <div key={title} className="flex flex-col rounded-2xl border border-gray-100 bg-[#fffaf3] p-6 shadow-sm">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white text-[#0CB8C9] shadow">
-                  <Icon className="h-6 w-6" />
+              { Icon: Sun, title: "12-Hour Attendant", hi: "12 घंटे की ड्यूटी", price: "₹999", text: "Day or night shift. Help with bathing, feeding, medicines on time, walking, hygiene and company for your patient.", msg: "12-hour patient attendant" },
+              { Icon: Clock, title: "24-Hour Attendant", hi: "24 घंटे की देखभाल", price: "₹1,100", text: "Round-the-clock care for patients who cannot be left alone, so the family can rest and carry on with work.", msg: "24-hour patient attendant" },
+              { Icon: HeartHandshake, title: "Home Nurse", hi: "ट्रेंड नर्स घर पर", price: "₹999", text: "Trained nurse for injections, IV drip, dressing, catheter and tube care, BP & sugar checks and care after surgery.", msg: "home nurse" },
+            ].map(({ Icon, title, hi, price, text, msg }) => (
+              <div key={title} className="flex flex-col rounded-2xl border border-gray-100 bg-[#fffaf3] p-6 shadow-sm hover:shadow-md transition-shadow">
+                <div className="mb-4 flex items-center justify-between">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-[#0CB8C9] shadow">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <span className="inline-flex items-center px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-800 text-xs font-bold">
+                    Starts from {price}
+                  </span>
                 </div>
                 <h3 className="text-xl font-bold text-[#0f2240]">{title}</h3>
-                <p className="mb-3 text-sm font-semibold text-[#c2410c]" lang="hi">{hi}</p>
-                <p className="mb-6 flex-grow text-[#354a6b]">{text}</p>
+                <p className="mb-2 text-sm font-semibold text-[#c2410c]" lang="hi">{hi}</p>
+                <p className="mb-4 flex-grow text-[#354a6b] text-sm leading-relaxed">{text}</p>
+
+                <div className="mb-4 rounded-xl bg-white p-3 border border-emerald-200 text-center shadow-xs">
+                  <span className="block text-xs font-bold text-[#6b82a3] uppercase tracking-wide">Starting Rate</span>
+                  <span className="block text-xl font-extrabold text-[#0f2240] mt-0.5">Service Starts from {price}</span>
+                  <span className="block text-[12px] font-semibold text-emerald-700 mt-0.5" lang="hi">सर्विस स्टार्ट फ्रॉम {price}</span>
+                </div>
+
                 <a
-                  href={waLink(`Hello Stoic Home Care, I need a ${msg} at home. Please share the rate and staff availability.`)}
+                  href={waLink(`Hello Stoic Home Care, I need a ${msg} at home. Service starts from ${price}. Please share details and confirm staff availability.`)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-3 font-bold text-white"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-3 font-bold text-white shadow-md hover:bg-[#20ba59] transition-colors"
                 >
-                  <MessageCircle className="h-5 w-5" /> Get today&apos;s rate
+                  <MessageCircle className="h-5 w-5 shrink-0" />
+                  <span>Get Prices · Starts from {price}</span>
                 </a>
               </div>
             ))}
